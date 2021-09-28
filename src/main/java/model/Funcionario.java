@@ -3,7 +3,9 @@ package model;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Funcionario {
@@ -23,6 +25,7 @@ public class Funcionario {
     @Column(length = 11)
     private String telefone;
 
+    @Column(name = "data_nasc")
     private Date dataNasc;
 
     @NotNull
@@ -33,10 +36,16 @@ public class Funcionario {
     @Column(length = 100)
     private String senha;
 
+    @OneToOne
+    private Endereco endereco;
+
+    @OneToMany(mappedBy = "funcionario")
+    private List<Pedido> pedidos = new ArrayList<>();
+
     public Funcionario() {
     }
 
-    public Funcionario(Long id, String nome, String cpf, String telefone, Date dataNasc, String email, String senha) {
+    public Funcionario(Long id, String nome, String cpf, String telefone, Date dataNasc, String email, String senha, Endereco endereco) {
         this.id = id;
         this.nome = nome;
         this.cpf = cpf;
@@ -44,6 +53,7 @@ public class Funcionario {
         this.dataNasc = dataNasc;
         this.email = email;
         this.senha = senha;
+        this.endereco = endereco;
     }
 
     public Long getId() {
@@ -100,5 +110,17 @@ public class Funcionario {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
+
+    public List<Pedido> getPedidos() {
+        return pedidos;
     }
 }

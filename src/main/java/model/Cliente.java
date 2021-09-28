@@ -3,7 +3,7 @@ package model;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.util.*;
 
 @Entity
 public class Cliente {
@@ -26,18 +26,26 @@ public class Cliente {
     @Column(length = 100)
     private String email;
 
+    @Column(name = "data_nasc")
     private Date dataNasc;
+
+    @OneToOne
+    private Endereco endereco;
+
+    @OneToMany(mappedBy = "cliente")
+    private List<Pedido> pedidos = new ArrayList<>();
 
     public Cliente() {
     }
 
-    public Cliente(Long id, String nome, String cpf, String celular, String email, Date dataNasc) {
+    public Cliente(Long id, String nome, String cpf, String celular, String email, Date dataNasc, Endereco endereco) {
         this.id = id;
         this.nome = nome;
         this.cpf = cpf;
         this.celular = celular;
         this.email = email;
         this.dataNasc = dataNasc;
+        this.endereco = endereco;
     }
 
     public Long getId() {
@@ -86,5 +94,17 @@ public class Cliente {
 
     public void setDataNasc(Date dataNasc) {
         this.dataNasc = dataNasc;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
+
+    public List<Pedido> getPedidos() {
+        return pedidos;
     }
 }

@@ -3,6 +3,8 @@ package model;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Produto {
@@ -23,16 +25,25 @@ public class Produto {
     private String marca;
 
     @NotNull
+    @Column(name = "quantidade_estoque")
     private Integer qtdEstoque;
 
-    public Produto() {}
+    @OneToOne
+    private Categoria categoria;
 
-    public Produto(Long id, String descricao, Double valor, String marca, Integer qtdEstoque) {
+    @OneToMany(mappedBy = "id.produto")
+    private Set<ItemPedido> itens = new HashSet<>();
+
+    public Produto() {
+    }
+
+    public Produto(Long id, String descricao, Double valor, String marca, Integer qtdEstoque, Categoria categoria) {
         this.id = id;
         this.descricao = descricao;
         this.valor = valor;
         this.marca = marca;
         this.qtdEstoque = qtdEstoque;
+        this.categoria = categoria;
     }
 
     public Long getId() {
@@ -73,5 +84,21 @@ public class Produto {
 
     public void setQtdEstoque(Integer qtdEstoque) {
         this.qtdEstoque = qtdEstoque;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
+
+    public Set<ItemPedido> getItens() {
+        return itens;
+    }
+
+    public void setItens(Set<ItemPedido> itens) {
+        this.itens = itens;
     }
 }
