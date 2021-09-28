@@ -3,7 +3,7 @@ package model;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -23,7 +23,7 @@ public class Pedido {
     private Integer quantidadeItens;
 
     @NotNull
-    private Date data;
+    private LocalDate data;
 
     @OneToMany(mappedBy = "id.pedido")
     private Set<ItemPedido> itens = new HashSet<>();
@@ -39,13 +39,13 @@ public class Pedido {
     public Pedido() {
     }
 
-    public Pedido(Long id, Double valorTotal, Integer quantidadeItens, Date data, Set<ItemPedido> itens, Cliente cliente) {
+    public Pedido(Long id, Double valorTotal, Integer quantidadeItens, LocalDate data, Cliente cliente, Funcionario funcionario) {
         this.id = id;
         this.valorTotal = valorTotal;
         this.quantidadeItens = quantidadeItens;
         this.data = data;
-        this.itens = itens;
         this.cliente = cliente;
+        this.funcionario = funcionario;
     }
 
     public Long getId() {
@@ -72,20 +72,24 @@ public class Pedido {
         this.quantidadeItens = quantidadeItens;
     }
 
-    public Date getData() {
+    public LocalDate getData() {
         return data;
     }
 
-    public void setData(Date data) {
+    public void setData(LocalDate data) {
         this.data = data;
+    }
+
+    public Funcionario getFuncionario() {
+        return funcionario;
+    }
+
+    public void setFuncionario(Funcionario funcionario) {
+        this.funcionario = funcionario;
     }
 
     public Set<ItemPedido> getItens() {
         return itens;
-    }
-
-    public void setItens(Set<ItemPedido> itens) {
-        this.itens = itens;
     }
 
     public Cliente getCliente() {

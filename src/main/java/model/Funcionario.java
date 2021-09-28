@@ -3,8 +3,8 @@ package model;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -26,7 +26,7 @@ public class Funcionario {
     private String telefone;
 
     @Column(name = "data_nasc")
-    private Date dataNasc;
+    private LocalDate dataNasc;
 
     @NotNull
     @Column(length = 100)
@@ -45,7 +45,7 @@ public class Funcionario {
     public Funcionario() {
     }
 
-    public Funcionario(Long id, String nome, String cpf, String telefone, Date dataNasc, String email, String senha, Endereco endereco) {
+    public Funcionario(Long id, String nome, String cpf, String telefone, LocalDate dataNasc, String email, String senha, Endereco endereco) {
         this.id = id;
         this.nome = nome;
         this.cpf = cpf;
@@ -88,11 +88,11 @@ public class Funcionario {
         this.telefone = telefone;
     }
 
-    public Date getDataNasc() {
+    public LocalDate getDataNasc() {
         return dataNasc;
     }
 
-    public void setDataNasc(Date dataNasc) {
+    public void setDataNasc(LocalDate dataNasc) {
         this.dataNasc = dataNasc;
     }
 

@@ -3,7 +3,9 @@ package model;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
-import java.util.*;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Cliente {
@@ -27,7 +29,7 @@ public class Cliente {
     private String email;
 
     @Column(name = "data_nasc")
-    private Date dataNasc;
+    private LocalDate dataNasc;
 
     @OneToOne
     private Endereco endereco;
@@ -38,7 +40,7 @@ public class Cliente {
     public Cliente() {
     }
 
-    public Cliente(Long id, String nome, String cpf, String celular, String email, Date dataNasc, Endereco endereco) {
+    public Cliente(Long id, String nome, String cpf, String celular, String email, LocalDate dataNasc, Endereco endereco, List<Pedido> pedidos) {
         this.id = id;
         this.nome = nome;
         this.cpf = cpf;
@@ -46,6 +48,7 @@ public class Cliente {
         this.email = email;
         this.dataNasc = dataNasc;
         this.endereco = endereco;
+        this.pedidos = pedidos;
     }
 
     public Long getId() {
@@ -88,12 +91,16 @@ public class Cliente {
         this.email = email;
     }
 
-    public Date getDataNasc() {
+    public LocalDate getDataNasc() {
         return dataNasc;
     }
 
-    public void setDataNasc(Date dataNasc) {
+    public void setDataNasc(LocalDate dataNasc) {
         this.dataNasc = dataNasc;
+    }
+
+    public void setPedidos(List<Pedido> pedidos) {
+        this.pedidos = pedidos;
     }
 
     public Endereco getEndereco() {
