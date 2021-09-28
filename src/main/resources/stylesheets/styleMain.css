@@ -1,36 +1,7 @@
-.btnSair {
-    -fx-background-color: #FFB300;
-    -fx-text-fill: #fff;
-    -fx-background-radius: 0 0 0 10;
+#paneColor {
+    -fx-background-color: radial-gradient(center 50% 50%, radius 200px, #FF6800, #FF7C00);
 }
 
-.btnSair:hover {
-    -fx-background-color: #F83600;
-    -fx-background-radius: 0 0 0 10;
-}
-
-.btnForm {
-    -fx-background-color: #FFB300;
-    -fx-text-fill: #fff;
-    -fx-background-radius: 10px;
-}
-
-.btnForm:hover {
-    -fx-background-color: transparent;
-    -fx-background-radius: 10px;
-    -fx-text-fill: #FFB300;
-    -fx-border-color: #FFB300;
-    -fx-border-width: 1px;
-    -fx-border-style: solid;
-    -fx-border-radius: 10px;
-}
-
-.btnEsqueceu:hover {
-    -fx-text-fill: #6747CD;
-    -fx-underline: true;
-}
-
-.btnCadastrar:hover {
-    -fx-text-fill: #6747CD;
-    -fx-underline: true;
+#paneMain {
+   -fx-background-color: linear-gradient(to right, #F8F7FC, #fff);
 }

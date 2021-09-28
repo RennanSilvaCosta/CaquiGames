@@ -15,9 +15,11 @@ import javax.persistence.Persistence;
 
 public class Main extends Application {
 
+    private double xOffset = 0;
+    private double yOffset = 0;
+
     @Override
     public void start(Stage primaryStage) throws Exception {
-
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("caqui");
 
         Usuario user = new Usuario();
@@ -29,12 +31,25 @@ public class Main extends Application {
         entityManager.persist(user);
         entityManager.getTransaction().commit();
 
-        Parent root = FXMLLoader.load(getClass().getResource("/view/LoginScreen.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/view/MainScreen.fxml"));
         Scene scene = new Scene(root);
+        scene.setFill(Color.TRANSPARENT);
+        primaryStage.initStyle(StageStyle.TRANSPARENT);
         primaryStage.setScene(scene);
         primaryStage.show();
         scene.getRoot().requestFocus();
 
+        scene.setOnMousePressed(event -> {
+            xOffset = event.getSceneX();
+            yOffset = event.getSceneY();
+        });
+
+        scene.setOnMouseDragged(event -> {
+            primaryStage.setX(event.getScreenX() - xOffset);
+            primaryStage.setY(event.getScreenY() - yOffset);
+            primaryStage.setOpacity(0.7);
+        });
+        scene.setOnMouseReleased(mouseEvent -> primaryStage.setOpacity(1));
     }
 
     public static void main(String[] args) {
