@@ -7,7 +7,6 @@ import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import model.Usuario;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -22,14 +21,14 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("caqui");
 
-        Usuario user = new Usuario();
+        /*Usuario user = new Usuario();
         user.setNome("Rennan Costa");
         user.setEmail("rennan@hotmail.com");
 
         EntityManager entityManager = emf.createEntityManager();
         entityManager.getTransaction().begin();
         entityManager.persist(user);
-        entityManager.getTransaction().commit();
+        entityManager.getTransaction().commit();*/
 
         Parent root = FXMLLoader.load(getClass().getResource("/view/MainScreen.fxml"));
         Scene scene = new Scene(root);
