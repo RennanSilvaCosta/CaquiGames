@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<StackPane fx:id="parentContainer" prefHeight="730.0" prefWidth="1000.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerVendaScreen">
+    <AnchorPane id="AnchorPane" fx:id="anchorRoot" prefHeight="730.0" prefWidth="1000.0" style="-fx-background-color: #FF7C00; -fx-background-radius: 10 10 10 10;">
+        <JFXButton fx:id="btnSair" layoutX="969.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="35.0" styleClass="btnSair" stylesheets="@../stylesheets/styleButton.css" text="x" textAlignment="CENTER">
+            <font>
+                <Font name="Ebrima Bold" size="12.0" />
+            </font>
+        </JFXButton>
+        <JFXTextField fx:id="txtAdicionarProduto" focusColor="#ff6800" layoutX="46.0" layoutY="18.0" prefHeight="75" prefWidth="800" promptText="Selecione um produto" style="-fx-background-color: white; -fx-background-radius: 20 20 20 20;" unFocusColor="#ffffff00">
+         <font>
+            <Font name="Ebrima" size="14.0" />
+         </font>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+        </JFXTextField>
+      <JFXButton fx:id="btnAdicionarProduto" buttonType="RAISED" layoutX="705.0" layoutY="18.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="245.0" style="-fx-background-color: #FF6800; -fx-background-radius: 20 20 20 20;" text="ADICIONAR PRODUTO" textFill="WHITE">
+         <font>
+            <Font name="Ebrima" size="18.0" />
+         </font>
+      </JFXButton>
+      <Pane layoutX="46.0" layoutY="514.0" prefHeight="120.0" prefWidth="260.0" style="-fx-background-color: #F8F7FC; -fx-background-radius: 10 10 10 10;">
+         <children>
+            <Label fx:id="txtQuantidadeItens" alignment="CENTER" layoutX="8.0" layoutY="33.0" prefHeight="27.0" prefWidth="245.0" text="5" textFill="#ff6800">
+               <font>
+                  <Font name="Ebrima Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="8.0" layoutY="60.0" prefHeight="27.0" prefWidth="245.0" text="ITEM" textFill="#a3a3a3">
+               <font>
+                  <Font name="Ebrima Bold" size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane layoutX="373.0" layoutY="514.0" prefHeight="120.0" prefWidth="260.0" style="-fx-background-color: #F8F7FC; -fx-background-radius: 10 10 10 10;">
+         <children>
+            <Label fx:id="txtValorDesconto" alignment="CENTER" layoutX="8.0" layoutY="33.0" prefHeight="27.0" prefWidth="245.0" text="R$ 0,00" textFill="#56caa4">
+               <font>
+                  <Font name="Ebrima Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="8.0" layoutY="60.0" prefHeight="27.0" prefWidth="245.0" text="DESCONTO" textFill="#a3a3a3">
+               <font>
+                  <Font name="Ebrima Bold" size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane layoutX="690.0" layoutY="514.0" prefHeight="120.0" prefWidth="260.0" style="-fx-background-color: #F8F7FC; -fx-background-radius: 10 10 10 10;">
+         <children>
+            <Label fx:id="txtValorTotal" alignment="CENTER" layoutX="8.0" layoutY="33.0" prefHeight="27.0" prefWidth="245.0" text="R$ 155,36" textFill="#56caa4">
+               <font>
+                  <Font name="Ebrima Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="8.0" layoutY="60.0" prefHeight="27.0" prefWidth="245.0" text="TOTAL" textFill="#a3a3a3">
+               <font>
+                  <Font name="Ebrima Bold" size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <JFXButton fx:id="btnFecharPedido" layoutX="252.0" layoutY="656.0" mnemonicParsing="false" onAction="#loadSecond" prefHeight="60.0" prefWidth="500.0" style="-fx-background-color: #56CAA4; -fx-background-radius: 20 20 20 20;" text="FECHAR PEDIDO" textFill="WHITE">
+         <font>
+            <Font name="Ebrima" size="18.0" />
+         </font>
+      </JFXButton>
+    </AnchorPane>
+</StackPane>

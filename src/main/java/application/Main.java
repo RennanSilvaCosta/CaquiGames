@@ -22,7 +22,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("caqui");
+       /* EntityManagerFactory emf = Persistence.createEntityManagerFactory("caqui");
 
         EntityManager entityManager = emf.createEntityManager();
 
@@ -104,7 +104,7 @@ public class Main extends Application {
 
         entityManager.getTransaction().begin();
         entityManager.persist(ip1);
-        entityManager.getTransaction().commit();
+        entityManager.getTransaction().commit();*/
 
         Parent root = FXMLLoader.load(getClass().getResource("/view/MainScreen.fxml"));
         Scene scene = new Scene(root);
