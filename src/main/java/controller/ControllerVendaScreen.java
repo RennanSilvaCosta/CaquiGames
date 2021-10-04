@@ -3,6 +3,7 @@ package controller;
 import adapter.AdapterListProduto;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
+import com.jfoenix.controls.JFXTextField;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -13,10 +14,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 import model.Produto;
+import org.controlsfx.control.textfield.AutoCompletionBinding;
+import org.controlsfx.control.textfield.TextFields;
 
 import java.io.IOException;
 import java.net.URL;
@@ -34,10 +38,27 @@ public class ControllerVendaScreen implements Initializable {
     private StackPane parentContainer;
     @FXML
     private JFXListView<Produto> listaProdutos;
+    @FXML
+    private JFXTextField txtAdicionarProduto;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         inicializaListaProdutos();
+
+        Produto p1 = new Produto();
+        Produto p2 = new Produto();
+        Produto p3 = new Produto();
+
+        p1.setDescricao("PS4 PRO");
+        p1.setMarca("SONY");
+
+        p2.setDescricao("NINTENDO SWITCH");
+        p2.setMarca("NINTENDO");
+
+        p3.setDescricao("XBOX ONE");
+        p3.setMarca("MICROSOFT");
+
+        TextFields.bindAutoCompletion(txtAdicionarProduto, p1, p2, p3);
     }
 
     @FXML

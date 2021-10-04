@@ -97,4 +97,9 @@ public class Produto {
     public Set<ItemPedido> getItens() {
         return itens;
     }
+
+    @Override
+    public String toString() {
+        return descricao + ", " + marca;
+    }
 }
