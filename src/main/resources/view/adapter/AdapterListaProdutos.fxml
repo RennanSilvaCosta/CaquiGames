@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<GridPane fx:id="gridPane" prefHeight="60.0" prefWidth="645.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1">
+    <columnConstraints>
+        <ColumnConstraints maxWidth="160.0" minWidth="1.0" prefWidth="58.0" />
+        <ColumnConstraints maxWidth="421.0" minWidth="196.0" prefWidth="241.0" />
+        <ColumnConstraints halignment="LEFT" maxWidth="421.0" minWidth="59.0" prefWidth="96.0" />
+        <ColumnConstraints halignment="CENTER" maxWidth="439.0" minWidth="127.0" prefWidth="127.0" />
+      <ColumnConstraints halignment="CENTER" maxWidth="439.0" minWidth="123.0" prefWidth="123.0" />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints maxHeight="60.0" minHeight="60.0" prefHeight="60.0" />
+    </rowConstraints>
+    <Label fx:id="txtTitle" prefHeight="23.0" prefWidth="250.0" text="PS4 PRO 4K" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="TOP">
+        <font>
+            <Font name="Ebrima Bold" size="18.0" />
+        </font>
+        <GridPane.margin>
+            <Insets left="10.0" top="5.0" />
+        </GridPane.margin>
+    </Label>
+    <Label fx:id="txtCategory" prefHeight="20.0" prefWidth="250.0" text="SONY" GridPane.columnIndex="1">
+        <font>
+            <Font size="14.0" />
+        </font>
+        <GridPane.margin>
+            <Insets left="10.0" top="20.0" />
+        </GridPane.margin>
+    </Label>
+    <Label fx:id="txtValue" alignment="CENTER_RIGHT" contentDisplay="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="31.0" prefWidth="144.0" text="R$ 1.000,00" textFill="#06865c" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+        <font>
+            <Font name="Ebrima Bold" size="14.0" />
+        </font>
+        <GridPane.margin>
+            <Insets />
+        </GridPane.margin>
+    </Label>
+    <ImageView fx:id="imgParcel" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
+      <GridPane.margin>
+         <Insets left="10.0" />
+      </GridPane.margin></ImageView>
+   <Label text="1" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+   <ImageView fx:id="imgParcel1" fitHeight="24.0" fitWidth="24.0" layoutX="383.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.valignment="CENTER">
+      <GridPane.margin>
+         <Insets right="10.0" />
+      </GridPane.margin>
+   </ImageView>
+   <Label nodeOrientation="RIGHT_TO_LEFT" prefHeight="31.0" prefWidth="144.0" text="R$ 200.00" textFill="#e82121" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+      <font>
+         <Font name="Ebrima Bold" size="14.0" />
+      </font>
+   </Label>
+</GridPane>

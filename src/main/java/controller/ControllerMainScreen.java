@@ -1,9 +1,6 @@
 package controller;
 
 import animatefx.animation.FadeInDown;
-import animatefx.animation.FadeInUp;
-import animatefx.animation.FadeOutDown;
-import animatefx.animation.FadeOutUp;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
 import javafx.event.EventHandler;

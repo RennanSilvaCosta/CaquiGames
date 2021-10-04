@@ -73,5 +73,6 @@
             <Font name="Ebrima" size="18.0" />
          </font>
       </JFXButton>
+      <JFXListView fx:id="listaProdutos" layoutX="46.0" layoutY="107.0" prefHeight="399.0" prefWidth="902.0" />
     </AnchorPane>
 </StackPane>
