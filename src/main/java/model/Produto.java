@@ -100,6 +100,6 @@ public class Produto {
 
     @Override
     public String toString() {
-        return descricao + ", " + marca;
+        return descricao;
     }
 }

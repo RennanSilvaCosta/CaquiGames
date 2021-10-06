@@ -7,13 +7,10 @@ import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import model.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import java.time.LocalDate;
-import java.util.Arrays;
 
 public class Main extends Application {
 
@@ -105,6 +102,11 @@ public class Main extends Application {
         entityManager.getTransaction().begin();
         entityManager.persist(ip1);
         entityManager.getTransaction().commit();*/
+
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("caqui");
+        EntityManager em = emf.createEntityManager();
+        em.close();
+        emf.close();
 
         Parent root = FXMLLoader.load(getClass().getResource("/view/MainScreen.fxml"));
         Scene scene = new Scene(root);

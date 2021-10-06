@@ -21,14 +21,14 @@
             <Insets />
          </opaqueInsets>
         </JFXTextField>
-      <JFXButton fx:id="btnAdicionarProduto" buttonType="RAISED" layoutX="705.0" layoutY="18.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="245.0" style="-fx-background-color: #FF6800; -fx-background-radius: 20 20 20 20;" text="ADICIONAR PRODUTO" textFill="WHITE">
+      <JFXButton fx:id="btnAdicionarProduto" buttonType="RAISED" layoutX="705.0" layoutY="18.0" mnemonicParsing="false" onAction="#adicionarItemCarrinho" prefHeight="75.0" prefWidth="245.0" style="-fx-background-color: #FF6800; -fx-background-radius: 20 20 20 20;" text="ADICIONAR PRODUTO" textFill="WHITE">
          <font>
             <Font name="Ebrima" size="18.0" />
          </font>
       </JFXButton>
       <Pane layoutX="46.0" layoutY="514.0" prefHeight="120.0" prefWidth="260.0" style="-fx-background-color: #F8F7FC; -fx-background-radius: 10 10 10 10;">
          <children>
-            <Label fx:id="txtQuantidadeItens" alignment="CENTER" layoutX="8.0" layoutY="33.0" prefHeight="27.0" prefWidth="245.0" text="5" textFill="#ff6800">
+            <Label fx:id="txtQuantidadeItens" alignment="CENTER" layoutX="8.0" layoutY="33.0" prefHeight="27.0" prefWidth="245.0" text="0" textFill="#ff6800">
                <font>
                   <Font name="Ebrima Bold" size="18.0" />
                </font>
@@ -56,7 +56,7 @@
       </Pane>
       <Pane layoutX="690.0" layoutY="514.0" prefHeight="120.0" prefWidth="260.0" style="-fx-background-color: #F8F7FC; -fx-background-radius: 10 10 10 10;">
          <children>
-            <Label fx:id="txtValorTotal" alignment="CENTER" layoutX="8.0" layoutY="33.0" prefHeight="27.0" prefWidth="245.0" text="R$ 155,36" textFill="#56caa4">
+            <Label fx:id="txtValorTotal" alignment="CENTER" layoutX="8.0" layoutY="33.0" prefHeight="27.0" prefWidth="245.0" text="R$ 0,00" textFill="#56caa4">
                <font>
                   <Font name="Ebrima Bold" size="18.0" />
                </font>
