@@ -1,6 +1,7 @@
 package controller;
 
 import adapter.AdapterListProduto;
+import animatefx.animation.FadeInDown;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTextField;
@@ -17,6 +18,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import model.ItemPedido;
 import model.Pedido;
@@ -43,7 +45,7 @@ public class ControllerVendaScreen implements Initializable {
     @FXML
     private Label txtQuantidadeItens, txtValorDesconto, txtValorTotal = new Label();
     @FXML
-    private JFXButton btnFecharPedido, btnAdicionarProduto;
+    private JFXButton btnFecharPedido, btnAdicionarProduto, btnSair;
     @FXML
     private AnchorPane anchorRoot;
     @FXML
@@ -79,24 +81,27 @@ public class ControllerVendaScreen implements Initializable {
     @FXML
     private void adicionarItemCarrinho() {
         String nomeProduto = txtAdicionarProduto.getText();
-        Produto produto = new Produto();
+        if (!nomeProduto.equals("")) {
+            Produto produto = new Produto();
 
-        for (Produto p : produtos) {
-            if (p.getDescricao().equals(nomeProduto)) {
-                produto = p;
-                break;
+            for (Produto p : produtos) {
+                if (p.getDescricao().equals(nomeProduto)) {
+                    produto = p;
+                    break;
+                }
             }
+
+            Pedido p = new Pedido();
+            ItemPedido item = new ItemPedido(p, produto, 0.0, 1, produto.getValor());
+
+            listaProdutos.getItems().add(item);
+            listaProdutos.setCellFactory(itemPedido -> new AdapterListProduto());
+            txtAdicionarProduto.clear();
+
+            new FadeInDown(txtQuantidadeItens).setSpeed(0.5).play();
+            txtQuantidadeItens.setText(String.valueOf(listaProdutos.getItems().size()));
+            defineValorTotal();
         }
-
-        Pedido p = new Pedido();
-        ItemPedido item = new ItemPedido(p, produto, 0.0, 1, produto.getValor());
-
-        listaProdutos.getItems().add(item);
-        listaProdutos.setCellFactory(itemPedido -> new AdapterListProduto());
-        txtAdicionarProduto.clear();
-
-        txtQuantidadeItens.setText(String.valueOf(listaProdutos.getItems().size()));
-        defineValorTotal();
     }
 
     private void inicializaListaProdutos() {
@@ -110,7 +115,12 @@ public class ControllerVendaScreen implements Initializable {
             total = item.getPreco() * item.getQuantidade();
         }
         valorTotal += total;
+        new FadeInDown(txtValorTotal).setSpeed(0.5).play();
         txtValorTotal.setText(formataValor(valorTotal));
     }
 
+    public void fecharJanela() {
+        Stage stage = (Stage) btnSair.getScene().getWindow();
+        stage.close();
+    }
 }

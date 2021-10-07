@@ -1,21 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
+<?import com.jfoenix.controls.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<?import javafx.scene.text.Font?>
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="controller.ControllerClienteScreen"
-            prefHeight="400.0" prefWidth="600.0">
+<Pane prefHeight="730.0" prefWidth="1000.0" style="-fx-background-color: #FF7C00; -fx-background-radius: 10 10 10 10;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerClienteScreen">
+   <JFXButton fx:id="btnSair" layoutX="958.0" mnemonicParsing="false" onAction="#fecharJanela" prefHeight="40.0" prefWidth="40.0" styleClass="btnSair" stylesheets="@../stylesheets/styleButton.css" text="X" />
+   <Label layoutX="43.0" layoutY="50.0" text="Clientes" textFill="WHITE">
+      <font>
+         <Font name="Ebrima Bold" size="24.0" />
+      </font>
+   </Label>
+   <JFXButton fx:id="btnCadastrarNovoCliente" buttonType="RAISED" layoutX="43.0" layoutY="109.0" maxWidth="300.0" mnemonicParsing="false" onAction="#abrirCadastroCliente" prefHeight="50.0" prefWidth="300.0" ripplerFill="WHITE" style="-fx-background-color: #FF6800; -fx-background-radius: 10;" text="Cadastrar novo cliente" textFill="WHITE">
+      <font>
+         <Font name="Ebrima" size="14.0" />
+      </font></JFXButton>
+   <JFXTextField fx:id="txtBuscaCliente" focusColor="#ff6800" layoutX="43.0" layoutY="187.0" prefHeight="50.0" prefWidth="600.0" promptText="PESQUISAR CLIENTE" style="-fx-background-color: WHITE; -fx-background-radius: 10 10 10 10;" unFocusColor="#4d4d4d00">
+      <font>
+         <Font name="Ebrima" size="14.0" />
+      </font></JFXTextField>
+   <JFXListView fx:id="listaClientes" layoutX="43.0" layoutY="257.0" prefHeight="453.0" prefWidth="915.0" />
 
-    <Label layoutX="178.0" layoutY="174.0" text="Cliente Screen">
-        <font>
-            <Font size="36.0"/>
-        </font>
-    </Label>
-
-</AnchorPane>
+</Pane>
