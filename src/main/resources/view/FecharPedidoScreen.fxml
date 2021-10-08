@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="730.0" prefWidth="1000.0" style="-fx-background-color: #FF7C00; -fx-background-radius: 10 10 10 10;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerFecharPedido">
+<AnchorPane id="AnchorPane" prefHeight="730.0" prefWidth="1000.0" style="-fx-background-color: #FF7C00; -fx-background-radius: 10 10 10 10;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerFecharPedido">
 
     <JFXTextField fx:id="txtAdicionarCliente" focusColor="#ff6800" layoutX="46.0" layoutY="18.0" prefHeight="75" prefWidth="800" promptText="Selecione um cliente" style="-fx-background-color: white; -fx-background-radius: 20 20 20 20;" unFocusColor="#ffffff00">
         <font>
@@ -16,9 +16,9 @@
             <Insets />
         </opaqueInsets>
     </JFXTextField>
-    <JFXButton fx:id="btnAdicionarCliente" buttonType="RAISED" layoutX="705.0" layoutY="18.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="245.0" style="-fx-background-color: #FF6800; -fx-background-radius: 20 20 20 20;" text="ADICIONAR CLIENTE" textFill="WHITE">
+    <JFXButton fx:id="btnAdicionarCliente" layoutX="705.0" layoutY="18.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="245.0" style="-fx-background-color: #FF6800; -fx-background-radius: 20 20 20 20;" text="ADICIONAR CLIENTE" textFill="WHITE">
         <font>
-            <Font name="Ebrima" size="18.0" />
+            <Font name="Ebrima" size="14.0" />
         </font>
     </JFXButton>
    <Pane layoutX="46.0" layoutY="177.0" prefHeight="150.0" prefWidth="220.0" style="-fx-background-color: #F8F7FC; -fx-background-radius: 20 20 20 20;">

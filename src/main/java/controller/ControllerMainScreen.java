@@ -82,7 +82,7 @@ public class ControllerMainScreen implements Initializable {
             Stage stage = new Stage();
             Scene scene = new Scene(parent);
             scene.setFill(Color.TRANSPARENT);
-            // stage.getIcons().add(new Image(""));
+            //stage.getIcons().add(new Image(""));
             stage.initStyle(StageStyle.TRANSPARENT);
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setScene(scene);

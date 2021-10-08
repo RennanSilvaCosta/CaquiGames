@@ -1,6 +1,7 @@
 package adapter;
 
 import com.jfoenix.controls.JFXButton;
+import controller.ControllerVendaScreen;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -86,11 +87,7 @@ public class AdapterListProduto extends ListCell<ItemPedido> {
     }
 
     private void desabilitaBotaoMenosQtd(int quantidade) {
-        if (quantidade == 1) {
-            btnMenosQuantidade.setDisable(true);
-        } else {
-            btnMenosQuantidade.setDisable(false);
-        }
+        btnMenosQuantidade.setDisable(quantidade == 1);
     }
 
 }
