@@ -1,13 +1,13 @@
 package service;
 
 import model.Produto;
-import repository.ProdutoRepository;
+import dao.ProdutoDAO;
 
 import java.util.List;
 
 public class ProdutoService {
 
-    private ProdutoRepository pr = new ProdutoRepository();
+    private ProdutoDAO pr = new ProdutoDAO();
 
     public List<Produto> listarNomeProdutos() {
         return pr.listarNomesProdutos();

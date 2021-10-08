@@ -1,4 +1,4 @@
-package repository;
+package dao;
 
 import model.Produto;
 
@@ -8,7 +8,7 @@ import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
-public class ProdutoRepository {
+public class ProdutoDAO {
 
     private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("caqui");
     private static EntityManager em = emf.createEntityManager();
