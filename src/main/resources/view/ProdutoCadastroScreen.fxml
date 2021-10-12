@@ -23,7 +23,7 @@
          </font>
       </Label>
    </Pane>
-   <JFXButton fx:id="btnSair" layoutX="669.0" layoutY="-3.0" mnemonicParsing="false" onAction="#fecharJanela" prefHeight="35.0" prefWidth="35.0" text="x" textFill="WHITE">
+   <JFXButton fx:id="btnSair" layoutX="669.0" mnemonicParsing="false" onAction="#fecharJanela" prefHeight="35.0" prefWidth="35.0" styleClass="btnSair" stylesheets="@../stylesheets/styleButton.css" text="x" textFill="WHITE">
       <font>
          <Font name="Ebrima" size="12.0" />
       </font>
