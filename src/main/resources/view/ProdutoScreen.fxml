@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerProdutoScreen">
-   <Label layoutX="178.0" layoutY="174.0" text="Produto Screen">
+<Pane prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: #F8F7FC; -fx-background-radius: 10 10 10 10;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerProdutoScreen">
+    <JFXListView fx:id="listaProdutos" layoutX="43.0" layoutY="214.0" prefHeight="453.0" prefWidth="915.0" style="-fx-background-radius: 10 10 10 10;" />
+   <JFXTextField fx:id="txtPesquisarProduto" focusColor="#ffffff00" layoutX="43.0" layoutY="125.0" prefHeight="75.0" prefWidth="677.0" promptText="PESQUISAR PRODUTO" style="-fx-background-color: #FFFFFF; -fx-background-radius: 20 20 20 20;" unFocusColor="#ffffff00" />
+   <JFXButton fx:id="btnCadastrarNovoProduto" onAction="#abrirCadastroProduto" layoutX="658.0" layoutY="125.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="300.0" style="-fx-background-color: #FF6800; -fx-background-radius: 20 20 20 20;" text="CADASTRAR NOVO PRODUTO" textFill="WHITE">
       <font>
-         <Font size="36.0"/>
-      </font>
-   </Label>
-</AnchorPane>
+         <Font name="Ebrima" size="14.0" />
+      </font></JFXButton>
+   <Label layoutX="43.0" layoutY="36.0" text="GERENCIAR PRODUTOS" textFill="#ff6800">
+      <font>
+         <Font name="Ebrima Bold" size="24.0" />
+      </font></Label>
+   <JFXButton fx:id="btnSair" layoutX="965.0" mnemonicParsing="false" onAction="#fecharJanela" prefHeight="35.0" prefWidth="35.0" styleClass="btnSair" stylesheets="@../stylesheets/styleButton.css" text="x" textFill="WHITE" />
+</Pane>
