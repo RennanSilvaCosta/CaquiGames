@@ -1,14 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerLoginScreen">
-   <children>
-      <Label layoutX="253.0" layoutY="109.0" text="TESTE">
+<Pane depthTest="ENABLE" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="604.0" prefWidth="846.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerLoginScreen">
+   <Pane layoutX="73.0" layoutY="65.0" prefHeight="475.0" prefWidth="700.0" style="-fx-background-radius: 10 10 10 10; -fx-background-color: #FFF;">
+      <Pane prefHeight="475.0" prefWidth="350.0"
+            style="-fx-background-color: #FF7C00; -fx-background-radius: 10 0 0 10;">
+         <ImageView fitHeight="128.0" fitWidth="128.0" layoutX="111.0" layoutY="134.0" pickOnBounds="true"
+                    preserveRatio="true">
+            <Image url="@../icons/caqui_logo.png"/>
+         </ImageView>
+         <Label layoutX="119.0" layoutY="282.0" text="Bem-vindo ao" textFill="WHITE">
+            <font>
+               <Font name="Ebrima" size="18.0"/>
+            </font>
+         </Label>
+         <Label layoutX="150.0" layoutY="318.0" text="Caqui" textFill="WHITE">
+            <font>
+               <Font name="Ebrima Bold" size="18.0"/>
+            </font>
+         </Label>
+      </Pane>
+      <JFXButton fx:id="btnSair" layoutX="665.0" mnemonicParsing="false" onAction="#fecharJanela" prefHeight="35.0" prefWidth="35.0" styleClass="btnSair" stylesheets="@../stylesheets/styleButton.css" text="x" textFill="WHITE">
          <font>
-            <Font size="36.0" />
-         </font></Label>
-   </children>
-</AnchorPane>
+            <Font name="Ebrima Bold" size="12.0" />
+         </font></JFXButton>
+      <Label layoutX="370.0" layoutY="35.0" text="Bem-vindo de volta" textFill="#575757">
+         <font>
+            <Font name="Ebrima" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="370.0" layoutY="62.0" text="Faça o login para continuar" textFill="#a3a3a3">
+         <font>
+            <Font name="Ebrima" size="14.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="txtEmail" focusColor="#ff6800" labelFloat="true" layoutX="370.0" layoutY="128.0" prefHeight="50.0" prefWidth="290.0" promptText="EMAIL" unFocusColor="#ff7c00" />
+      <JFXPasswordField fx:id="txtSenha" focusColor="#ff6800" labelFloat="true" layoutX="370.0" layoutY="225.0" prefHeight="50.0" prefWidth="290.0" promptText="SENHA" unFocusColor="#ff7c00" />
+      <JFXButton fx:id="btnLogar" layoutX="425.0" layoutY="322.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #FF7C00; -fx-background-radius: 20 20 20 20;" text="ENTRAR" textFill="WHITE">
+         <font>
+            <Font name="Ebrima" size="14.0" />
+         </font></JFXButton>
+      <Label fx:id="txtEsqueceuSenha" layoutX="467.0" layoutY="382.0" text="Esqueceu a senha?" textFill="#a3a3a3">
+         <font>
+            <Font name="Ebrima" size="14.0" />
+         </font>
+      </Label>
+   </Pane>
+</Pane>
