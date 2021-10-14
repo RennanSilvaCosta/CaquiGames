@@ -40,10 +40,11 @@ public class ControllerVendaScreen implements Initializable {
 
     private List<Produto> produtos = new ArrayList<>();
 
-    double valorTotal = 0;
+    public static double valorTotal = 0;
+    public static Label txtValorTotalStatic;
 
     @FXML
-    private Label txtQuantidadeItens, txtValorDesconto, txtValorTotal = new Label();
+    private Label txtQuantidadeItens, txtValorDesconto, txtValorTotal;
     @FXML
     private JFXButton btnFecharPedido, btnAdicionarProduto, btnSair;
     @FXML
@@ -57,6 +58,7 @@ public class ControllerVendaScreen implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        txtValorTotalStatic = txtValorTotal;
         inicializaListaProdutos();
     }
 
@@ -116,10 +118,11 @@ public class ControllerVendaScreen implements Initializable {
         }
         valorTotal += total;
         new FadeInDown(txtValorTotal).setSpeed(0.5).play();
-        txtValorTotal.setText(formataValor(valorTotal));
+        txtValorTotalStatic.setText(formataValor(valorTotal));
     }
 
     public void fecharJanela() {
+        valorTotal = 0;
         Stage stage = (Stage) btnSair.getScene().getWindow();
         stage.close();
     }
