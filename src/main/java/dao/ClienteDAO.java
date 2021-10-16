@@ -37,10 +37,19 @@ public class ClienteDAO {
     public Cliente getCliente(String cpf) {
         StringBuilder getClientePorCpf = new StringBuilder();
 
-        getClientePorCpf.append("select * from Clientes where cpf = " + cpf );
+        getClientePorCpf.append("select * from Cliente where cpf = '" + cpf + "'" );
 
         return this.em.createQuery(getClientePorCpf.toString(), Cliente.class).getSingleResult();
 
+    }
+    
+    public void deletaCliente( String cpf ) {
+        StringBuilder deleteClientePorCpf = new StringBuilder();
+        
+        Cliente c = getCliente(cpf);
+        Long idCliente = c.getId();
+        deleteClientePorCpf.append("delete * from Cliente where id = " + idCliente);
+        
     }
 
 }
