@@ -1,5 +1,6 @@
 package adapter;
 
+import animatefx.animation.FadeInDown;
 import com.jfoenix.controls.JFXButton;
 import controller.ControllerVendaScreen;
 import javafx.event.ActionEvent;
@@ -68,6 +69,8 @@ public class AdapterListProduto extends ListCell<ItemPedido> {
                     txtQuantidade.setText(String.valueOf(item.getQuantidade()));
                     txtValorTotal.setText(formataValor(item.getPreco() * item.getQuantidade()));
                     desabilitaBotaoMenosQtd(item.getQuantidade());
+                    ControllerVendaScreen.txtValorTotalStatic.setText(String.valueOf(formataValor(ControllerVendaScreen.valorTotal += item.getPreco())));
+                    new FadeInDown(ControllerVendaScreen.txtValorTotalStatic).setSpeed(0.5).play();
                 }
             });
 
@@ -78,6 +81,8 @@ public class AdapterListProduto extends ListCell<ItemPedido> {
                     txtQuantidade.setText(String.valueOf(item.getQuantidade()));
                     txtValorTotal.setText(formataValor((item.getPreco() * item.getQuantidade())));
                     desabilitaBotaoMenosQtd(item.getQuantidade());
+                    ControllerVendaScreen.txtValorTotalStatic.setText(String.valueOf(formataValor(ControllerVendaScreen.valorTotal -= item.getPreco())));
+                    new FadeInDown(ControllerVendaScreen.txtValorTotalStatic).setSpeed(0.5).play();
                 }
             });
 
