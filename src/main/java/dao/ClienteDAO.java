@@ -1,5 +1,7 @@
 package dao;
 
+import model.Cliente;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.time.LocalDate;
@@ -29,6 +31,15 @@ public class ClienteDAO {
         createCliente.append(")");
 
         this.em.createNativeQuery(createCliente.toString()).executeUpdate();
+
+    }
+
+    public Cliente getCliente(String cpf) {
+        StringBuilder getClientePorCpf = new StringBuilder();
+
+        getClientePorCpf.append("select * from Clientes where cpf = " + cpf );
+
+        return this.em.createQuery(getClientePorCpf.toString(), Cliente.class).getSingleResult();
 
     }
 
