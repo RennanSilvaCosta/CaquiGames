@@ -5,6 +5,7 @@ import model.Cliente;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class ClienteDAO {
 
@@ -36,11 +37,8 @@ public class ClienteDAO {
 
     public Cliente getCliente(String cpf) {
         StringBuilder getClientePorCpf = new StringBuilder();
-
         getClientePorCpf.append("select * from Cliente where cpf = '" + cpf + "'" );
-
         return this.em.createQuery(getClientePorCpf.toString(), Cliente.class).getSingleResult();
-
     }
     
     public void deletaCliente( String cpf ) {
@@ -50,6 +48,30 @@ public class ClienteDAO {
         Long idCliente = c.getId();
         deleteClientePorCpf.append("delete * from Cliente where id = " + idCliente);
         
+    }
+
+    public void editaCliente(String nome, String cpf, String celular, String email, LocalDate dataNasc ) {
+        StringBuilder updateCliente = new StringBuilder();
+
+        updateCliente.append("update cliente set ");
+        if ( !Objects.isNull(nome) ) {
+            updateCliente.append("nome = " + "'" + nome + "'");
+        }
+        if ( !Objects.isNull(cpf) ) {
+            updateCliente.append("cpf = " + "'" + cpf + "'");
+        }
+        if ( !Objects.isNull(celular) ) {
+            updateCliente.append("celular = " + "'" + celular + "'");
+        }
+        if ( !Objects.isNull(email) ) {
+            updateCliente.append("email = " + "'" + email + "'");
+        }
+        if ( !Objects.isNull(dataNasc) ) {
+            updateCliente.append("dataNasc = " + "'" + dataNasc + "'");
+        }
+
+        this.em.createNativeQuery(updateCliente.toString()).executeUpdate();
+
     }
 
 }
