@@ -42,7 +42,7 @@ public class AdapterListProduto extends ListCell<ItemPedido> {
 
         } else {
             if (mLLoader == null) {
-                mLLoader = new FXMLLoader(getClass().getResource("/view/adapter/AdapterListaProdutos.fxml"));
+                mLLoader = new FXMLLoader(getClass().getResource("/view/adapter/AdapterListaProdutosVenda.fxml"));
                 mLLoader.setController(this);
                 try {
                     mLLoader.load();
