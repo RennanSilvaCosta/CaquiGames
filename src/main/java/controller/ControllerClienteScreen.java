@@ -1,7 +1,6 @@
 package controller;
 
 import adapter.AdapterListCliente;
-import adapter.AdapterListProduto;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
 import javafx.event.EventHandler;
@@ -16,7 +15,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import model.Cliente;
-import org.controlsfx.control.textfield.TextFields;
 
 import java.io.IOException;
 import java.net.URL;

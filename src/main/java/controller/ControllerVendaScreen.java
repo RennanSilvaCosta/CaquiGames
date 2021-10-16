@@ -1,6 +1,6 @@
 package controller;
 
-import adapter.AdapterListProduto;
+import adapter.AdapterListProdutoVenda;
 import animatefx.animation.FadeInDown;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
@@ -97,7 +97,7 @@ public class ControllerVendaScreen implements Initializable {
             ItemPedido item = new ItemPedido(p, produto, 0.0, 1, produto.getValor());
 
             listaProdutos.getItems().add(item);
-            listaProdutos.setCellFactory(itemPedido -> new AdapterListProduto());
+            listaProdutos.setCellFactory(itemPedido -> new AdapterListProdutoVenda());
             txtAdicionarProduto.clear();
 
             new FadeInDown(txtQuantidadeItens).setSpeed(0.5).play();

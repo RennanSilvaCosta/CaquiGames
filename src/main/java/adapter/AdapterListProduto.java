@@ -1,10 +1,6 @@
 package adapter;
 
-import animatefx.animation.FadeInDown;
 import com.jfoenix.controls.JFXButton;
-import controller.ControllerVendaScreen;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
@@ -12,13 +8,11 @@ import javafx.scene.control.ListCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
-import model.ItemPedido;
+import model.Produto;
 
 import java.io.IOException;
 
-import static util.Helper.formataValor;
-
-public class AdapterListProduto extends ListCell<ItemPedido> {
+public class AdapterListProduto extends ListCell<Produto> {
 
     private FXMLLoader mLLoader;
 
@@ -26,23 +20,23 @@ public class AdapterListProduto extends ListCell<ItemPedido> {
     private GridPane gridPane;
 
     @FXML
-    Label txtIndice, txtNomeProduto, txtQuantidade, txtValorUnitario, txtValorTotal;
+    Label txtId, txtDescricao, txtMarca, txtQtdEstoque, txtValor, txtCategoria;
 
     @FXML
-    JFXButton btnMenosQuantidade, btnMaisQuantidade;
+    JFXButton btnEditarProduto, btnExcluirProduto;
 
     @Override
-    protected void updateItem(ItemPedido item, boolean empty) {
-        super.updateItem(item, empty);
+    protected void updateItem(Produto produto, boolean empty) {
+        super.updateItem(produto, empty);
 
-        if (empty || item == null) {
+        if (empty || produto == null) {
 
             setText(null);
             setGraphic(null);
 
         } else {
             if (mLLoader == null) {
-                mLLoader = new FXMLLoader(getClass().getResource("/view/adapter/AdapterListaProdutosVenda.fxml"));
+                mLLoader = new FXMLLoader(getClass().getResource("/view/adapter/AdapterListaProtudos.fxml"));
                 mLLoader.setController(this);
                 try {
                     mLLoader.load();
@@ -51,48 +45,18 @@ public class AdapterListProduto extends ListCell<ItemPedido> {
                 }
             }
 
-            btnMenosQuantidade.setGraphic(new ImageView(new Image("/icons/negativo.png")));
-            btnMaisQuantidade.setGraphic(new ImageView(new Image("/icons/mais.png")));
+            btnEditarProduto.setGraphic(new ImageView(new Image("/icons/btn_editar_cliente.png")));
+            btnExcluirProduto.setGraphic(new ImageView(new Image("/icons/btn_excluir_cliente.png")));
 
-            txtIndice.setText(item.getProduto().getId().toString());
-            txtNomeProduto.setText(item.getProduto().getDescricao());
-            txtQuantidade.setText(item.getQuantidade().toString());
-            txtValorUnitario.setText(formataValor(item.getPreco()));
-            txtValorTotal.setText(formataValor(item.getPreco() * item.getQuantidade()));
-
-            desabilitaBotaoMenosQtd(item.getQuantidade());
-
-            btnMaisQuantidade.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent actionEvent) {
-                    item.setQuantidade(item.getQuantidade() + 1);
-                    txtQuantidade.setText(String.valueOf(item.getQuantidade()));
-                    txtValorTotal.setText(formataValor(item.getPreco() * item.getQuantidade()));
-                    desabilitaBotaoMenosQtd(item.getQuantidade());
-                    ControllerVendaScreen.txtValorTotalStatic.setText(String.valueOf(formataValor(ControllerVendaScreen.valorTotal += item.getPreco())));
-                    new FadeInDown(ControllerVendaScreen.txtValorTotalStatic).setSpeed(0.5).play();
-                }
-            });
-
-            btnMenosQuantidade.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent actionEvent) {
-                    item.setQuantidade(item.getQuantidade() - 1);
-                    txtQuantidade.setText(String.valueOf(item.getQuantidade()));
-                    txtValorTotal.setText(formataValor((item.getPreco() * item.getQuantidade())));
-                    desabilitaBotaoMenosQtd(item.getQuantidade());
-                    ControllerVendaScreen.txtValorTotalStatic.setText(String.valueOf(formataValor(ControllerVendaScreen.valorTotal -= item.getPreco())));
-                    new FadeInDown(ControllerVendaScreen.txtValorTotalStatic).setSpeed(0.5).play();
-                }
-            });
+            txtId.setText(String.valueOf(produto.getId()));
+            txtDescricao.setText(produto.getDescricao());
+            txtMarca.setText(produto.getMarca());
+            txtQtdEstoque.setText(String.valueOf(produto.getQtdEstoque()));
+            txtValor.setText(String.valueOf(produto.getValor()));
+            txtCategoria.setText(produto.getCategoria().getDescricao());
 
             setText(null);
             setGraphic(gridPane);
         }
     }
-
-    private void desabilitaBotaoMenosQtd(int quantidade) {
-        btnMenosQuantidade.setDisable(quantidade == 1);
-    }
-
 }
