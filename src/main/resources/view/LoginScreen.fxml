@@ -41,7 +41,7 @@
       </Label>
       <JFXTextField fx:id="txtEmail" focusColor="#ff6800" labelFloat="true" layoutX="370.0" layoutY="128.0" prefHeight="50.0" prefWidth="290.0" promptText="EMAIL" unFocusColor="#ff7c00" />
       <JFXPasswordField fx:id="txtSenha" focusColor="#ff6800" labelFloat="true" layoutX="370.0" layoutY="225.0" prefHeight="50.0" prefWidth="290.0" promptText="SENHA" unFocusColor="#ff7c00" />
-      <JFXButton fx:id="btnLogar" layoutX="425.0" layoutY="322.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #FF7C00; -fx-background-radius: 20 20 20 20;" text="ENTRAR" textFill="WHITE">
+      <JFXButton fx:id="btnLogar" onAction="#logar" layoutX="425.0" layoutY="322.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #FF7C00; -fx-background-radius: 20 20 20 20;" text="ENTRAR" textFill="WHITE">
          <font>
             <Font name="Ebrima" size="14.0" />
          </font></JFXButton>
