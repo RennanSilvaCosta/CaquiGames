@@ -1,76 +1,75 @@
 package dao;
 
 import model.Cliente;
+import model.Endereco;
 
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
 import java.time.LocalDate;
 import java.util.Objects;
 
 public class ClienteDAO {
 
-    @PersistenceContext
-    private EntityManager em;
+    private static EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("caquidb");
+    private static EntityManager entityManager = entityManagerFactory.createEntityManager();
 
-    public void criaCliente(String nome, String cpf, String celular, String email, LocalDate dataNasc ) {
+    public void criaCliente(String nome, String cpf, String celular, String email, LocalDate dataNasc, Endereco endereco) {
 
-        final StringBuilder createCliente = new StringBuilder();
+        Cliente cliente = new Cliente();
+        cliente.setNome(nome);
+        cliente.setCpf(cpf);
+        cliente.setEmail(email);
+        cliente.setDataNasc(dataNasc);
+        cliente.setCelular(celular);
+        cliente.setEndereco(endereco);
 
-        createCliente.append("insert into Cliente ");
-        createCliente.append("(nome, ");
-        createCliente.append("cpf, ");
-        createCliente.append("celular, ");
-        createCliente.append("email, ");
-        createCliente.append("dataNasc, ");
-        createCliente.append("endereco) ");
-        createCliente.append("values ");
-        createCliente.append("( " + nome);
-        createCliente.append("( " + cpf);
-        createCliente.append("( " + celular);
-        createCliente.append("( " + email);
-        createCliente.append("( " + dataNasc);
-        createCliente.append(")");
-
-        this.em.createNativeQuery(createCliente.toString()).executeUpdate();
+        entityManager.getTransaction().begin();
+        entityManager.persist(cliente);
+        entityManager.getTransaction().commit();
 
     }
 
     public Cliente getCliente(String cpf) {
-        StringBuilder getClientePorCpf = new StringBuilder();
-        getClientePorCpf.append("select * from Cliente where cpf = '" + cpf + "'" );
-        return this.em.createQuery(getClientePorCpf.toString(), Cliente.class).getSingleResult();
+        String getClientePorCpf = "select c from Cliente where cpf = ':cpf'";
+        TypedQuery<Cliente> typedQuery = entityManager
+                .createQuery(getClientePorCpf, Cliente.class)
+                .setParameter("cpf", cpf);
+
+        return typedQuery.getSingleResult();
     }
     
     public void deletaCliente( String cpf ) {
-        StringBuilder deleteClientePorCpf = new StringBuilder();
-        
-        Cliente c = getCliente(cpf);
-        Long idCliente = c.getId();
-        deleteClientePorCpf.append("delete * from Cliente where id = " + idCliente);
-        
+        Cliente cliente = entityManager.find(Cliente.class, getCliente(cpf).getId());
+        entityManager.getTransaction().begin();
+        entityManager.remove(cliente);
+        entityManager.getTransaction().commit();
     }
 
     public void editaCliente(String nome, String cpf, String celular, String email, LocalDate dataNasc ) {
-        StringBuilder updateCliente = new StringBuilder();
 
-        updateCliente.append("update cliente set ");
+        Cliente cliente = getCliente(cpf);
+
         if ( !Objects.isNull(nome) ) {
-            updateCliente.append("nome = " + "'" + nome + "'");
+            cliente.setNome(nome);
         }
         if ( !Objects.isNull(cpf) ) {
-            updateCliente.append("cpf = " + "'" + cpf + "'");
+            cliente.setCpf(cpf);
         }
         if ( !Objects.isNull(celular) ) {
-            updateCliente.append("celular = " + "'" + celular + "'");
+            cliente.setCelular(celular);
         }
         if ( !Objects.isNull(email) ) {
-            updateCliente.append("email = " + "'" + email + "'");
+            cliente.setEmail(email);
         }
         if ( !Objects.isNull(dataNasc) ) {
-            updateCliente.append("dataNasc = " + "'" + dataNasc + "'");
+            cliente.setDataNasc(dataNasc);
         }
 
-        this.em.createNativeQuery(updateCliente.toString()).executeUpdate();
+        entityManager.getTransaction().begin();
+        entityManager.merge(cliente);
+        entityManager.getTransaction().commit();
 
     }
 
