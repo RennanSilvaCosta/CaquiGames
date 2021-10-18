@@ -3,43 +3,66 @@ package dao;
 import model.Endereco;
 
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import java.util.Objects;
 
 public class EnderecoDAO {
 
-    @PersistenceContext
-    private EntityManager em;
+    private static EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("caquidb");
+    private static EntityManager entityManager = entityManagerFactory.createEntityManager();
 
     public Endereco criaEndereco(String cep, String logradouro, String bairro, Integer numero, String complemento, String referencia ) {
 
-        final StringBuilder createEndereco = new StringBuilder();
+        Endereco endereco = new Endereco();
 
-        createEndereco.append("insert into Endereco ");
-        createEndereco.append("(cep, ");
-        createEndereco.append("logradouro, ");
-        createEndereco.append("bairro, ");
-        createEndereco.append("numero, ");
-        createEndereco.append("complemento, ");
-        createEndereco.append("referencia) ");
-        createEndereco.append("values ");
-        createEndereco.append("( '" + cep + "'");
-        createEndereco.append(", '" + logradouro + "'");
-        createEndereco.append(", '" + bairro + "'");
-        createEndereco.append(", " + numero);
-        createEndereco.append(", '" + complemento + "'");
-        createEndereco.append(", '" + referencia + "'");
-        createEndereco.append(")");
+        endereco.setCep(cep);
+        endereco.setBairro(bairro);
+        endereco.setComplemento(complemento);
+        endereco.setNumero(numero);
+        endereco.setLogradouro(logradouro);
+        endereco.setReferencia(referencia);
 
-        this.em.createNativeQuery(createEndereco.toString()).executeUpdate();
+        entityManager.getTransaction().begin();
+        entityManager.persist(endereco);
+        entityManager.getTransaction().commit();
 
-        return getIdEndereco();
+        return getEndereco();
 
     }
 
-    private Endereco getIdEndereco() {
-        StringBuilder queryBuilder = new StringBuilder();
-
-        queryBuilder.append("select * from Endereco order by id desc limit 1 ");
-        return this.em.createQuery(queryBuilder.toString(), Endereco.class).getSingleResult();
+    private Endereco getEndereco() {
+        return entityManager.createQuery("select * from Endereco order by id desc limit 1 ", Endereco.class).getSingleResult();
     }
+
+    public void editaEndereco(String cep, String logradouro, String bairro, Integer numero, String complemento, String referencia, Long idEndereco ) {
+
+        Endereco endereco = new Endereco();
+        endereco.setId(idEndereco);
+
+        if (!Objects.isNull(cep)) {
+            endereco.setComplemento(cep);
+        }
+        if (!Objects.isNull(logradouro)) {
+            endereco.setLogradouro(logradouro);
+        }
+        if (!Objects.isNull(bairro)) {
+            endereco.setBairro(bairro);
+        }
+        if (!Objects.isNull(numero)) {
+            endereco.setNumero(numero);
+        }
+        if (!Objects.isNull(complemento)) {
+            endereco.setComplemento(complemento);
+        }
+        if (!Objects.isNull(referencia)) {
+            endereco.setReferencia(referencia);
+        }
+
+        entityManager.getTransaction().begin();
+        entityManager.merge(endereco);
+        entityManager.getTransaction().commit();
+
+    }
+
 }

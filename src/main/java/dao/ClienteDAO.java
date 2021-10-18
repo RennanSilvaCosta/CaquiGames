@@ -8,6 +8,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Objects;
 
 public class ClienteDAO {
@@ -32,12 +33,21 @@ public class ClienteDAO {
     }
 
     public Cliente getCliente(String cpf) {
-        String getClientePorCpf = "select c from Cliente where cpf = ':cpf'";
+        String getClientePorCpf = "select * from Cliente where cpf = ':cpf';";
         TypedQuery<Cliente> typedQuery = entityManager
                 .createQuery(getClientePorCpf, Cliente.class)
                 .setParameter("cpf", cpf);
 
         return typedQuery.getSingleResult();
+    }
+
+    public List<Cliente> getClientesPorNome(String str) {
+        String getClientesPorNome = "select distinct * from Cliente where nome like '%:str%' order by nome limit 10;";
+        TypedQuery<Cliente> typedQuery = entityManager
+                .createQuery(getClientesPorNome, Cliente.class)
+                .setParameter("str", str);
+
+        return typedQuery.getResultList();
     }
     
     public void deletaCliente( String cpf ) {
