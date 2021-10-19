@@ -13,27 +13,34 @@ public class EnderecoService {
 
     public Endereco cadastraEndereco(String cep, String logradouro, String bairro, Integer numero, String complemento, String referencia) {
 
-        return enderecoDAO.criaEndereco(
-                cep,
-                logradouro,
-                bairro,
-                numero,
-                complemento,
-                referencia
-        );
+        Endereco endereco = new Endereco();
+
+        endereco.setCep(cep);
+        endereco.setLogradouro(logradouro);
+        endereco.setBairro(bairro);
+        endereco.setNumero(numero);
+        endereco.setComplemento(complemento);
+        endereco.setReferencia(referencia);
+
+        return enderecoDAO.criaEndereco(endereco);
 
     }
 
     public void atualizaEndereco(String cep, String logradouro, String bairro, Integer numero, String complemento, String referencia, String cpf) {
 
         Cliente cliente = clienteDAO.getCliente(cpf);
+
+        Endereco endereco = new Endereco();
+
+        endereco.setCep(cep);
+        endereco.setLogradouro(logradouro);
+        endereco.setBairro(bairro);
+        endereco.setNumero(numero);
+        endereco.setComplemento(complemento);
+        endereco.setReferencia(referencia);
+
         enderecoDAO.editaEndereco(
-                cep,
-                logradouro,
-                bairro,
-                numero,
-                complemento,
-                referencia,
+                endereco,
                 cliente
                         .getEndereco()
                         .getId()

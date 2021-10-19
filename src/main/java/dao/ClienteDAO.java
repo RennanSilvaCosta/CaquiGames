@@ -7,7 +7,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
@@ -16,15 +15,7 @@ public class ClienteDAO {
     private static EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("caquidb");
     private static EntityManager entityManager = entityManagerFactory.createEntityManager();
 
-    public void criaCliente(String nome, String cpf, String celular, String email, LocalDate dataNasc, Endereco endereco) {
-
-        Cliente cliente = new Cliente();
-        cliente.setNome(nome);
-        cliente.setCpf(cpf);
-        cliente.setEmail(email);
-        cliente.setDataNasc(dataNasc);
-        cliente.setCelular(celular);
-        cliente.setEndereco(endereco);
+    public void criaCliente(Cliente cliente, Endereco endereco) {
 
         entityManager.getTransaction().begin();
         entityManager.persist(cliente);
@@ -51,34 +42,35 @@ public class ClienteDAO {
     }
     
     public void deletaCliente( String cpf ) {
-        Cliente cliente = entityManager.find(Cliente.class, getCliente(cpf).getId());
+        Cliente cliente = entityManager.find(Cliente.class, getCliente(cpf));
         entityManager.getTransaction().begin();
         entityManager.remove(cliente);
         entityManager.getTransaction().commit();
     }
 
-    public void editaCliente(String nome, String cpf, String celular, String email, LocalDate dataNasc ) {
+    public void editaCliente( Cliente cliente, Long idCliente ) {
 
-        Cliente cliente = getCliente(cpf);
+        Cliente clienteNew = new Cliente();
+        clienteNew.setId(idCliente);
 
-        if ( !Objects.isNull(nome) ) {
-            cliente.setNome(nome);
+        if ( !Objects.isNull(cliente.getNome()) ) {
+            clienteNew.setNome(cliente.getNome());
         }
-        if ( !Objects.isNull(cpf) ) {
-            cliente.setCpf(cpf);
+        if ( !Objects.isNull(cliente.getCpf()) ) {
+            clienteNew.setCpf(cliente.getCpf());
         }
-        if ( !Objects.isNull(celular) ) {
-            cliente.setCelular(celular);
+        if ( !Objects.isNull(cliente.getCelular()) ) {
+            clienteNew.setCelular(cliente.getCelular());
         }
-        if ( !Objects.isNull(email) ) {
-            cliente.setEmail(email);
+        if ( !Objects.isNull(cliente.getEmail()) ) {
+            clienteNew.setEmail(cliente.getEmail());
         }
-        if ( !Objects.isNull(dataNasc) ) {
-            cliente.setDataNasc(dataNasc);
+        if ( !Objects.isNull(cliente.getDataNasc()) ) {
+            clienteNew.setDataNasc(cliente.getDataNasc());
         }
 
         entityManager.getTransaction().begin();
-        entityManager.merge(cliente);
+        entityManager.merge(clienteNew);
         entityManager.getTransaction().commit();
 
     }

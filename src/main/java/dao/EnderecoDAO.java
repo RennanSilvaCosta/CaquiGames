@@ -12,16 +12,7 @@ public class EnderecoDAO {
     private static EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("caquidb");
     private static EntityManager entityManager = entityManagerFactory.createEntityManager();
 
-    public Endereco criaEndereco(String cep, String logradouro, String bairro, Integer numero, String complemento, String referencia ) {
-
-        Endereco endereco = new Endereco();
-
-        endereco.setCep(cep);
-        endereco.setBairro(bairro);
-        endereco.setComplemento(complemento);
-        endereco.setNumero(numero);
-        endereco.setLogradouro(logradouro);
-        endereco.setReferencia(referencia);
+    public Endereco criaEndereco(Endereco endereco) {
 
         entityManager.getTransaction().begin();
         entityManager.persist(endereco);
@@ -35,32 +26,32 @@ public class EnderecoDAO {
         return entityManager.createQuery("select * from Endereco order by id desc limit 1 ", Endereco.class).getSingleResult();
     }
 
-    public void editaEndereco(String cep, String logradouro, String bairro, Integer numero, String complemento, String referencia, Long idEndereco ) {
+    public void editaEndereco(Endereco endereco, Long idEndereco) {
 
-        Endereco endereco = new Endereco();
-        endereco.setId(idEndereco);
+        Endereco enderecoNew = new Endereco();
+        enderecoNew.setId(idEndereco);
 
-        if (!Objects.isNull(cep)) {
-            endereco.setComplemento(cep);
+        if (!Objects.isNull(endereco.getCep())) {
+            enderecoNew.setComplemento(endereco.getCep());
         }
-        if (!Objects.isNull(logradouro)) {
-            endereco.setLogradouro(logradouro);
+        if (!Objects.isNull(endereco.getLogradouro())) {
+            enderecoNew.setLogradouro(endereco.getLogradouro());
         }
-        if (!Objects.isNull(bairro)) {
-            endereco.setBairro(bairro);
+        if (!Objects.isNull(endereco.getBairro())) {
+            enderecoNew.setBairro(endereco.getBairro());
         }
-        if (!Objects.isNull(numero)) {
-            endereco.setNumero(numero);
+        if (!Objects.isNull(endereco.getNumero())) {
+            enderecoNew.setNumero(endereco.getNumero());
         }
-        if (!Objects.isNull(complemento)) {
-            endereco.setComplemento(complemento);
+        if (!Objects.isNull(endereco.getComplemento())) {
+            enderecoNew.setComplemento(endereco.getComplemento());
         }
-        if (!Objects.isNull(referencia)) {
-            endereco.setReferencia(referencia);
+        if (!Objects.isNull(endereco.getReferencia())) {
+            enderecoNew.setReferencia(endereco.getReferencia());
         }
 
         entityManager.getTransaction().begin();
-        entityManager.merge(endereco);
+        entityManager.merge(enderecoNew);
         entityManager.getTransaction().commit();
 
     }
