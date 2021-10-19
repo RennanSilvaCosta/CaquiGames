@@ -12,7 +12,7 @@ public class Endereco {
     private Long id;
 
     @NotNull
-    @Column(length = 8)
+    @Column(length = 9)
     private String cep;
 
     @NotNull

@@ -1,5 +1,6 @@
 package controller;
 
+import adapter.AdapterListCliente;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import dto.EnderecoDto;
@@ -12,6 +13,8 @@ import service.ClienteService;
 
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import static service.ViaCepService.buscaEnderecoViaCep;
@@ -21,6 +24,8 @@ public class ControllerClienteCadastroScreen implements Initializable {
     Cliente cliente = new Cliente();
     Endereco end = new Endereco();
     ClienteService clienteService = new ClienteService();
+
+    private List<Cliente> clientes = new ArrayList<>();
 
     @FXML
     JFXButton btnSair, btnSalvarCliente;
@@ -49,6 +54,7 @@ public class ControllerClienteCadastroScreen implements Initializable {
     }
 
     public void persistirCliente() {
+        populaEndereco();
         populaCliente();
         if (cliente.getId() != null) {
             clienteService.atualizaCliente(this.cliente);
@@ -56,6 +62,16 @@ public class ControllerClienteCadastroScreen implements Initializable {
             clienteService.cadastraCliente(this.cliente);
         }
         fecharCadastroCliente();
+        atualizaListaClientes();
+    }
+
+    private void atualizaListaClientes() {
+        clientes = clienteService.buscaTodosClientes();
+        ControllerClienteScreen.listaClienteStatic.getItems().clear();
+        for (Cliente c : clientes) {
+            ControllerClienteScreen.listaClienteStatic.getItems().add(c);
+        }
+        ControllerClienteScreen.listaClienteStatic.setCellFactory(cliente -> new AdapterListCliente());
     }
 
     private void populaCliente() {
@@ -65,6 +81,14 @@ public class ControllerClienteCadastroScreen implements Initializable {
         this.cliente.setDataNasc(LocalDate.now());
         this.cliente.setCelular(txtCelular.getText());
         this.cliente.setEndereco(end);
+    }
+
+    private void populaEndereco() {
+        this.end.setCep(txtCep.getText());
+        this.end.setLogradouro(txtLogradouro.getText());
+        this.end.setBairro(txtBairro.getText());
+        this.end.setNumero(Integer.parseInt(txtNumero.getText()));
+        this.end.setComplemento(txtComplemento.getText());
     }
 
     public void buscaCep() {

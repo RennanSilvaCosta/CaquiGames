@@ -15,8 +15,8 @@ public class ClienteDAO {
 
     public void criaCliente(Cliente cliente) {
         entityManager.getTransaction().begin();
-        entityManager.persist(cliente);
         entityManager.persist(cliente.getEndereco());
+        entityManager.persist(cliente);
         entityManager.getTransaction().commit();
     }
 

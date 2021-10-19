@@ -15,12 +15,10 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import model.Cliente;
-import model.Endereco;
 import service.ClienteService;
 
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -39,14 +37,12 @@ public class ControllerClienteScreen implements Initializable {
     @FXML
     JFXListView<Cliente> listacliente;
 
+    static JFXListView<Cliente> listaClienteStatic;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        listaClienteStatic = listacliente;
         inicializaListaCliente();
-    }
-
-    public void fecharJanela() {
-        Stage stage = (Stage) btnSair.getScene().getWindow();
-        stage.close();
     }
 
     @FXML
@@ -124,7 +120,7 @@ public class ControllerClienteScreen implements Initializable {
         }
     }
 
-    private void inicializaListaCliente() {
+    public void inicializaListaCliente() {
         clientes = clienteService.buscaTodosClientes();
         for (Cliente c : clientes) {
             listacliente.getItems().add(c);
@@ -132,4 +128,9 @@ public class ControllerClienteScreen implements Initializable {
         listacliente.setCellFactory(cliente -> new AdapterListCliente());
     }
 
+    public void fecharJanela() {
+        listaClienteStatic.getItems().clear();
+        Stage stage = (Stage) btnSair.getScene().getWindow();
+        stage.close();
+    }
 }
