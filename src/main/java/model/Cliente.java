@@ -19,10 +19,10 @@ public class Cliente {
     private String nome;
 
     @NotNull
-    @Column(length = 11)
+    @Column(length = 15)
     private String cpf;
 
-    @Column(length = 11)
+    @Column(length = 14)
     private String celular;
 
     @Column(length = 100)
