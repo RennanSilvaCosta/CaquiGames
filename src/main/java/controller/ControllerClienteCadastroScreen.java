@@ -1,8 +1,8 @@
 package controller;
 
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTextField;
+import dto.EnderecoDto;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.stage.Stage;
@@ -12,9 +12,9 @@ import service.ClienteService;
 
 import java.net.URL;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
+
+import static service.ViaCepService.buscaEnderecoViaCep;
 
 public class ControllerClienteCadastroScreen implements Initializable {
 
@@ -65,6 +65,18 @@ public class ControllerClienteCadastroScreen implements Initializable {
         this.cliente.setDataNasc(LocalDate.now());
         this.cliente.setCelular(txtCelular.getText());
         this.cliente.setEndereco(end);
+    }
+
+    public void buscaCep() {
+        if (txtCep.getText().charAt(8) != '_') {
+            EnderecoDto end = buscaEnderecoViaCep(txtCep.getText());
+            if (end != null) {
+                txtLogradouro.setText(end.getLogradouro());
+                txtBairro.setText(end.getBairro());
+                txtCidade.setText(end.getLocalidade());
+                txtEstado.setText(end.getUf());
+            }
+        }
     }
 
     public void fecharCadastroCliente() {

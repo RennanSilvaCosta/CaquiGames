@@ -6,9 +6,9 @@
 <?import javafx.scene.text.*?>
 <?import util.*?>
 
-<Pane prefHeight="530.0" prefWidth="970.0" style="-fx-background-color: #FF7C00; -fx-background-radius: 10 10 10 10;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerClienteCadastroScreen">
-    <Pane layoutX="20.0" layoutY="66.0" prefHeight="450.0" prefWidth="930.0" style="-fx-background-color: #F8F7FC; -fx-background-radius: 10 10 10 10;">
-        <Label layoutX="39.0" layoutY="29.0" style="-fx-font-style: d6d6d6;" text="DADOS DE IDENTIFICAÇÃO" textFill="#a3a3a3">
+<Pane prefHeight="530.0" prefWidth="922.0" style="-fx-background-color: #FF7C00; -fx-background-radius: 10 10 10 10;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerClienteCadastroScreen">
+    <Pane layoutX="20.0" layoutY="66.0" prefHeight="450.0" prefWidth="881.0" style="-fx-background-color: #F8F7FC; -fx-background-radius: 10 10 10 10;">
+        <Label layoutX="39.0" layoutY="29.0" text="DADOS DE IDENTIFICAÇÃO" textFill="#a3a3a3">
             <font>
                 <Font name="Ebrima Bold" size="14.0" />
             </font>
@@ -45,7 +45,7 @@
             <Font name="Ebrima" size="14.0" />
          </font>
       </MaskedTextField>
-      <MaskedTextField fx:id="txtCep" focusColor="#ff6800" labelFloat="true" layoutX="483.0" layoutY="73.0" mask="#####-###" prefHeight="40.0" prefWidth="170.0" promptText="CEP" unFocusColor="#ff7c00">
+      <MaskedTextField fx:id="txtCep" focusColor="#ff6800" labelFloat="true" layoutX="483.0" layoutY="73.0" mask="#####-###" onKeyReleased="#buscaCep" prefHeight="40.0" prefWidth="170.0" promptText="CEP" unFocusColor="#ff7c00">
          <font>
             <Font name="Ebrima" size="14.0" />
          </font>
@@ -85,7 +85,7 @@
             <Font name="Ebrima" size="14.0" />
          </font></JFXButton>
     </Pane>
-   <JFXButton fx:id="btnSair" layoutX="935.0" mnemonicParsing="false" onAction="#fecharCadastroCliente" prefHeight="35.0" prefWidth="35.0" styleClass="btnSair" stylesheets="@../stylesheets/styleButton.css" text="x" textFill="WHITE">
+   <JFXButton fx:id="btnSair" layoutX="886.0" mnemonicParsing="false" onAction="#fecharCadastroCliente" prefHeight="35.0" prefWidth="35.0" styleClass="btnSair" stylesheets="@../stylesheets/styleButton.css" text="x" textFill="WHITE">
       <font>
          <Font name="Ebrima Bold" size="12.0" />
       </font></JFXButton>
