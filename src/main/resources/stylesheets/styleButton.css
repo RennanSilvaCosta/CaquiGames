@@ -9,28 +9,34 @@
     -fx-background-radius: 0 10 0 10;
 }
 
-.btnForm {
-    -fx-background-color: #FFB300;
+.btnFecharPedido {
     -fx-text-fill: #fff;
-    -fx-background-radius: 10px;
+    -fx-background-color: #56CAA4;
+    -fx-background-radius: 20 20 20 20;
 }
 
-.btnForm:hover {
+.btnFecharPedido:hover {
     -fx-background-color: transparent;
-    -fx-background-radius: 10px;
-    -fx-text-fill: #FFB300;
-    -fx-border-color: #FFB300;
+    -fx-background-radius: 20px;
+    -fx-text-fill: #56CAA4;
+    -fx-border-color: #56CAA4;
     -fx-border-width: 1px;
     -fx-border-style: solid;
-    -fx-border-radius: 10px;
+    -fx-border-radius: 20px;
 }
 
-.btnEsqueceu:hover {
-    -fx-text-fill: #6747CD;
-    -fx-underline: true;
+.btnAdicionar {
+    -fx-text-fill: #fff;
+    -fx-background-color: #FF6800;
+    -fx-background-radius: 20 20 20 20;
 }
 
-.btnCadastrar:hover {
-    -fx-text-fill: #6747CD;
-    -fx-underline: true;
+.btnAdicionar:hover {
+    -fx-background-color: transparent;
+    -fx-background-radius: 20px;
+    -fx-text-fill: #FF6800;
+    -fx-border-color: #FF6800;
+    -fx-border-width: 1px;
+    -fx-border-style: solid;
+    -fx-border-radius: 20px;
 }
