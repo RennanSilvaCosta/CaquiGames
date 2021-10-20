@@ -1,5 +1,6 @@
 package dao;
 
+import exceptions.ClienteJaExisteException;
 import model.Cliente;
 
 import javax.persistence.EntityManager;
@@ -7,17 +8,24 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 import java.util.List;
+import java.util.Objects;
 
 public class ClienteDAO {
 
-    private static EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("caqui");
+    private static EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("caquidb");
     private static EntityManager entityManager = entityManagerFactory.createEntityManager();
 
     public void criaCliente(Cliente cliente) {
-        entityManager.getTransaction().begin();
-        entityManager.persist(cliente.getEndereco());
-        entityManager.persist(cliente);
-        entityManager.getTransaction().commit();
+
+        boolean isCpfExiste = isClienteExiste(cliente.getCpf());
+
+        if (Objects.equals(isCpfExiste, false)) {
+            entityManager.getTransaction().begin();
+            entityManager.persist(cliente.getEndereco());
+            entityManager.persist(cliente);
+            entityManager.getTransaction().commit();
+        }
+        else throw new ClienteJaExisteException();
     }
 
     public List<Cliente> buscaTodosClientes() {
@@ -36,7 +44,7 @@ public class ClienteDAO {
     }
 
     public List<Cliente> getClientesPorNome(String str) {
-        String getClientesPorNome = "select distinct * from Cliente where nome like '%:str%' order by nome limit 10;";
+        String getClientesPorNome = "select distinct c from Cliente where nome like '%:str%' order by nome limit 20;";
         TypedQuery<Cliente> typedQuery = entityManager
                 .createQuery(getClientesPorNome, Cliente.class)
                 .setParameter("str", str);
@@ -54,6 +62,11 @@ public class ClienteDAO {
         entityManager.getTransaction().begin();
         entityManager.merge(cliente);
         entityManager.getTransaction().commit();
+    }
+
+    boolean isClienteExiste(String cpf) {
+        buscaClienteCpf(cpf);
+        return true;
     }
 
 }
