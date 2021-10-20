@@ -107,7 +107,7 @@ public class ControllerVendaScreen implements Initializable {
     }
 
     private void inicializaListaProdutos() {
-        produtos = ps.listarNomeProdutos();
+        produtos = ps.buscaListaProdutos();
         TextFields.bindAutoCompletion(txtAdicionarProduto, produtos);
     }
 
