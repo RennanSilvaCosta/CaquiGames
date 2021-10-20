@@ -7,6 +7,9 @@ import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import model.Categoria;
+import model.Cliente;
+import model.Endereco;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -19,8 +22,8 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-       /* EntityManagerFactory emf = Persistence.createEntityManagerFactory("caqui");
-
+        /*
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("caqui");
         EntityManager entityManager = emf.createEntityManager();
 
         Categoria cat = new Categoria(null, "Controles");
@@ -28,6 +31,9 @@ public class Main extends Application {
         entityManager.getTransaction().begin();
         entityManager.persist(cat);
         entityManager.getTransaction().commit();
+
+        entityManager.close();
+        emf.close();
 
         Endereco end = new Endereco();
 
@@ -101,12 +107,12 @@ public class Main extends Application {
 
         entityManager.getTransaction().begin();
         entityManager.persist(ip1);
-        entityManager.getTransaction().commit();*/
+        entityManager.getTransaction().commit();
 
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("caqui");
         EntityManager em = emf.createEntityManager();
         em.close();
-        emf.close();
+        emf.close();*/
 
         Parent root = FXMLLoader.load(getClass().getResource("/view/MainScreen.fxml"));
         Scene scene = new Scene(root);

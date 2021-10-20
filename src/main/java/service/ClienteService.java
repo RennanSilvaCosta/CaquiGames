@@ -1,9 +1,9 @@
 package service;
 
 import dao.ClienteDAO;
-import exceptions.ClienteJaExisteException;
 import model.Cliente;
 
+import javax.persistence.NoResultException;
 import java.util.List;
 
 public class ClienteService {
@@ -11,11 +11,11 @@ public class ClienteService {
     private ClienteDAO clienteDAO = new ClienteDAO();
 
     public void cadastraCliente(Cliente cliente) {
-           clienteDAO.criaCliente(cliente);
+        clienteDAO.criaCliente(cliente);
     }
 
     public List<Cliente> buscaTodosClientes() {
-       return clienteDAO.buscaTodosClientes();
+        return clienteDAO.buscaTodosClientes();
     }
 
     public Cliente consultaCliente(String cpf) {
