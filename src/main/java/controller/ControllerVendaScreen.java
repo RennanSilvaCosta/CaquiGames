@@ -20,19 +20,15 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import model.Funcionario;
 import model.ItemPedido;
 import model.Pedido;
 import model.Produto;
 import org.controlsfx.control.textfield.TextFields;
 import service.ProdutoService;
-import session.UserSession;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 import static util.Helper.formataValor;
 
@@ -41,6 +37,7 @@ public class ControllerVendaScreen implements Initializable {
     ProdutoService ps = new ProdutoService();
 
     private List<Produto> produtos = new ArrayList<>();
+    Set<ItemPedido> listaItens = new HashSet<>();
 
     public static double valorTotal = 0;
     public static Label txtValorTotalStatic;
@@ -65,9 +62,16 @@ public class ControllerVendaScreen implements Initializable {
     }
 
     @FXML
-    private void loadSecond(ActionEvent event) throws IOException {
+    private void abrirFormaPagamento(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/PagamentoScreen.fxml"));
         Scene scene = btnFecharPedido.getScene();
+
+        ControllerPagamentoScreen controller = new ControllerPagamentoScreen();
+        Pedido p = new Pedido();
+        p.setValorTotal(valorTotal);
+        p.setQuantidadeItens(listaItens.size());
+        p.setItens(listaItens);
+        controller.getPedido(p);
 
         root.translateXProperty().set(scene.getWidth());
         parentContainer.getChildren().add(root);
@@ -94,9 +98,8 @@ public class ControllerVendaScreen implements Initializable {
                     break;
                 }
             }
-
-            Pedido p = new Pedido();
-            ItemPedido item = new ItemPedido(p, produto, 0.0, 1, produto.getValor());
+            ItemPedido item = new ItemPedido(produto, 0.0, 1, produto.getValor());
+            listaItens.add(item);
 
             listaProdutos.getItems().add(item);
             listaProdutos.setCellFactory(itemPedido -> new AdapterListProdutoVenda());

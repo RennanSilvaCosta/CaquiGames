@@ -114,4 +114,9 @@ public class Cliente {
     public List<Pedido> getPedidos() {
         return pedidos;
     }
+
+    @Override
+    public String toString() {
+        return cpf + " - " + nome;
+    }
 }

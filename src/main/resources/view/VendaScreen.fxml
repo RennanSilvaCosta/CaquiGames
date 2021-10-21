@@ -62,7 +62,7 @@
                 </font>
             </Label>
         </Pane>
-      <JFXButton fx:id="btnFecharPedido" layoutX="252.0" layoutY="656.0" mnemonicParsing="false" onAction="#loadSecond" prefHeight="60.0" prefWidth="500.0" styleClass="btnFecharPedido" stylesheets="@../stylesheets/styleButton.css" text="FECHAR PEDIDO">
+      <JFXButton fx:id="btnFecharPedido" layoutX="252.0" layoutY="656.0" mnemonicParsing="false" onAction="#abrirFormaPagamento" prefHeight="60.0" prefWidth="500.0" styleClass="btnFecharPedido" stylesheets="@../stylesheets/styleButton.css" text="FECHAR PEDIDO">
          <font>
             <Font name="Ebrima" size="18.0" />
          </font>

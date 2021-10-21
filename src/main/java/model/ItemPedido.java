@@ -16,8 +16,8 @@ public class ItemPedido {
 
     public ItemPedido() {}
 
-    public ItemPedido(Pedido pedido, Produto produto, Double desconto, Integer quantidade, Double preco) {
-        id.setPedido(pedido);
+    public ItemPedido(/*Pedido pedido,*/ Produto produto, Double desconto, Integer quantidade, Double preco) {
+        //id.setPedido(pedido);
         id.setProduto(produto);
         this.desconto = desconto;
         this.quantidade = quantidade;

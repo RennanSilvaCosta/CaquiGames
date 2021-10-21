@@ -19,6 +19,10 @@ public class Pedido {
     private Double valorTotal;
 
     @NotNull
+    @Column(name = "forma_pagamento")
+    private String formaPagamento;
+
+    @NotNull
     @Column(name = "quantidade_itens")
     private Integer quantidadeItens;
 
@@ -39,9 +43,10 @@ public class Pedido {
     public Pedido() {
     }
 
-    public Pedido(Long id, Double valorTotal, Integer quantidadeItens, LocalDate data, Cliente cliente, Funcionario funcionario) {
+    public Pedido(Long id, Double valorTotal, String formaPagamento, Integer quantidadeItens, LocalDate data, Cliente cliente, Funcionario funcionario) {
         this.id = id;
         this.valorTotal = valorTotal;
+        this.formaPagamento = formaPagamento;
         this.quantidadeItens = quantidadeItens;
         this.data = data;
         this.cliente = cliente;
@@ -62,6 +67,18 @@ public class Pedido {
 
     public void setValorTotal(Double valorTotal) {
         this.valorTotal = valorTotal;
+    }
+
+    public String getFormaPagamento() {
+        return formaPagamento;
+    }
+
+    public void setFormaPagamento(String formaPagamento) {
+        this.formaPagamento = formaPagamento;
+    }
+
+    public void setItens(Set<ItemPedido> itens) {
+        this.itens = itens;
     }
 
     public Integer getQuantidadeItens() {

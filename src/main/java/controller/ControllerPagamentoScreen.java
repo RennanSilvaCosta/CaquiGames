@@ -16,16 +16,23 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
+import model.Funcionario;
+import model.ItemPedido;
+import model.Pedido;
+import session.UserSession;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 
 public class ControllerPagamentoScreen implements Initializable {
+
+    static Pedido pedido;
+
     @FXML
     private JFXButton btnDinheiro, btnCartaoCredito;
-
 
     @FXML
     private AnchorPane container;
@@ -42,12 +49,15 @@ public class ControllerPagamentoScreen implements Initializable {
     }
 
     @FXML
-    private void loadThird(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader. load(getClass().getResource("/view/FecharPedidoScreen.fxml"));
+    private void abrirFinalizarPedido(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/view/FecharPedidoScreen.fxml"));
         Scene scene = btnDinheiro.getScene();
         root.translateXProperty().set(scene.getWidth());
 
         StackPane parentContainer = (StackPane) btnDinheiro.getScene().getRoot();
+
+        pedido.setFormaPagamento("Dinheiro");
+        ControllerFecharPedido controller = new ControllerFecharPedido();
 
         parentContainer.getChildren().add(root);
 
@@ -58,8 +68,12 @@ public class ControllerPagamentoScreen implements Initializable {
         timeline.setOnFinished(t -> {
             parentContainer.getChildren().remove(container);
         });
+        controller.getPedido(pedido);
         timeline.play();
     }
 
+    public void getPedido(Pedido pedido) {
+       this.pedido = pedido ;
+    }
 
 }
