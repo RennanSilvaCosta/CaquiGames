@@ -2,14 +2,11 @@ package service;
 
 import dao.ClienteDAO;
 import dao.EnderecoDAO;
-import model.Cliente;
 import model.Endereco;
 
 public class EnderecoService {
 
     private EnderecoDAO enderecoDAO = new EnderecoDAO();
-
-    private ClienteDAO clienteDAO;
 
     public Endereco cadastraEndereco(String cep, String logradouro, String bairro, Integer numero, String complemento, String referencia) {
 
