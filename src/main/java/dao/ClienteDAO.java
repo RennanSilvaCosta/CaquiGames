@@ -28,10 +28,10 @@ public class ClienteDAO {
         return typedQuery.getResultList();
     }
 
-    public Cliente buscaClienteCpf(String cpf) {
-        String getClientePorCpf = "select c from Cliente c where cpf = :cpf";
+    public Cliente buscaClienteCPF(String cpf) {
+        String getClientePorCPF = "select c from Cliente c where cpf = :cpf";
         TypedQuery<Cliente> typedQuery = entityManager
-                .createQuery(getClientePorCpf, Cliente.class)
+                .createQuery(getClientePorCPF, Cliente.class)
                 .setParameter("cpf", cpf);
         List<Cliente> resultList = typedQuery.getResultList();
         if (Objects.isNull(resultList) || resultList.isEmpty()) {
@@ -52,7 +52,7 @@ public class ClienteDAO {
     }
     
     public void deletaCliente(String cpf) {
-        Cliente cliente = entityManager.find(Cliente.class, buscaClienteCpf(cpf));
+        Cliente cliente = entityManager.find(Cliente.class, buscaClienteCPF(cpf));
         entityManager.getTransaction().begin();
         entityManager.remove(cliente);
         entityManager.getTransaction().commit();
@@ -65,7 +65,7 @@ public class ClienteDAO {
     }
 
     public boolean isClienteExiste(String cpf) {
-        return !Objects.isNull(buscaClienteCpf(cpf));
+        return !Objects.isNull(buscaClienteCPF(cpf));
     }
 
 }

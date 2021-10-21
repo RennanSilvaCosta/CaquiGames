@@ -28,7 +28,7 @@ public class ClienteService {
     }
 
     public Cliente consultaCliente(String cpf) {
-        return clienteDAO.buscaClienteCpf(cpf);
+        return clienteDAO.buscaClienteCPF(cpf);
     }
 
     public List<Cliente> consultaListaClientes(String str) {
