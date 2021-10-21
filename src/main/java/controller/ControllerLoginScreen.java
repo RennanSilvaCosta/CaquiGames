@@ -42,49 +42,52 @@ public class ControllerLoginScreen implements Initializable {
     public void logar() {
         String email = txtEmail.getText();
         String senha = txtSenha.getText();
-
         if (email.equals("r@r.com") & senha.equals("123")) {
-            try {
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/MainScreen.fxml"));
-                Parent parent = fxmlLoader.load();
-                Stage stage = new Stage();
-                Scene scene = new Scene(parent);
-                scene.setFill(Color.TRANSPARENT);
-                //stage.getIcons().add(new Image(""));
-                stage.initStyle(StageStyle.TRANSPARENT);
-                stage.initModality(Modality.APPLICATION_MODAL);
-                stage.setScene(scene);
-                stage.show();
-
-                if (btnLogar != null) {
-                    //a partir do componenete de layout recupero a janela a ser fechada
-                    Stage stage2 = (Stage) btnLogar.getScene().getWindow();
-                    stage2.close();
-                }
-
-                scene.setOnMousePressed(event -> {
-                    xOffset = event.getSceneX();
-                    yOffset = event.getSceneY();
-                });
-
-                scene.setOnMouseDragged(event -> {
-                    stage.setX(event.getScreenX() - xOffset);
-                    stage.setY(event.getScreenY() - yOffset);
-                    stage.setOpacity(0.7);
-                });
-
-                scene.setOnMouseReleased(new EventHandler<MouseEvent>() {
-                    @Override
-                    public void handle(MouseEvent mouseEvent) {
-                        stage.setOpacity(1);
-                    }
-                });
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            abrirMainScreen();
         } else {
             new Shake(txtEmail).play();
             new Shake(txtSenha).play();
+        }
+    }
+
+    private void abrirMainScreen() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/MainScreen.fxml"));
+            Parent parent = fxmlLoader.load();
+            Stage stage = new Stage();
+            Scene scene = new Scene(parent);
+            scene.setFill(Color.TRANSPARENT);
+            //stage.getIcons().add(new Image(""));
+            stage.initStyle(StageStyle.TRANSPARENT);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setScene(scene);
+            stage.show();
+
+            if (btnLogar != null) {
+                //a partir do componenete de layout recupero a janela a ser fechada
+                Stage stage2 = (Stage) btnLogar.getScene().getWindow();
+                stage2.close();
+            }
+
+            scene.setOnMousePressed(event -> {
+                xOffset = event.getSceneX();
+                yOffset = event.getSceneY();
+            });
+
+            scene.setOnMouseDragged(event -> {
+                stage.setX(event.getScreenX() - xOffset);
+                stage.setY(event.getScreenY() - yOffset);
+                stage.setOpacity(0.7);
+            });
+
+            scene.setOnMouseReleased(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    stage.setOpacity(1);
+                }
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

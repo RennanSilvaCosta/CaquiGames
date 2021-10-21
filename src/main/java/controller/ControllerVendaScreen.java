@@ -20,11 +20,13 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import model.Funcionario;
 import model.ItemPedido;
 import model.Pedido;
 import model.Produto;
 import org.controlsfx.control.textfield.TextFields;
 import service.ProdutoService;
+import session.UserSession;
 
 import java.io.IOException;
 import java.net.URL;
@@ -87,7 +89,7 @@ public class ControllerVendaScreen implements Initializable {
             Produto produto = new Produto();
 
             for (Produto p : produtos) {
-                if (p.getDescricao().equals(nomeProduto)) {
+                if (p.getNome().equals(nomeProduto)) {
                     produto = p;
                     break;
                 }

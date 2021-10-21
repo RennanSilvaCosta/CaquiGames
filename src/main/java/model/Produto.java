@@ -41,7 +41,6 @@ public class Produto {
     public Produto() {
     }
 
-
     public Produto(Long id, String nome, String descricao, Double valor, String marca, Integer qtdEstoque, Categoria categoria) {
         this.id = id;
         this.nome = nome;
@@ -114,6 +113,6 @@ public class Produto {
 
     @Override
     public String toString() {
-        return descricao;
+        return nome;
     }
 }
