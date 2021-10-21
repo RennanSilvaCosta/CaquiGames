@@ -9,7 +9,7 @@ import java.util.Objects;
 
 public class EnderecoDAO {
 
-    private static EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("caquidb");
+    private static EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("caqui");
     private static EntityManager entityManager = entityManagerFactory.createEntityManager();
 
     public Endereco criaEndereco(Endereco endereco) {

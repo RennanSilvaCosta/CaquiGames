@@ -1,6 +1,5 @@
 package dao;
 
-import exceptions.ClienteJaExisteException;
 import model.Cliente;
 
 import javax.persistence.EntityManager;
@@ -12,20 +11,14 @@ import java.util.Objects;
 
 public class ClienteDAO {
 
-    private static EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("caquidb");
+    private static EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("caqui");
     private static EntityManager entityManager = entityManagerFactory.createEntityManager();
 
     public void criaCliente(Cliente cliente) {
-
-        boolean isCpfExiste = isClienteExiste(cliente.getCpf());
-
-        if (Objects.equals(isCpfExiste, false)) {
-            entityManager.getTransaction().begin();
-            entityManager.persist(cliente.getEndereco());
-            entityManager.persist(cliente);
-            entityManager.getTransaction().commit();
-        }
-        else throw new ClienteJaExisteException();
+        entityManager.getTransaction().begin();
+        entityManager.persist(cliente.getEndereco());
+        entityManager.persist(cliente);
+        entityManager.getTransaction().commit();
     }
 
     public List<Cliente> buscaTodosClientes() {
@@ -36,18 +29,25 @@ public class ClienteDAO {
     }
 
     public Cliente buscaClienteCpf(String cpf) {
-        String getClientePorCpf = "select c from Cliente where cpf = ':cpf';";
+        String getClientePorCpf = "select c from Cliente c where cpf = :cpf";
         TypedQuery<Cliente> typedQuery = entityManager
                 .createQuery(getClientePorCpf, Cliente.class)
                 .setParameter("cpf", cpf);
-        return typedQuery.getSingleResult();
+        List<Cliente> resultList = typedQuery.getResultList();
+        if (Objects.isNull(resultList) || resultList.isEmpty()) {
+            return null;
+        }
+        else {
+            return resultList.get(0);
+        }
     }
 
     public List<Cliente> getClientesPorNome(String str) {
-        String getClientesPorNome = "select distinct c from Cliente where nome like '%:str%' order by nome limit 20;";
+        String getClientesPorNome = "SELECT c FROM Cliente c WHERE c.nome LIKE :str";
         TypedQuery<Cliente> typedQuery = entityManager
                 .createQuery(getClientesPorNome, Cliente.class)
-                .setParameter("str", str);
+                .setParameter("str", "%" + str + "%")
+                .setMaxResults(10);
         return typedQuery.getResultList();
     }
     
@@ -64,9 +64,8 @@ public class ClienteDAO {
         entityManager.getTransaction().commit();
     }
 
-    boolean isClienteExiste(String cpf) {
-        buscaClienteCpf(cpf);
-        return true;
+    public boolean isClienteExiste(String cpf) {
+        return !Objects.isNull(buscaClienteCpf(cpf));
     }
 
 }

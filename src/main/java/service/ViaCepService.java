@@ -1,7 +1,7 @@
 package service;
 
 import com.google.gson.Gson;
-import dto.EnderecoDto;
+import dto.EnderecoDTO;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -14,7 +14,7 @@ public class ViaCepService {
     private static String urlBase = "https://viacep.com.br/ws/";
     private static String urlBaseTipo = "/json";
 
-    public static EnderecoDto buscaEnderecoViaCep(String cep) {
+    public static EnderecoDTO buscaEnderecoViaCep(String cep) {
         StringBuilder sb = new StringBuilder(urlBase).append(cep).append(urlBaseTipo);
         try {
             URL url = new URL(sb.toString());
@@ -30,7 +30,7 @@ public class ViaCepService {
             BufferedReader resposta = new BufferedReader(new InputStreamReader(conexao.getInputStream(), StandardCharsets.UTF_8));
             Gson gson = new Gson();
 
-            return gson.fromJson(resposta, EnderecoDto.class);
+            return gson.fromJson(resposta, EnderecoDTO.class);
 
         } catch (Exception e) {
             e.printStackTrace();

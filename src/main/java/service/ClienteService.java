@@ -5,13 +5,22 @@ import exceptions.ClienteJaExisteException;
 import model.Cliente;
 
 import java.util.List;
+import java.util.Objects;
 
 public class ClienteService {
 
     private ClienteDAO clienteDAO = new ClienteDAO();
 
     public void cadastraCliente(Cliente cliente) {
-           clienteDAO.criaCliente(cliente);
+
+        boolean isCPFRegistrado = clienteDAO.isClienteExiste(cliente.getCpf());
+
+        if (Objects.equals(isCPFRegistrado, false)) {
+            clienteDAO.criaCliente(cliente);
+        } else {
+            throw new ClienteJaExisteException();
+        }
+
     }
 
     public List<Cliente> buscaTodosClientes() {

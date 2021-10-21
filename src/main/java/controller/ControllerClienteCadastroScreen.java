@@ -3,7 +3,7 @@ package controller;
 import adapter.AdapterListCliente;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
-import dto.EnderecoDto;
+import dto.EnderecoDTO;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.stage.Stage;
@@ -93,7 +93,7 @@ public class ControllerClienteCadastroScreen implements Initializable {
 
     public void buscaCep() {
         if (txtCep.getText().charAt(8) != '_') {
-            EnderecoDto end = buscaEnderecoViaCep(txtCep.getText());
+            EnderecoDTO end = buscaEnderecoViaCep(txtCep.getText());
             if (end != null) {
                 txtLogradouro.setText(end.getLogradouro());
                 txtBairro.setText(end.getBairro());

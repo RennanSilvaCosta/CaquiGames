@@ -2,7 +2,7 @@ package dto;
 
 import java.io.Serializable;
 
-public class EnderecoDto implements Serializable {
+public class EnderecoDTO implements Serializable {
 
     private String cep;
     private String logradouro;
