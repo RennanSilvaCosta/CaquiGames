@@ -1,9 +1,9 @@
 package exceptions;
 
-import enums.ClienteValidation;
+import enums.MessagesExceptions;
 
 public class ClienteJaExisteException extends RuntimeException {
     public ClienteJaExisteException() {
-        super(ClienteValidation.CLIENTE_JA_CADASTRADO.getMessage());
+        super(MessagesExceptions.CPF_JA_CADASTRADO.getMessage());
     }
 }

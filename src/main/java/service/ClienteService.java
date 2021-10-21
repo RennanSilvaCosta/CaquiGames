@@ -1,25 +1,34 @@
 package service;
 
 import dao.ClienteDAO;
+import exceptions.ClienteJaExisteException;
 import model.Cliente;
 
-import javax.persistence.NoResultException;
 import java.util.List;
+import java.util.Objects;
 
 public class ClienteService {
 
     private ClienteDAO clienteDAO = new ClienteDAO();
 
     public void cadastraCliente(Cliente cliente) {
-        clienteDAO.criaCliente(cliente);
+
+        boolean isCPFRegistrado = clienteDAO.isClienteExiste(cliente.getCpf());
+
+        if (Objects.equals(isCPFRegistrado, false)) {
+            clienteDAO.criaCliente(cliente);
+        } else {
+            throw new ClienteJaExisteException();
+        }
+
     }
 
     public List<Cliente> buscaTodosClientes() {
-        return clienteDAO.buscaTodosClientes();
+       return clienteDAO.buscaTodosClientes();
     }
 
     public Cliente consultaCliente(String cpf) {
-        return clienteDAO.buscaClienteCpf(cpf);
+        return clienteDAO.buscaClienteCPF(cpf);
     }
 
     public List<Cliente> consultaListaClientes(String str) {
