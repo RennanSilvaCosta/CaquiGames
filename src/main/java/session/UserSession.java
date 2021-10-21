@@ -6,7 +6,7 @@ public final class UserSession {
 
     private static UserSession instance;
 
-    private Funcionario funcionario;
+    private static Funcionario funcionario;
 
     private UserSession(Funcionario funcionario) {
         this.funcionario = funcionario;
@@ -19,7 +19,7 @@ public final class UserSession {
         return instance;
     }
 
-    public Funcionario getFuncionario() {
+    public static Funcionario getFuncionario() {
         return funcionario;
     }
 

@@ -1,11 +1,9 @@
 package dao;
 
+import dto.FuncionarioDTO;
 import model.Funcionario;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.TypedQuery;
+import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
 
@@ -61,6 +59,15 @@ public class FuncionarioDAO {
         entityManager.getTransaction().begin();
         entityManager.merge(funcionario);
         entityManager.getTransaction();
+    }
+
+    public Funcionario buscaFuncionarioEmaileSenha(FuncionarioDTO dto) throws NoResultException {
+        String getFuncionarioEmailSenha = "SELECT f FROM Funcionario f WHERE f.email = :email and f.senha = :senha";
+        TypedQuery<Funcionario> typedQuery = entityManager
+                .createQuery(getFuncionarioEmailSenha, Funcionario.class)
+                .setParameter("email", dto.getEmail())
+                .setParameter("senha", dto.getSenha());
+        return typedQuery.getSingleResult();
     }
 
     public boolean isFuncionarioExiste(String cpf) {

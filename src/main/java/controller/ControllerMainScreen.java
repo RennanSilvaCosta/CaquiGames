@@ -16,6 +16,8 @@ import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import model.Funcionario;
+import session.UserSession;
 
 import java.io.IOException;
 import java.net.URL;
@@ -34,8 +36,13 @@ public class ControllerMainScreen implements Initializable {
     @FXML
     Pane paneTotalVendido, paneTotalPedidos, paneProdutoEstoque;
 
+    @FXML
+    Label txtSaudacao;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        Funcionario func = UserSession.getFuncionario();
+        txtSaudacao.setText(txtSaudacao.getText() + func.getNome());
         inicializaResumo();
         inicializaMainMenu();
     }

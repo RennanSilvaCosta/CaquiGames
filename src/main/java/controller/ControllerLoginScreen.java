@@ -4,18 +4,25 @@ import animatefx.animation.Shake;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
+import dto.FuncionarioDTO;
+import exceptions.EmailInvalidoException;
+import exceptions.SenhaInvalidaException;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import service.FuncionarioService;
 
+import javax.persistence.NoResultException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -24,6 +31,8 @@ public class ControllerLoginScreen implements Initializable {
 
     private double xOffset = 0;
     private double yOffset = 0;
+
+    FuncionarioService funcionarioService = new FuncionarioService();
 
     @FXML
     JFXButton btnSair, btnLogar;
@@ -34,20 +43,44 @@ public class ControllerLoginScreen implements Initializable {
     @FXML
     JFXPasswordField txtSenha;
 
+    @FXML
+    Label txtErrorEmail, txtErrorSenha;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
     }
 
     public void logar() {
-        String email = txtEmail.getText();
-        String senha = txtSenha.getText();
-        if (email.equals("r@r.com") & senha.equals("123")) {
+        try {
+            limparErrorLabels();
+            FuncionarioDTO dto = new FuncionarioDTO();
+            String email = txtEmail.getText();
+            String senha = txtSenha.getText();
+
+            dto.setEmail(email);
+            dto.setSenha(senha);
+
+            funcionarioService.logarFuncionario(dto);
             abrirMainScreen();
-        } else {
+
+        } catch (EmailInvalidoException e) {
+            txtErrorEmail.setText(e.getMessage());
             new Shake(txtEmail).play();
+        } catch (SenhaInvalidaException e) {
+            txtErrorSenha.setText(e.getMessage());
             new Shake(txtSenha).play();
+        } catch (NoResultException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Credenciais Inválidas");
+            alert.setContentText("Email ou senha inválidos!");
+            alert.showAndWait();
         }
+    }
+
+    public void limparErrorLabels() {
+        txtErrorEmail.setText("");
+        txtErrorSenha.setText("");
     }
 
     private void abrirMainScreen() {
