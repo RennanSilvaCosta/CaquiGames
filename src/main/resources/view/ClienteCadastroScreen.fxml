@@ -25,7 +25,7 @@
                 <Font name="Ebrima" size="14.0" />
             </font>
         </JFXTextField>
-      <MaskedTextField fx:id="txtCpf" focusColor="#ff6800" labelFloat="true" layoutX="39.0" layoutY="135.0" mask="###.###.###-##" prefHeight="40.0" prefWidth="360.0" promptText="CPF" unFocusColor="#ff7c00">
+      <MaskedTextField fx:id="txtCpf" focusColor="#ff6800" labelFloat="true" layoutX="39.0" layoutY="135.0" placeholder=" " mask="###.###.###-##" prefHeight="40.0" prefWidth="360.0" promptText="CPF" unFocusColor="#ff7c00">
          <font>
             <Font name="Ebrima" size="14.0" />
          </font>

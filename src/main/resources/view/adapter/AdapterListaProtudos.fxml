@@ -6,12 +6,12 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<GridPane fx:id="gridPane" prefHeight="50.0" prefWidth="643.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1">
+<GridPane fx:id="gridPane" prefHeight="50.0" prefWidth="643.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <columnConstraints>
         <ColumnConstraints halignment="CENTER" maxWidth="40.0" minWidth="40.0" prefWidth="40.0" />
-        <ColumnConstraints maxWidth="421.0" minWidth="240.0" prefWidth="230.0" />
-        <ColumnConstraints maxWidth="200.0" minWidth="130.0" prefWidth="120.0" />
-        <ColumnConstraints halignment="CENTER" maxWidth="60.0" minWidth="60.0" prefWidth="60.0" />
+        <ColumnConstraints maxWidth="320.0" minWidth="320.0" prefWidth="320.0" />
+        <ColumnConstraints maxWidth="80.0" minWidth="70.0" prefWidth="80.0" />
+        <ColumnConstraints halignment="CENTER" maxWidth="85.0" minWidth="85.0" prefWidth="85.0" />
         <ColumnConstraints halignment="CENTER" maxWidth="200.0" minWidth="150.0" prefWidth="170.0" />
         <ColumnConstraints halignment="CENTER" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" />
       <ColumnConstraints halignment="CENTER" maxWidth="80.0" minWidth="80.0" prefWidth="80.0" />
@@ -19,7 +19,7 @@
     <rowConstraints>
         <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="50.0" />
     </rowConstraints>
-    <Label fx:id="txtDescricao" nodeOrientation="LEFT_TO_RIGHT" prefHeight="31.0" prefWidth="291.0" text="Controle PS4 Dual shock" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
+    <Label fx:id="txtDescricao" nodeOrientation="LEFT_TO_RIGHT" prefHeight="31.0" prefWidth="317.0" text="Controle PS4 Dual shock" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
         <font>
             <Font name="Ebrima" size="14.0" />
         </font>
@@ -27,12 +27,12 @@
             <Insets />
         </GridPane.margin>
     </Label>
-    <Label fx:id="txtId" prefHeight="20.0" prefWidth="23.0" text="2">
+    <Label fx:id="txtId" alignment="CENTER" prefHeight="20.0" prefWidth="23.0" text="2" GridPane.halignment="CENTER">
         <font>
             <Font name="Ebrima" size="14.0" />
         </font>
     </Label>
-    <Label fx:id="txtQtdEstoque" alignment="CENTER" contentDisplay="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="17.0" prefWidth="163.0" text="1000" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
+    <Label fx:id="txtQtdEstoque" nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="45.0" text="1000" textFill="DARKTURQUOISE" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.valignment="CENTER">
         <font>
             <Font name="Ebrima" size="14.0" />
         </font>
@@ -40,7 +40,7 @@
             <Insets />
         </GridPane.margin>
     </Label>
-    <Label fx:id="txtValor" alignment="CENTER" prefHeight="17.0" prefWidth="134.0" text="R$ 451,69" GridPane.columnIndex="4" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
+    <Label fx:id="txtValor" prefHeight="20.0" prefWidth="100.0" text="R$ 451,69" textFill="#6d9f35" GridPane.columnIndex="4" GridPane.halignment="RIGHT" GridPane.valignment="CENTER">
         <font>
             <Font name="Ebrima" size="14.0" />
         </font>
@@ -48,7 +48,7 @@
             <Insets left="10.0" />
         </GridPane.margin>
     </Label>
-    <Label fx:id="txtMarca" prefHeight="20.0" prefWidth="130.0" text="Sony" GridPane.columnIndex="2">
+    <Label fx:id="txtMarca" alignment="CENTER" prefHeight="20.0" prefWidth="70.0" text="Sony" GridPane.columnIndex="2">
         <font>
             <Font name="Ebrima" size="14.0" />
         </font>
@@ -68,4 +68,14 @@
          <Insets right="10.0" />
       </GridPane.margin>
    </JFXButton>
+   <Label contentDisplay="CENTER" layoutX="480.0" layoutY="25.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="40.0" text="QTD" textFill="#a3a3a3" GridPane.columnIndex="3" GridPane.halignment="LEFT">
+      <font>
+         <Font name="Ebrima" size="14.0" />
+      </font>
+   </Label>
+   <Label alignment="CENTER" contentDisplay="CENTER" layoutX="420.0" layoutY="25.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="50.0" text="VALOR" textFill="#a3a3a3" GridPane.columnIndex="4" GridPane.halignment="LEFT">
+      <font>
+         <Font name="Ebrima" size="14.0" />
+      </font>
+   </Label>
 </GridPane>

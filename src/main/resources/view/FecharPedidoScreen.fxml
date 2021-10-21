@@ -6,9 +6,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="730.0" prefWidth="1000.0" style="-fx-background-color: #FF7C00; -fx-background-radius: 10 10 10 10;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerFecharPedido">
+<AnchorPane id="AnchorPane" prefHeight="730.0" prefWidth="1000.0" style="-fx-background-color: #FF7C00; -fx-background-radius: 10 10 10 10;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerFecharPedido">
 
-    <JFXTextField fx:id="txtAdicionarCliente" focusColor="#ff6800" layoutX="46.0" layoutY="18.0" prefHeight="75" prefWidth="800" promptText="Selecione um cliente" style="-fx-background-color: white; -fx-background-radius: 20 20 20 20;" unFocusColor="#ffffff00">
+    <JFXTextField fx:id="txtAdicionarCliente" focusColor="#ffffff00" layoutX="46.0" layoutY="18.0" prefHeight="75" prefWidth="903.0" promptText="Selecione um cliente" style="-fx-background-color: white; -fx-background-radius: 20 20 20 20;" unFocusColor="#ffffff00">
         <font>
             <Font name="Ebrima" size="18.0" />
         </font>
@@ -16,26 +16,27 @@
             <Insets />
         </opaqueInsets>
     </JFXTextField>
-    <JFXButton fx:id="btnAdicionarCliente" layoutX="705.0" layoutY="18.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="245.0" style="-fx-background-color: #FF6800; -fx-background-radius: 20 20 20 20;" text="ADICIONAR CLIENTE" textFill="WHITE">
+    <JFXButton fx:id="btnAdicionarCliente" layoutX="705.0" layoutY="18.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="245.0" styleClass="btnAdicionar" stylesheets="@../stylesheets/styleButton.css" text="ADICIONAR CLIENTE">
         <font>
             <Font name="Ebrima" size="14.0" />
         </font>
     </JFXButton>
-   <Pane layoutX="46.0" layoutY="177.0" prefHeight="150.0" prefWidth="220.0" style="-fx-background-color: #F8F7FC; -fx-background-radius: 20 20 20 20;">
-      <children>
-         <Label fx:id="txtValorTotal" alignment="CENTER" layoutY="40.0" prefHeight="35.0" prefWidth="220.0" text="R$ 300,00" textFill="#ff6800">
-            <font>
-               <Font name="Ebrima" size="24.0" />
-            </font>
-         </Label>
-         <Label alignment="CENTER" layoutY="85.0" prefWidth="220.0" text="VALOR TOTAL DO PEDIDO" textFill="#a3a3a3">
-            <font>
-               <Font name="Ebrima" size="14.0" />
-            </font>
-         </Label>
-      </children>
+   <Pane fx:id="paneValorTotalPedido" layoutX="46.0" layoutY="177.0" onMouseEntered="#deslizarPainelValorTotalCima"
+         onMouseExited="#deslizarPainelValorTotalBaixo" prefHeight="150.0" prefWidth="220.0" styleClass="paneValorTotal"
+         stylesheets="@../stylesheets/styleFecharPedidoScreen.css">
+      <Label fx:id="txtValorTotal" alignment="CENTER" layoutY="40.0" prefHeight="35.0" prefWidth="220.0"
+             text="R$ 300,00" textFill="#ff6800">
+         <font>
+            <Font name="Ebrima" size="24.0"/>
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutY="85.0" prefWidth="220.0" text="VALOR TOTAL DO PEDIDO" textFill="#a3a3a3">
+         <font>
+            <Font name="Ebrima" size="14.0"/>
+         </font>
+      </Label>
    </Pane>
-   <Pane layoutX="276.0" layoutY="177.0" prefHeight="150.0" prefWidth="220.0" style="-fx-background-color: #F8F7FC; -fx-background-radius: 20 20 20 20;">
+   <Pane fx:id="paneDesconto" layoutX="276.0" layoutY="177.0" onMouseEntered="#deslizarPainelDescontoCima" onMouseExited="#deslizarPainelDescontoBaixo" prefHeight="150.0" prefWidth="220.0" style="-fx-background-color: #F8F7FC; -fx-background-radius: 20 20 20 20;">
       <children>
          <Label fx:id="txtValorDesconto" alignment="CENTER" layoutY="40.0" prefHeight="35.0" prefWidth="220.0" text="R$ 0,00" textFill="#ff6800">
             <font>
@@ -49,35 +50,37 @@
          </Label>
       </children>
    </Pane>
-   <Pane layoutX="507.0" layoutY="177.0" prefHeight="150.0" prefWidth="220.0" style="-fx-background-color: #F8F7FC; -fx-background-radius: 20 20 20 20;">
-      <children>
-         <Label fx:id="txtValorRecebido" alignment="CENTER" layoutY="40.0" prefHeight="35.0" prefWidth="220.0" text="R$ 0,00" textFill="#6d9f35">
-            <font>
-               <Font name="Ebrima" size="24.0" />
-            </font>
-         </Label>
-         <Label alignment="CENTER" layoutX="1.0" layoutY="85.0" prefWidth="220.0" text="VALOR RECEBIDO" textFill="#a3a3a3">
-            <font>
-               <Font name="Ebrima" size="14.0" />
-            </font>
-         </Label>
-      </children>
+   <Pane fx:id="paneValorRecebido" layoutX="507.0" layoutY="177.0" onMouseEntered="#deslizarPainelValorRecebidoCima"
+         onMouseExited="#deslizarPainelValorRecebidoBaixo" prefHeight="150.0" prefWidth="220.0"
+         style="-fx-background-color: #F8F7FC; -fx-background-radius: 20 20 20 20;">
+      <Label fx:id="txtValorRecebido" alignment="CENTER" layoutY="40.0" prefHeight="35.0" prefWidth="220.0"
+             text="R$ 0,00" textFill="#6d9f35">
+         <font>
+            <Font name="Ebrima" size="24.0"/>
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="1.0" layoutY="85.0" prefWidth="220.0" text="VALOR RECEBIDO" textFill="#a3a3a3">
+         <font>
+            <Font name="Ebrima" size="14.0"/>
+         </font>
+      </Label>
    </Pane>
-   <Pane layoutX="736.0" layoutY="177.0" prefHeight="150.0" prefWidth="220.0" style="-fx-background-color: #F8F7FC; -fx-background-radius: 20 20 20 20;">
-      <children>
-         <Label fx:id="txtTroco" alignment="CENTER" layoutY="40.0" prefHeight="35.0" prefWidth="220.0" text="R$ 0,00" textFill="DARKTURQUOISE">
-            <font>
-               <Font name="Ebrima" size="24.0" />
-            </font>
-         </Label>
-         <Label alignment="CENTER" layoutY="85.0" prefWidth="220.0" text="TROCO" textFill="#a3a3a3">
-            <font>
-               <Font name="Ebrima" size="14.0" />
-            </font>
-         </Label>
-      </children>
+   <Pane fx:id="paneTroco" layoutX="736.0" layoutY="177.0" onMouseEntered="#deslizarPainelTrocoCima"
+         onMouseExited="#deslizarPainelTrocoBaixo" prefHeight="150.0" prefWidth="220.0"
+         style="-fx-background-color: #F8F7FC; -fx-background-radius: 20 20 20 20;">
+      <Label fx:id="txtTroco" alignment="CENTER" layoutY="40.0" prefHeight="35.0" prefWidth="220.0" text="R$ 0,00"
+             textFill="DARKTURQUOISE">
+         <font>
+            <Font name="Ebrima" size="24.0"/>
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutY="85.0" prefWidth="220.0" text="TROCO" textFill="#a3a3a3">
+         <font>
+            <Font name="Ebrima" size="14.0"/>
+         </font>
+      </Label>
    </Pane>
-   <JFXButton fx:id="btnFinalizarPedido" layoutX="250.0" layoutY="656.0" mnemonicParsing="false" onAction="#finalizarPedido" prefHeight="60.0" prefWidth="500.0" style="-fx-background-color: #56CAA4; -fx-background-radius: 20 20 20 20;" text="FINALIZAR PEDIDO" textFill="WHITE">
+   <JFXButton fx:id="btnFinalizarPedido" layoutX="250.0" layoutY="656.0" mnemonicParsing="false" onAction="#finalizarPedido" prefHeight="60.0" prefWidth="500.0" styleClass="btnFecharPedido" stylesheets="@../stylesheets/styleButton.css" text="FINALIZAR PEDIDO" textFill="WHITE">
       <font>
          <Font name="Ebrima" size="18.0" />
       </font>

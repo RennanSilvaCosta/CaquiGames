@@ -14,7 +14,11 @@ public class Produto {
     private Long id;
 
     @NotNull
-    @Column(length = 40)
+    @Column(length = 55)
+    private String nome;
+
+    @NotNull
+    @Column(length = 100)
     private String descricao;
 
     @NotNull
@@ -37,8 +41,9 @@ public class Produto {
     public Produto() {
     }
 
-    public Produto(Long id, String descricao, Double valor, String marca, Integer qtdEstoque, Categoria categoria) {
+    public Produto(Long id, String nome, String descricao, Double valor, String marca, Integer qtdEstoque, Categoria categoria) {
         this.id = id;
+        this.nome = nome;
         this.descricao = descricao;
         this.valor = valor;
         this.marca = marca;
@@ -52,6 +57,14 @@ public class Produto {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public String getDescricao() {
@@ -100,6 +113,6 @@ public class Produto {
 
     @Override
     public String toString() {
-        return descricao;
+        return nome;
     }
 }

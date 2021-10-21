@@ -14,14 +14,14 @@ public class ProdutoDAO {
     private static EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("caqui");
     private static EntityManager entityManager = entityManagerFactory.createEntityManager();
 
-    public void cadastraProduto( Produto produto ) {
+    public void cadastraProduto(Produto produto) {
         entityManager.getTransaction().begin();
         entityManager.persist(produto);
-        entityManager.getTransaction().begin();
+        entityManager.getTransaction().commit();
     }
 
     public Produto buscaProduto(String descricao) {
-        String findProdutoUnicoPorNome = "select p from Produto where descricao = ':descricao';";
+        String findProdutoUnicoPorNome = "select p from Produto where descricao = ':descricao'";
         TypedQuery<Produto> typedQuery = entityManager
                 .createQuery(findProdutoUnicoPorNome, Produto.class)
                 .setParameter("descricao", descricao);
@@ -29,7 +29,7 @@ public class ProdutoDAO {
     }
 
     public List<Produto> getProdutosPorNome(String str) {
-        String findProdutosPorNome = "select distinct p from Produto where descricao like '%:str%' order by nome limit 10;";
+        String findProdutosPorNome = "select distinct p from Produto where descricao like '%:str%' order by nome limit 10";
         TypedQuery<Produto> typedQuery = entityManager
                 .createQuery(findProdutosPorNome, Produto.class)
                 .setParameter("str", str);
@@ -37,7 +37,7 @@ public class ProdutoDAO {
     }
 
     public List<Produto> getProdutosPorMarca(String str) {
-        String findProdutosPorMarca = "select distinct p from Produto where marca like '%:str' order by marca limit 10;";
+        String findProdutosPorMarca = "select distinct p from Produto where marca like '%:str' order by marca limit 10";
         TypedQuery<Produto> typedQuery = entityManager
                 .createQuery(findProdutosPorMarca, Produto.class)
                 .setParameter("str", str);
@@ -46,7 +46,7 @@ public class ProdutoDAO {
 
     public List<Produto> listarNomesProdutos() {
         entityManager.getTransaction().begin();
-        String jpql = "select p from Produto p limit 20;";
+        String jpql = "select p from Produto p";
         TypedQuery<Produto> typedQuery = entityManager.createQuery(jpql, Produto.class);
         List<Produto> nomesProdutos = typedQuery.getResultList();
         entityManager.getTransaction().commit();

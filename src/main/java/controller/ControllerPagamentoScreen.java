@@ -43,7 +43,7 @@ public class ControllerPagamentoScreen implements Initializable {
 
     @FXML
     private void loadThird(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/view/FecharPedidoScreen.fxml"));
+        Parent root = FXMLLoader. load(getClass().getResource("/view/FecharPedidoScreen.fxml"));
         Scene scene = btnDinheiro.getScene();
         root.translateXProperty().set(scene.getWidth());
 

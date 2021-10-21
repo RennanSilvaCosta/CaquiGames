@@ -26,9 +26,9 @@ public class EnderecoService {
 
     }
 
-    public void atualizaEndereco(String cep, String logradouro, String bairro, Integer numero, String complemento, String referencia, String cpf) {
+    /*public void atualizaEndereco(String cep, String logradouro, String bairro, Integer numero, String complemento, String referencia, String cpf) {
 
-        Cliente cliente = clienteDAO.buscaClienteCpf(cpf);
+       // Cliente cliente = clienteDAO.buscaClienteCpf(cpf);
 
         Endereco endereco = new Endereco();
 
@@ -45,6 +45,6 @@ public class EnderecoService {
                         .getEndereco()
                         .getId()
         );
-    }
+    }*/
 
 }
