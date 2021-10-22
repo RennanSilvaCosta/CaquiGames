@@ -114,7 +114,7 @@ public class Main extends Application {
         em.close();
         emf.close();*/
 
-        Parent root = FXMLLoader.load(getClass().getResource("/view/MainScreen.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/view/LoginScreen.fxml"));
         Scene scene = new Scene(root);
         scene.setFill(Color.TRANSPARENT);
         primaryStage.initStyle(StageStyle.TRANSPARENT);

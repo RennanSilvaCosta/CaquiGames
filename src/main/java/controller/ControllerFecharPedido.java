@@ -5,8 +5,9 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import javafx.animation.PathTransition;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
@@ -23,19 +24,25 @@ import service.ClienteService;
 import service.PedidoService;
 import session.UserSession;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import static util.Helper.abrirDialog;
 import static util.Helper.formataValor;
 
 public class ControllerFecharPedido implements Initializable {
 
     Funcionario func = UserSession.getFuncionario();
     static Pedido pedido;
+    public static Label txtValorSubTotalStatic;
     public static Label txtValorTotalStatic;
+    public static Label txtValorRecebidoStatic;
+    public static Label txtValorDescontoStatic;
+    public static double valorRecebido;
 
     PedidoService pedidoService = new PedidoService();
     List<Cliente> clientes = new ArrayList<>();
@@ -46,7 +53,7 @@ public class ControllerFecharPedido implements Initializable {
     Pane paneValorTotalPedido, paneDesconto, paneValorRecebido, paneTroco, paneClienteSelecionado;
 
     @FXML
-    Label txtValorTotal, txtCpfCliente, txtNomeCliente, txtEmailCliente, lblClienteSelecionado;
+    Label txtValorTotal, txtCpfCliente, txtNomeCliente, txtEmailCliente, lblClienteSelecionado, txtValorDesconto, txtValorRecebido, txtValorSubTotal;
 
     @FXML
     JFXTextField txtAdicionarCliente;
@@ -57,7 +64,10 @@ public class ControllerFecharPedido implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         inicializaListaClientes();
+        txtValorSubTotalStatic = txtValorSubTotal;
         txtValorTotalStatic = txtValorTotal;
+        txtValorRecebidoStatic = txtValorRecebido;
+        txtValorDescontoStatic = txtValorDesconto;
     }
 
     private void inicializaListaClientes() {
@@ -68,6 +78,7 @@ public class ControllerFecharPedido implements Initializable {
     public void getPedido(Pedido pedido) {
         this.pedido = pedido;
         txtValorTotalStatic.setText(formataValor(pedido.getValorTotal()));
+        txtValorRecebidoStatic.setText(formataValor(pedido.getValorTotal()));
     }
 
     @FXML
@@ -102,6 +113,54 @@ public class ControllerFecharPedido implements Initializable {
             txtNomeCliente.setText(cliente.getNome());
             txtEmailCliente.setText(cliente.getEmail());
         }
+    }
+
+    @FXML
+    private void definirDesconto() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("/view/dialog/DialogDesconto.fxml"));
+            DialogPane dialogPane = fxmlLoader.load();
+            Dialog<ButtonType> dialog = new Dialog<>();
+            dialog.setDialogPane(dialogPane);
+            dialog.setTitle("Descontos");
+
+            ControllerDialogDesconto c = new ControllerDialogDesconto();
+            c.getValorTotal(pedido.getValorTotal());
+            dialog.showAndWait();
+            new FadeIn(txtValorDesconto).play();
+            new FadeIn(txtValorRecebido).play();
+        } catch (IOException e) {
+            abrirDialog("Ops", "Algo deu errado, tente novamente mais tarde!", Alert.AlertType.ERROR);
+        }
+    }
+
+    @FXML
+    private void definirValorRecebido() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("/view/dialog/DialogValorRecebido.fxml"));
+            DialogPane dialogPane = fxmlLoader.load();
+            Dialog<ButtonType> dialog = new Dialog<>();
+            dialog.setDialogPane(dialogPane);
+            dialog.setTitle("Valor recebido");
+
+            ControllerDialogValorRecebido c = new ControllerDialogValorRecebido();
+            c.setValoRecebido(pedido.getValorTotal());
+            dialog.showAndWait();
+            new FadeIn(txtValorRecebido).play();
+        } catch (IOException e) {
+            abrirDialog("Ops", "Algo deu errado, tente novamente mais tarde!", Alert.AlertType.ERROR);
+        }
+    }
+
+    public void setValorRecebido(double valor) {
+        txtValorRecebidoStatic.setText(formataValor(valor));
+    }
+
+    public void setValorDesconto(double valor) {
+        txtValorSubTotalStatic.setText(formataValor(pedido.getValorTotal() - valor));
+        txtValorDescontoStatic.setText(formataValor(valor));
     }
 
     @FXML
@@ -220,6 +279,10 @@ public class ControllerFecharPedido implements Initializable {
             adicionarCliente();
         } else if (evt.getCode() == KeyCode.F8) {
             finalizarVenda();
+        } else if (evt.getCode() == KeyCode.F10) {
+            definirDesconto();
+        } else if (evt.getCode() == KeyCode.F4) {
+            definirValorRecebido();
         }
     }
 
