@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane depthTest="ENABLE" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="604.0" prefWidth="846.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerLoginScreen">
+<Pane depthTest="ENABLE" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onKeyPressed="#keyPressed" prefHeight="604.0" prefWidth="846.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerLoginScreen">
    <Pane layoutX="73.0" layoutY="65.0" prefHeight="475.0" prefWidth="700.0" style="-fx-background-radius: 10 10 10 10; -fx-background-color: #FFF;">
       <Pane prefHeight="475.0" prefWidth="350.0" style="-fx-background-color: #FF7C00; -fx-background-radius: 10 0 0 10;">
          <ImageView fitHeight="128.0" fitWidth="128.0" layoutX="111.0" layoutY="134.0" pickOnBounds="true" preserveRatio="true">

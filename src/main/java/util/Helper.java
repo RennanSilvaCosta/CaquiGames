@@ -1,6 +1,7 @@
 package util;
 
 import com.jfoenix.controls.JFXButton;
+import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 
 import java.text.NumberFormat;
@@ -18,4 +19,10 @@ public class Helper {
         stage.close();
     }
 
+    public static void abrirDialog(String titulo, String mensagem, Alert.AlertType type) {
+        Alert alert = new Alert(type);
+        alert.setTitle(titulo);
+        alert.setContentText(mensagem);
+        alert.showAndWait();
+    }
 }

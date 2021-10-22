@@ -41,8 +41,8 @@ public class ControllerMainScreen implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        Funcionario func = UserSession.getFuncionario();
-        txtSaudacao.setText(txtSaudacao.getText() + func.getNome());
+        //Funcionario func = UserSession.getFuncionario();
+       // txtSaudacao.setText(txtSaudacao.getText() + func.getNome());
         inicializaResumo();
         inicializaMainMenu();
     }

@@ -6,13 +6,8 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<StackPane fx:id="parentContainer" prefHeight="730.0" prefWidth="1000.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerVendaScreen">
+<StackPane fx:id="parentContainer" onKeyPressed="#keyPressed" prefHeight="730.0" prefWidth="1000.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerVendaScreen">
     <AnchorPane id="AnchorPane" fx:id="anchorRoot" prefHeight="730.0" prefWidth="1000.0" style="-fx-background-color: #FF7C00; -fx-background-radius: 10 10 10 10;">
-        <JFXButton fx:id="btnSair" layoutX="969.0" mnemonicParsing="false" onAction="#fecharJanela" prefHeight="35.0" prefWidth="35.0" styleClass="btnSair" stylesheets="@../stylesheets/styleButton.css" text="x" textAlignment="CENTER">
-            <font>
-                <Font name="Ebrima Bold" size="12.0" />
-            </font>
-        </JFXButton>
         <JFXTextField fx:id="txtAdicionarProduto" focusColor="#ff6800" layoutX="46.0" layoutY="18.0" prefHeight="75" prefWidth="902.0" promptText="Selecione um produto" style="-fx-background-color: white; -fx-background-radius: 20 20 20 20;" unFocusColor="#ffffff00">
          <font>
             <Font name="Ebrima" size="18.0" />
@@ -21,7 +16,12 @@
             <Insets />
          </opaqueInsets>
         </JFXTextField>
-      <JFXButton fx:id="btnAdicionarProduto" layoutX="705.0" layoutY="18.0" mnemonicParsing="false" onAction="#adicionarItemCarrinho" prefHeight="75.0" prefWidth="245.0" styleClass="btnAdicionar" stylesheets="@../stylesheets/styleButton.css" text="ADICIONAR PRODUTO">
+        <JFXButton fx:id="btnSair" layoutX="969.0" mnemonicParsing="false" onAction="#fecharJanela" prefHeight="35.0" prefWidth="35.0" styleClass="btnSair" stylesheets="@../stylesheets/styleButton.css" text="x" textAlignment="CENTER">
+            <font>
+                <Font name="Ebrima Bold" size="12.0" />
+            </font>
+        </JFXButton>
+      <JFXButton fx:id="btnAdicionarProduto" layoutX="705.0" layoutY="18.0" mnemonicParsing="false" onAction="#adicionarItemCarrinho" prefHeight="75.0" prefWidth="245.0" styleClass="btnAdicionar" stylesheets="@../stylesheets/styleButton.css" text="ADICIONAR PRODUTO (F3)">
          <font>
             <Font name="Ebrima" size="14.0" />
          </font>
@@ -44,7 +44,7 @@
                     <Font name="Ebrima Bold" size="18.0" />
                 </font>
             </Label>
-            <Label alignment="CENTER" layoutX="8.0" layoutY="60.0" prefHeight="27.0" prefWidth="245.0" text="DESCONTO" textFill="#a3a3a3">
+            <Label alignment="CENTER" layoutX="8.0" layoutY="60.0" prefHeight="27.0" prefWidth="245.0" text="DESCONTO (F10)" textFill="#a3a3a3">
                 <font>
                     <Font name="Ebrima Bold" size="18.0" />
                 </font>
@@ -62,7 +62,7 @@
                 </font>
             </Label>
         </Pane>
-      <JFXButton fx:id="btnFecharPedido" layoutX="252.0" layoutY="656.0" mnemonicParsing="false" onAction="#abrirFormaPagamento" prefHeight="60.0" prefWidth="500.0" styleClass="btnFecharPedido" stylesheets="@../stylesheets/styleButton.css" text="FECHAR PEDIDO">
+      <JFXButton fx:id="btnFecharPedido" layoutX="252.0" layoutY="656.0" mnemonicParsing="false" onAction="#fecharPedido" prefHeight="60.0" prefWidth="500.0" styleClass="btnFecharPedido" stylesheets="@../stylesheets/styleButton.css" text="FECHAR PEDIDO (F8)">
          <font>
             <Font name="Ebrima" size="18.0" />
          </font>

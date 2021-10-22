@@ -1,11 +1,14 @@
 package controller;
 
+import animatefx.animation.FadeIn;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import javafx.animation.PathTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.LineTo;
 import javafx.scene.shape.MoveTo;
@@ -40,10 +43,10 @@ public class ControllerFecharPedido implements Initializable {
     Cliente cliente;
 
     @FXML
-    Pane paneValorTotalPedido, paneDesconto, paneValorRecebido, paneTroco;
+    Pane paneValorTotalPedido, paneDesconto, paneValorRecebido, paneTroco, paneClienteSelecionado;
 
     @FXML
-    Label txtValorTotal;
+    Label txtValorTotal, txtCpfCliente, txtNomeCliente, txtEmailCliente, lblClienteSelecionado;
 
     @FXML
     JFXTextField txtAdicionarCliente;
@@ -81,8 +84,13 @@ public class ControllerFecharPedido implements Initializable {
     private void adicionarCliente() {
         String nomeCliente = txtAdicionarCliente.getText();
         if (!nomeCliente.equals("")) {
-            cliente = new Cliente();
+            paneClienteSelecionado.setVisible(true);
+            lblClienteSelecionado.setVisible(true);
 
+            new FadeIn(paneClienteSelecionado).play();
+            new FadeIn(lblClienteSelecionado).play();
+
+            cliente = new Cliente();
             for (Cliente c : clientes) {
                 String cpfNome = c.getCpf() + " - " + c.getNome();
                 if (cpfNome.equals(nomeCliente)) {
@@ -90,6 +98,9 @@ public class ControllerFecharPedido implements Initializable {
                     break;
                 }
             }
+            txtCpfCliente.setText(cliente.getCpf());
+            txtNomeCliente.setText(cliente.getNome());
+            txtEmailCliente.setText(cliente.getEmail());
         }
     }
 
@@ -201,6 +212,15 @@ public class ControllerFecharPedido implements Initializable {
     private void fecharJanela() {
         Stage stage = (Stage) btnFinalizarPedido.getScene().getWindow();
         stage.close();
+    }
+
+    @FXML
+    private void keyPressed(KeyEvent evt) {
+        if (evt.getCode() == KeyCode.ENTER || evt.getCode() == KeyCode.F3) {
+            adicionarCliente();
+        } else if (evt.getCode() == KeyCode.F8) {
+            finalizarVenda();
+        }
     }
 
 }

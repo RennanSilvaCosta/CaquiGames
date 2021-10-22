@@ -15,6 +15,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
@@ -26,6 +28,8 @@ import javax.persistence.NoResultException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import static util.Helper.abrirDialog;
 
 public class ControllerLoginScreen implements Initializable {
 
@@ -71,10 +75,7 @@ public class ControllerLoginScreen implements Initializable {
             txtErrorSenha.setText(e.getMessage());
             new Shake(txtSenha).play();
         } catch (NoResultException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Credenciais Inválidas");
-            alert.setContentText("Email ou senha inválidos!");
-            alert.showAndWait();
+            abrirDialog("Credenciais Inválidas", "Email ou senha inválidos!",Alert.AlertType.ERROR);
         }
     }
 
@@ -127,6 +128,13 @@ public class ControllerLoginScreen implements Initializable {
     public void fecharJanela() {
         Stage stage = (Stage) btnSair.getScene().getWindow();
         stage.close();
+    }
+
+    @FXML
+    private void keyPressed(KeyEvent evt) {
+        if (evt.getCode() == KeyCode.ENTER) {
+            logar();
+        }
     }
 
 }
