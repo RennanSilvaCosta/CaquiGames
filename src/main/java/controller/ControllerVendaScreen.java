@@ -90,6 +90,7 @@ public class ControllerVendaScreen implements Initializable {
         ControllerPagamentoScreen controller = new ControllerPagamentoScreen();
         Pedido p = new Pedido();
         p.setValorTotal(valorTotal);
+        p.setSubTotal(valorTotal);
         p.setQuantidadeItens(listaItens.size());
         p.setItens(listaItens);
         controller.getPedido(p);
@@ -133,7 +134,7 @@ public class ControllerVendaScreen implements Initializable {
     }
 
     private void inicializaListaProdutos() {
-        produtos = ps.buscaListaProdutos();
+        produtos = ps.buscarProdutoParaVenda();
         TextFields.bindAutoCompletion(txtAdicionarProduto, produtos).setPrefWidth(660);
     }
 

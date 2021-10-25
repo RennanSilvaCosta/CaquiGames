@@ -6,7 +6,7 @@ public enum MessagesExceptions {
     EMAIL_INVALIDO("O email informado não é válido!"),
     SENHA_INVALIDA("Informe a senha!"),
     CARRINHO_VAZIO("O carrinho não pode está vazio, adicione ao menos um item!"),
-    CLIENTE_NAO_SELECIONADO("Nenhum cliente selecionado, por favor selcione um cliente para poder finalizar a vernda!");
+    CLIENTE_NAO_SELECIONADO("Nenhum cliente selecionado, por favor selcione um cliente para poder finalizar a venda!");
 
     private String value;
 

@@ -19,6 +19,17 @@ public class Pedido {
     private Double valorTotal;
 
     @NotNull
+    @Column(name = "sub_total")
+    private double subTotal;
+
+    @NotNull
+    private double desconto;
+
+    @NotNull
+    @Column(name = "qtd_parcelas")
+    private int qtdParcelas;
+
+    @NotNull
     @Column(name = "forma_pagamento")
     private String formaPagamento;
 
@@ -67,6 +78,30 @@ public class Pedido {
 
     public void setValorTotal(Double valorTotal) {
         this.valorTotal = valorTotal;
+    }
+
+    public double getSubTotal() {
+        return subTotal;
+    }
+
+    public void setSubTotal(double subTotal) {
+        this.subTotal = subTotal;
+    }
+
+    public double getDesconto() {
+        return desconto;
+    }
+
+    public void setDesconto(double desconto) {
+        this.desconto = desconto;
+    }
+
+    public int getQtdParcelas() {
+        return qtdParcelas;
+    }
+
+    public void setQtdParcelas(int qtdParcelas) {
+        this.qtdParcelas = qtdParcelas;
     }
 
     public String getFormaPagamento() {

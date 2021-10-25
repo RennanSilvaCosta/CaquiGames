@@ -40,7 +40,7 @@ public class ControllerDialogValorRecebido implements Initializable {
         if (txtValorRecebido.getAmount() < valorRecebido) {
             abrirDialog("Valor inválido", "O valor recebido não pode ser menor que o valor total do pedido!", Alert.AlertType.ERROR);
         } else {
-            ControllerFecharPedido c = new ControllerFecharPedido();
+            ControllerFecharPedidoDinheiroScreen c = new ControllerFecharPedidoDinheiroScreen();
             c.setValorRecebido(txtValorRecebido.getAmount());
             close();
         }

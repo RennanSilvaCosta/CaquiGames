@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" onKeyPressed="#keyPressed" prefHeight="730.0" prefWidth="1000.0" style="-fx-background-color: #FF7C00; -fx-background-radius: 10 10 10 10;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerFecharPedido">
+<AnchorPane id="AnchorPane" prefHeight="730.0" prefWidth="1000.0"  onKeyPressed="#keyPressed" style="-fx-background-color: #FF7C00; -fx-background-radius: 10 10 10 10;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerFecharPedidoCartaoScreen">
     <JFXTextField fx:id="txtAdicionarCliente" focusColor="#ffffff00" layoutX="46.0" layoutY="18.0" prefHeight="75" prefWidth="903.0" promptText="Digite o CPF ou nome do cliente" style="-fx-background-color: white; -fx-background-radius: 20 20 20 20;" unFocusColor="#ffffff00">
         <font>
             <Font name="Ebrima" size="18.0" />
@@ -20,7 +20,12 @@
             <Font name="Ebrima" size="14.0" />
         </font>
     </JFXButton>
-   <Pane fx:id="paneValorTotalPedido" layoutX="46.0" layoutY="177.0" onMouseEntered="#deslizarPainelValorTotalCima" onMouseExited="#deslizarPainelValorTotalBaixo" prefHeight="150.0" prefWidth="220.0" styleClass="paneValorTotal" stylesheets="@../stylesheets/styleFecharPedidoScreen.css">
+   <Label alignment="CENTER" layoutX="215.0" layoutY="126.0" prefHeight="27.0" prefWidth="565.0" text="FORMA DE PAGAMENTO SELECIONADA: CARTÃO" textFill="WHITE">
+      <font>
+         <Font name="Ebrima Bold" size="14.0" />
+      </font>
+   </Label>
+   <Pane fx:id="paneValorTotalPedido" layoutX="161.0" layoutY="177.0" onMouseEntered="#deslizarPainelValorTotalCima" onMouseExited="#deslizarPainelValorTotalBaixo"  prefHeight="150.0" prefWidth="220.0" styleClass="paneValorTotal" stylesheets="@../stylesheets/styleFecharPedidoScreen.css">
       <Label fx:id="txtValorTotal" alignment="CENTER" layoutY="34.0" prefHeight="35.0" prefWidth="220.0" text="R$ 0,00" textFill="#ff6800">
          <font>
             <Font name="Ebrima" size="24.0" />
@@ -42,40 +47,25 @@
          </font>
       </Label>
    </Pane>
-   <Pane fx:id="paneDesconto" layoutX="276.0" layoutY="177.0" onMouseClicked="#definirDesconto"
-         onMouseEntered="#deslizarPainelDescontoCima" onMouseExited="#deslizarPainelDescontoBaixo" prefHeight="150.0"
-         prefWidth="220.0" style="-fx-background-color: #F8F7FC; -fx-background-radius: 20 20 20 20;">
-      <Label fx:id="txtValorDesconto" alignment="CENTER" layoutY="40.0" prefHeight="35.0" prefWidth="220.0"
-             text="R$ 0,00" textFill="#ff6800">
-         <font>
-            <Font name="Ebrima" size="24.0"/>
-         </font>
-      </Label>
-      <Label alignment="CENTER" layoutX="1.0" layoutY="85.0" prefWidth="220.0" text="DESCONTO (F10)" textFill="#a3a3a3">
-         <font>
-            <Font name="Ebrima" size="14.0"/>
-         </font>
-      </Label>
-   </Pane>
-   <Pane fx:id="paneValorRecebido" layoutX="507.0" layoutY="177.0" onMouseClicked="#definirValorRecebido" onMouseEntered="#deslizarPainelValorRecebidoCima" onMouseExited="#deslizarPainelValorRecebidoBaixo" prefHeight="150.0" prefWidth="220.0" style="-fx-background-color: #F8F7FC; -fx-background-radius: 20 20 20 20;">
-      <Label fx:id="txtValorRecebido" alignment="CENTER" layoutY="40.0" prefHeight="35.0" prefWidth="220.0" text="R$ 0,00" textFill="#6d9f35">
+   <Pane fx:id="paneDesconto" layoutX="391.0" layoutY="177.0" onMouseEntered="#deslizarPainelDescontoCima" onMouseExited="#deslizarPainelDescontoBaixo" prefHeight="150.0" onMouseClicked="#definirDesconto" prefWidth="220.0" style="-fx-background-color: #F8F7FC; -fx-background-radius: 20 20 20 20;">
+      <Label fx:id="txtValorDesconto" alignment="CENTER" layoutY="40.0" prefHeight="35.0" prefWidth="220.0" text="R$ 0,00" textFill="#ff6800">
          <font>
             <Font name="Ebrima" size="24.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="1.0" layoutY="85.0" prefWidth="220.0" text="VALOR RECEBIDO (F4)" textFill="#a3a3a3">
+      <Label alignment="CENTER" layoutX="1.0" layoutY="85.0" prefWidth="220.0" text="DESCONTO (F10)" textFill="#a3a3a3">
          <font>
             <Font name="Ebrima" size="14.0" />
          </font>
       </Label>
    </Pane>
-   <Pane fx:id="paneTroco" layoutX="736.0" layoutY="177.0" onMouseEntered="#deslizarPainelTrocoCima" onMouseExited="#deslizarPainelTrocoBaixo" prefHeight="150.0" prefWidth="220.0" style="-fx-background-color: #F8F7FC; -fx-background-radius: 20 20 20 20;">
-      <Label fx:id="txtValorTroco" alignment="CENTER" layoutY="40.0" prefHeight="35.0" prefWidth="220.0" text="R$ 0,00" textFill="DARKTURQUOISE">
+   <Pane fx:id="paneQtdParcelas" layoutX="622.0" layoutY="177.0" onMouseClicked="#adicionarParcelas" onMouseEntered="#deslizarPainelQtdParcelasCima" onMouseExited="#deslizarPainelQtdParcelasBaixo" prefHeight="150.0" prefWidth="220.0" style="-fx-background-color: #F8F7FC; -fx-background-radius: 20 20 20 20;">
+      <Label fx:id="txtQtdParcelas" alignment="CENTER" layoutY="40.0" prefHeight="35.0" prefWidth="220.0" text="1" textFill="DARKTURQUOISE">
          <font>
             <Font name="Ebrima" size="24.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutY="85.0" prefWidth="220.0" text="TROCO" textFill="#a3a3a3">
+      <Label alignment="CENTER" layoutY="85.0" prefWidth="220.0" text="QTD PARCELAS" textFill="#a3a3a3">
          <font>
             <Font name="Ebrima" size="14.0" />
          </font>

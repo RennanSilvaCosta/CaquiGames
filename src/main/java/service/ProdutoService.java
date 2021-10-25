@@ -33,4 +33,7 @@ public class ProdutoService {
         produtoDAO.deletaProduto(descricao);
     }
 
+    public List<Produto> buscarProdutoParaVenda() {
+        return produtoDAO.litarProdutosParaVenda();
+    }
 }

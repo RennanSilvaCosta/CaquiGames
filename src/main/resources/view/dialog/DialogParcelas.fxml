@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import util.*?>
+
+<DialogPane expanded="true" prefHeight="250.0" prefWidth="500.0"  onKeyPressed="#keyPressed" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerDialogParcela">
+    <content>
+        <Pane prefHeight="250.0" prefWidth="500.0" style="-fx-background-radius: 20 20 20 20;">
+            <JFXComboBox fx:id="comboParcelas" focusColor="#ff6800" layoutX="40.0" layoutY="101.0" prefHeight="40.0" prefWidth="420.0" unFocusColor="#ff7c00"/>
+            <Label layoutX="40.0" layoutY="82.0" text="Quantidade de parcelas">
+                <font>
+                    <Font name="Ebrima" size="13.0" />
+                </font>
+            </Label>
+            <JFXButton fx:id="btnCancelar" layoutX="250.0" layoutY="173.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="100.0" text="CANCELAR" textFill="#575757">
+                <font>
+                    <Font name="Ebrima" size="13.0" />
+                </font></JFXButton>
+            <JFXButton fx:id="btnSalvar" layoutX="355.0" layoutY="173.0" onAction="#salvarParcelas" mnemonicParsing="false" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #FF6800;" text="SALVAR" textFill="WHITE">
+                <font>
+                    <Font name="Ebrima" size="13.0" />
+                </font>
+            </JFXButton>
+         <Label layoutX="40.0" layoutY="41.0" text="Parcelas">
+            <font>
+               <Font name="Ebrima" size="18.0" />
+            </font>
+         </Label>
+        </Pane>
+    </content>
+    <ButtonType fx:constant="OK" />
+</DialogPane>

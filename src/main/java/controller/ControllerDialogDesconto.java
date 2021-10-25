@@ -7,6 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
+import model.Pedido;
 import util.CurrencyField;
 
 import java.net.URL;
@@ -23,6 +24,7 @@ public class ControllerDialogDesconto implements Initializable {
     @FXML
     JFXButton btnSalvarDesconto, btnCancelar;
 
+    static Pedido pedido;
     static double valorPedido;
     static double valorDescontado;
 
@@ -38,8 +40,13 @@ public class ControllerDialogDesconto implements Initializable {
     @FXML
     private void salvarDesconto() {
         valorDescontado = txtDescontoReais.getAmount();
-        ControllerFecharPedido c = new ControllerFecharPedido();
-        c.setValorDesconto(valorDescontado);
+        if (pedido.getFormaPagamento().equals("Dinheiro")) {
+            ControllerFecharPedidoDinheiroScreen c = new ControllerFecharPedidoDinheiroScreen();
+            c.setValorDesconto(valorDescontado);
+        } else {
+            ControllerFecharPedidoCartaoScreen c = new ControllerFecharPedidoCartaoScreen();
+            c.setValorDesconto(valorDescontado);
+        }
         close();
     }
 
@@ -49,8 +56,9 @@ public class ControllerDialogDesconto implements Initializable {
         stage.close();
     }
 
-    public void getValorTotal(double valor) {
-        valorPedido = valor;
+    public void getValorTotal(Pedido pedido) {
+        this.pedido = pedido;
+        valorPedido = pedido.getValorTotal();
     }
 
     @FXML

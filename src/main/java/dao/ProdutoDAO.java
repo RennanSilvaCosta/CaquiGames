@@ -53,6 +53,15 @@ public class ProdutoDAO {
         return nomesProdutos;
     }
 
+    public List<Produto> litarProdutosParaVenda() {
+        entityManager.getTransaction().begin();
+        String jpql = "select p from Produto p where quantidade_estoque > 0";
+        TypedQuery<Produto> typedQuery = entityManager.createQuery(jpql, Produto.class);
+        List<Produto> nomesProdutos = typedQuery.getResultList();
+        entityManager.getTransaction().commit();
+        return nomesProdutos;
+    }
+
     public void editaProduto(Produto produto) {
         entityManager.getTransaction().begin();
         entityManager.merge(produto);

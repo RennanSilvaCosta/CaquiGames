@@ -35,12 +35,12 @@ import java.util.ResourceBundle;
 import static util.Helper.abrirDialog;
 import static util.Helper.formataValor;
 
-public class ControllerFecharPedido implements Initializable {
+public class ControllerFecharPedidoCartaoScreen implements Initializable {
 
     Funcionario func = UserSession.getFuncionario();
     static Pedido pedido;
-    public static Label txtValorSubTotalStatic, txtValorTotalStatic, txtValorRecebidoStatic, txtValorDescontoStatic, txtValorTrocoStatic;
-    public static double valorRecebido;
+
+    public static Label txtValorSubTotalStatic, txtValorTotalStatic, txtValorDescontoStatic, txtQtdParcelasStatic;
 
     PedidoService pedidoService = new PedidoService();
     List<Cliente> clientes = new ArrayList<>();
@@ -48,10 +48,10 @@ public class ControllerFecharPedido implements Initializable {
     Cliente cliente;
 
     @FXML
-    Pane paneValorTotalPedido, paneDesconto, paneValorRecebido, paneTroco, paneClienteSelecionado;
+    Pane paneValorTotalPedido, paneDesconto, paneQtdParcelas, paneClienteSelecionado;
 
     @FXML
-    Label txtValorTotal, txtCpfCliente, txtNomeCliente, txtEmailCliente, lblClienteSelecionado, txtValorDesconto, txtValorRecebido, txtValorSubTotal, txtValorTroco;
+    Label txtValorTotal, txtCpfCliente, txtNomeCliente, txtEmailCliente, lblClienteSelecionado, txtValorDesconto, txtValorSubTotal, txtQtdParcelas;
 
     @FXML
     JFXTextField txtAdicionarCliente;
@@ -62,11 +62,10 @@ public class ControllerFecharPedido implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         inicializaListaClientes();
-        txtValorTrocoStatic = txtValorTroco;
-        txtValorSubTotalStatic = txtValorSubTotal;
         txtValorTotalStatic = txtValorTotal;
-        txtValorRecebidoStatic = txtValorRecebido;
+        txtValorSubTotalStatic = txtValorSubTotal;
         txtValorDescontoStatic = txtValorDesconto;
+        txtQtdParcelasStatic = txtQtdParcelas;
     }
 
     private void inicializaListaClientes() {
@@ -78,27 +77,21 @@ public class ControllerFecharPedido implements Initializable {
         this.pedido = pedido;
         String valor = formataValor(pedido.getValorTotal());
         txtValorTotalStatic.setText(valor);
-        txtValorRecebidoStatic.setText(valor);
-        txtValorSubTotalStatic.setText(valor);
+        txtValorSubTotalStatic.setText(valor + " x" + pedido.getQtdParcelas());
     }
 
-    @FXML
-    private void finalizarVenda() {
-        try {
-            func = UserSession.getFuncionario();
-            pedido.setFuncionario(func);
-            pedido.setData(LocalDate.now());
+    public void setParcelas(Pedido pedido) {
+        int numParcelas = pedido.getQtdParcelas();
+        txtQtdParcelasStatic.setText(String.valueOf(numParcelas));
+        txtValorSubTotalStatic.setText(formataValor(pedido.getSubTotal()) + " x" + numParcelas);
+    }
 
-            if (!(cliente == null)) {
-                pedido.setCliente(cliente);
-                pedidoService.salvarPedido(pedido);
-                fecharJanela();
-            } else {
-                throw new NenhumClienteSelecionadoException();
-            }
-        } catch (NenhumClienteSelecionadoException e) {
-            abrirDialog("Nenhum cliente selecinado", e.getMessage(), Alert.AlertType.ERROR);
-        }
+    public void setValorDesconto(double desconto) {
+        double subTotal = pedido.getValorTotal() - desconto;
+        pedido.setDesconto(desconto);
+        pedido.setSubTotal(subTotal);
+        txtValorSubTotalStatic.setText(formataValor(subTotal) + " x" + pedido.getQtdParcelas());
+        txtValorDescontoStatic.setText(formataValor(desconto));
     }
 
     @FXML
@@ -126,6 +119,25 @@ public class ControllerFecharPedido implements Initializable {
     }
 
     @FXML
+    private void adicionarParcelas() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("/view/dialog/DialogParcelas.fxml"));
+            DialogPane dialogPane = fxmlLoader.load();
+            Dialog<ButtonType> dialog = new Dialog<>();
+            dialog.setDialogPane(dialogPane);
+            dialog.setTitle("Parcelas");
+
+            ControllerDialogParcela c = new ControllerDialogParcela();
+            c.getValorTotal(pedido);
+            dialog.showAndWait();
+            new FadeIn(txtQtdParcelas).play();
+        } catch (IOException e) {
+            abrirDialog("Ops", "Algo deu errado, tente novamente mais tarde!", Alert.AlertType.ERROR);
+        }
+    }
+
+    @FXML
     private void definirDesconto() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();
@@ -136,45 +148,48 @@ public class ControllerFecharPedido implements Initializable {
             dialog.setTitle("Descontos");
 
             ControllerDialogDesconto c = new ControllerDialogDesconto();
-            c.getValorTotal(pedido.getValorTotal());
+            c.getValorTotal(pedido);
             dialog.showAndWait();
             new FadeIn(txtValorDesconto).play();
-            new FadeIn(txtValorRecebido).play();
         } catch (IOException e) {
             abrirDialog("Ops", "Algo deu errado, tente novamente mais tarde!", Alert.AlertType.ERROR);
         }
     }
 
     @FXML
-    private void definirValorRecebido() {
+    private void finalizarVenda() {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("/view/dialog/DialogValorRecebido.fxml"));
-            DialogPane dialogPane = fxmlLoader.load();
-            Dialog<ButtonType> dialog = new Dialog<>();
-            dialog.setDialogPane(dialogPane);
-            dialog.setTitle("Valor recebido");
+            func = UserSession.getFuncionario();
+            pedido.setFuncionario(func);
+            pedido.setData(LocalDate.now());
 
-            ControllerDialogValorRecebido c = new ControllerDialogValorRecebido();
-            c.setValoRecebido(pedido.getValorTotal());
-            dialog.showAndWait();
-            new FadeIn(txtValorRecebido).play();
-            new FadeIn(txtValorTroco).play();
-        } catch (IOException e) {
-            abrirDialog("Ops", "Algo deu errado, tente novamente mais tarde!", Alert.AlertType.ERROR);
+            if (!(cliente == null)) {
+                pedido.setCliente(cliente);
+                pedidoService.salvarPedido(pedido);
+                fecharJanela();
+            } else {
+                throw new NenhumClienteSelecionadoException();
+            }
+        } catch (NenhumClienteSelecionadoException e) {
+            abrirDialog("Nenhum cliente selecinado", e.getMessage(), Alert.AlertType.ERROR);
         }
     }
 
-    public void setValorRecebido(double valor) {
-        txtValorRecebidoStatic.setText(formataValor(valor));
-        txtValorTrocoStatic.setText(formataValor(valor - pedido.getValorTotal()));
+    @FXML
+    private void keyPressed(KeyEvent evt) {
+        if (evt.getCode() == KeyCode.ENTER || evt.getCode() == KeyCode.F3) {
+            adicionarCliente();
+        } else if (evt.getCode() == KeyCode.F8) {
+            finalizarVenda();
+        } else if (evt.getCode() == KeyCode.F10) {
+            definirDesconto();
+        }
     }
 
-    public void setValorDesconto(double valor) {
-        String subTotal = formataValor(pedido.getValorTotal() - valor);
-        txtValorSubTotalStatic.setText(subTotal);
-        txtValorRecebidoStatic.setText(subTotal);
-        txtValorDescontoStatic.setText(formataValor(valor));
+    @FXML
+    private void fecharJanela() {
+        Stage stage = (Stage) btnFinalizarPedido.getScene().getWindow();
+        stage.close();
     }
 
     @FXML
@@ -230,74 +245,28 @@ public class ControllerFecharPedido implements Initializable {
     }
 
     @FXML
-    private void deslizarPainelValorRecebidoCima() {
+    private void deslizarPainelQtdParcelasCima() {
         Path path = new Path();
         path.getElements().add(new MoveTo(110, 70));
         path.getElements().add(new LineTo(110, 46));
 
         PathTransition transition = new PathTransition();
-        transition.setNode(paneValorRecebido);
+        transition.setNode(paneQtdParcelas);
         transition.setDuration(Duration.millis(300));
         transition.setPath(path);
         transition.play();
     }
 
     @FXML
-    private void deslizarPainelValorRecebidoBaixo() {
+    private void deslizarPainelQtdParcelasBaixo() {
         Path path = new Path();
         path.getElements().add(new MoveTo(110, 46));
         path.getElements().add(new LineTo(110, 70));
 
         PathTransition transition = new PathTransition();
-        transition.setNode(paneValorRecebido);
+        transition.setNode(paneQtdParcelas);
         transition.setDuration(Duration.millis(300));
         transition.setPath(path);
         transition.play();
     }
-
-    @FXML
-    private void deslizarPainelTrocoCima() {
-        Path path = new Path();
-        path.getElements().add(new MoveTo(110, 70));
-        path.getElements().add(new LineTo(110, 46));
-
-        PathTransition transition = new PathTransition();
-        transition.setNode(paneTroco);
-        transition.setDuration(Duration.millis(300));
-        transition.setPath(path);
-        transition.play();
-    }
-
-    @FXML
-    private void deslizarPainelTrocoBaixo() {
-        Path path = new Path();
-        path.getElements().add(new MoveTo(110, 46));
-        path.getElements().add(new LineTo(110, 70));
-
-        PathTransition transition = new PathTransition();
-        transition.setNode(paneTroco);
-        transition.setDuration(Duration.millis(300));
-        transition.setPath(path);
-        transition.play();
-    }
-
-    @FXML
-    private void fecharJanela() {
-        Stage stage = (Stage) btnFinalizarPedido.getScene().getWindow();
-        stage.close();
-    }
-
-    @FXML
-    private void keyPressed(KeyEvent evt) {
-        if (evt.getCode() == KeyCode.ENTER || evt.getCode() == KeyCode.F3) {
-            adicionarCliente();
-        } else if (evt.getCode() == KeyCode.F8) {
-            finalizarVenda();
-        } else if (evt.getCode() == KeyCode.F10) {
-            definirDesconto();
-        } else if (evt.getCode() == KeyCode.F4) {
-            definirValorRecebido();
-        }
-    }
-
 }
