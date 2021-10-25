@@ -42,19 +42,20 @@
          </font>
       </Label>
    </Pane>
-   <Pane fx:id="paneDesconto" layoutX="276.0" layoutY="177.0" onMouseClicked="#definirDesconto" onMouseEntered="#deslizarPainelDescontoCima" onMouseExited="#deslizarPainelDescontoBaixo" prefHeight="150.0" prefWidth="220.0" style="-fx-background-color: #F8F7FC; -fx-background-radius: 20 20 20 20;">
-      <children>
-         <Label fx:id="txtValorDesconto" alignment="CENTER" layoutY="40.0" prefHeight="35.0" prefWidth="220.0" text="R$ 0,00" textFill="#ff6800">
-            <font>
-               <Font name="Ebrima" size="24.0" />
-            </font>
-         </Label>
-         <Label alignment="CENTER" layoutX="1.0" layoutY="85.0" prefWidth="220.0" text="DESCONTO (F10)" textFill="#a3a3a3">
-            <font>
-               <Font name="Ebrima" size="14.0" />
-            </font>
-         </Label>
-      </children>
+   <Pane fx:id="paneDesconto" layoutX="276.0" layoutY="177.0" onMouseClicked="#definirDesconto"
+         onMouseEntered="#deslizarPainelDescontoCima" onMouseExited="#deslizarPainelDescontoBaixo" prefHeight="150.0"
+         prefWidth="220.0" style="-fx-background-color: #F8F7FC; -fx-background-radius: 20 20 20 20;">
+      <Label fx:id="txtValorDesconto" alignment="CENTER" layoutY="40.0" prefHeight="35.0" prefWidth="220.0"
+             text="R$ 0,00" textFill="#ff6800">
+         <font>
+            <Font name="Ebrima" size="24.0"/>
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="1.0" layoutY="85.0" prefWidth="220.0" text="DESCONTO (F10)" textFill="#a3a3a3">
+         <font>
+            <Font name="Ebrima" size="14.0"/>
+         </font>
+      </Label>
    </Pane>
    <Pane fx:id="paneValorRecebido" layoutX="507.0" layoutY="177.0" onMouseClicked="#definirValorRecebido" onMouseEntered="#deslizarPainelValorRecebidoCima" onMouseExited="#deslizarPainelValorRecebidoBaixo" prefHeight="150.0" prefWidth="220.0" style="-fx-background-color: #F8F7FC; -fx-background-radius: 20 20 20 20;">
       <Label fx:id="txtValorRecebido" alignment="CENTER" layoutY="40.0" prefHeight="35.0" prefWidth="220.0" text="R$ 0,00" textFill="#6d9f35">

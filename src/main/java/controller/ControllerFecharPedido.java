@@ -3,6 +3,7 @@ package controller;
 import animatefx.animation.FadeIn;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
+import exceptions.NenhumClienteSelecionadoException;
 import javafx.animation.PathTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -83,12 +84,21 @@ public class ControllerFecharPedido implements Initializable {
 
     @FXML
     private void finalizarVenda() {
-        func = UserSession.getFuncionario();
-        pedido.setFuncionario(func);
-        pedido.setCliente(cliente);
-        pedido.setData(LocalDate.now());
-        pedidoService.salvarPedido(pedido);
-        fecharJanela();
+        try {
+            func = UserSession.getFuncionario();
+            pedido.setFuncionario(func);
+            pedido.setData(LocalDate.now());
+
+            if (!(cliente == null)) {
+                pedido.setCliente(cliente);
+                pedidoService.salvarPedido(pedido);
+                fecharJanela();
+            } else {
+                throw new NenhumClienteSelecionadoException();
+            }
+        } catch (NenhumClienteSelecionadoException e) {
+            abrirDialog("Nenhum cliente selecinado", e.getMessage(), Alert.AlertType.ERROR);
+        }
     }
 
     @FXML
