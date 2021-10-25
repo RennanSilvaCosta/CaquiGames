@@ -69,7 +69,7 @@
       </Label>
    </Pane>
    <Pane fx:id="paneTroco" layoutX="736.0" layoutY="177.0" onMouseEntered="#deslizarPainelTrocoCima" onMouseExited="#deslizarPainelTrocoBaixo" prefHeight="150.0" prefWidth="220.0" style="-fx-background-color: #F8F7FC; -fx-background-radius: 20 20 20 20;">
-      <Label fx:id="txtTroco" alignment="CENTER" layoutY="40.0" prefHeight="35.0" prefWidth="220.0" text="R$ 0,00" textFill="DARKTURQUOISE">
+      <Label fx:id="txtValorTroco" alignment="CENTER" layoutY="40.0" prefHeight="35.0" prefWidth="220.0" text="R$ 0,00" textFill="DARKTURQUOISE">
          <font>
             <Font name="Ebrima" size="24.0" />
          </font>

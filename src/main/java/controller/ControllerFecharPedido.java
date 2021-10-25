@@ -38,10 +38,7 @@ public class ControllerFecharPedido implements Initializable {
 
     Funcionario func = UserSession.getFuncionario();
     static Pedido pedido;
-    public static Label txtValorSubTotalStatic;
-    public static Label txtValorTotalStatic;
-    public static Label txtValorRecebidoStatic;
-    public static Label txtValorDescontoStatic;
+    public static Label txtValorSubTotalStatic, txtValorTotalStatic, txtValorRecebidoStatic, txtValorDescontoStatic, txtValorTrocoStatic;
     public static double valorRecebido;
 
     PedidoService pedidoService = new PedidoService();
@@ -53,7 +50,7 @@ public class ControllerFecharPedido implements Initializable {
     Pane paneValorTotalPedido, paneDesconto, paneValorRecebido, paneTroco, paneClienteSelecionado;
 
     @FXML
-    Label txtValorTotal, txtCpfCliente, txtNomeCliente, txtEmailCliente, lblClienteSelecionado, txtValorDesconto, txtValorRecebido, txtValorSubTotal;
+    Label txtValorTotal, txtCpfCliente, txtNomeCliente, txtEmailCliente, lblClienteSelecionado, txtValorDesconto, txtValorRecebido, txtValorSubTotal, txtValorTroco;
 
     @FXML
     JFXTextField txtAdicionarCliente;
@@ -64,6 +61,7 @@ public class ControllerFecharPedido implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         inicializaListaClientes();
+        txtValorTrocoStatic = txtValorTroco;
         txtValorSubTotalStatic = txtValorSubTotal;
         txtValorTotalStatic = txtValorTotal;
         txtValorRecebidoStatic = txtValorRecebido;
@@ -77,8 +75,10 @@ public class ControllerFecharPedido implements Initializable {
 
     public void getPedido(Pedido pedido) {
         this.pedido = pedido;
-        txtValorTotalStatic.setText(formataValor(pedido.getValorTotal()));
-        txtValorRecebidoStatic.setText(formataValor(pedido.getValorTotal()));
+        String valor = formataValor(pedido.getValorTotal());
+        txtValorTotalStatic.setText(valor);
+        txtValorRecebidoStatic.setText(valor);
+        txtValorSubTotalStatic.setText(valor);
     }
 
     @FXML
@@ -149,6 +149,7 @@ public class ControllerFecharPedido implements Initializable {
             c.setValoRecebido(pedido.getValorTotal());
             dialog.showAndWait();
             new FadeIn(txtValorRecebido).play();
+            new FadeIn(txtValorTroco).play();
         } catch (IOException e) {
             abrirDialog("Ops", "Algo deu errado, tente novamente mais tarde!", Alert.AlertType.ERROR);
         }
@@ -156,10 +157,13 @@ public class ControllerFecharPedido implements Initializable {
 
     public void setValorRecebido(double valor) {
         txtValorRecebidoStatic.setText(formataValor(valor));
+        txtValorTrocoStatic.setText(formataValor(valor - pedido.getValorTotal()));
     }
 
     public void setValorDesconto(double valor) {
-        txtValorSubTotalStatic.setText(formataValor(pedido.getValorTotal() - valor));
+        String subTotal = formataValor(pedido.getValorTotal() - valor);
+        txtValorSubTotalStatic.setText(subTotal);
+        txtValorRecebidoStatic.setText(subTotal);
         txtValorDescontoStatic.setText(formataValor(valor));
     }
 

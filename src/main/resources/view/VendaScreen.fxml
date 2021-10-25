@@ -6,8 +6,8 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<StackPane fx:id="parentContainer" onKeyPressed="#keyPressed" prefHeight="730.0" prefWidth="1000.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerVendaScreen">
-    <AnchorPane id="AnchorPane" fx:id="anchorRoot" prefHeight="730.0" prefWidth="1000.0" style="-fx-background-color: #FF7C00; -fx-background-radius: 10 10 10 10;">
+<StackPane fx:id="parentContainer" prefHeight="730.0" prefWidth="1000.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerVendaScreen">
+    <AnchorPane id="AnchorPane" fx:id="anchorRoot" onKeyPressed="#keyPressed" prefHeight="730.0" prefWidth="1000.0" style="-fx-background-color: #FF7C00; -fx-background-radius: 10 10 10 10;">
         <JFXTextField fx:id="txtAdicionarProduto" focusColor="#ff6800" layoutX="46.0" layoutY="18.0" prefHeight="75" prefWidth="902.0" promptText="Selecione um produto" style="-fx-background-color: white; -fx-background-radius: 20 20 20 20;" unFocusColor="#ffffff00">
          <font>
             <Font name="Ebrima" size="18.0" />
