@@ -10,8 +10,6 @@ import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
-import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -30,7 +28,6 @@ import model.Pedido;
 import model.Produto;
 import org.controlsfx.control.textfield.TextFields;
 import service.ProdutoService;
-import util.Helper;
 
 import java.io.IOException;
 import java.net.URL;
@@ -50,15 +47,27 @@ public class ControllerVendaScreen implements Initializable {
     public static Label txtValorTotalStatic;
 
     @FXML
-    private Label txtQuantidadeItens, txtValorDesconto, txtValorTotal;
+    Label txtQuantidadeItens;
     @FXML
-    private JFXButton btnFecharPedido, btnAdicionarProduto, btnSair;
+    Label txtValorDesconto;
+    @FXML
+    Label txtValorTotal;
+
+    @FXML
+    private JFXButton btnFecharPedido;
+    @FXML
+    private JFXButton btnAdicionarProduto;
+    @FXML
+    private JFXButton btnSair;
+
     @FXML
     private AnchorPane anchorRoot;
     @FXML
     private StackPane parentContainer;
+
     @FXML
     private JFXListView<ItemPedido> listaProdutos;
+
     @FXML
     private JFXTextField txtAdicionarProduto;
 
@@ -71,7 +80,7 @@ public class ControllerVendaScreen implements Initializable {
     @FXML
     private void fecharPedido() {
         try {
-            if (!(listaItens.size() == 0)) {
+            if (listaItens.isEmpty()) {
                 abrirFormaPagamento();
             } else {
                 throw new CarrinhoVazioException();
@@ -102,9 +111,7 @@ public class ControllerVendaScreen implements Initializable {
         KeyValue kv = new KeyValue(root.translateXProperty(), 0, Interpolator.EASE_IN);
         KeyFrame kf = new KeyFrame(Duration.millis(800), kv);
         timeline.getKeyFrames().add(kf);
-        timeline.setOnFinished(t -> {
-            parentContainer.getChildren().remove(anchorRoot);
-        });
+        timeline.setOnFinished(t -> parentContainer.getChildren().remove(anchorRoot));
         timeline.play();
     }
 

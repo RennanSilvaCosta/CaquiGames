@@ -20,7 +20,9 @@ public class ControllerDialogValorRecebido implements Initializable {
     CurrencyField txtValorRecebido;
 
     @FXML
-    JFXButton btnCancelar, btnSalvar;
+    JFXButton btnCancelar;
+    @FXML
+    JFXButton btnSalvar;
 
     public static CurrencyField txtValorRecebidoStatic;
     public static double valorRecebido = 0;

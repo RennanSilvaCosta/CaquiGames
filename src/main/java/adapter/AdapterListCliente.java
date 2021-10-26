@@ -2,19 +2,13 @@ package adapter;
 
 import com.jfoenix.controls.JFXButton;
 import controller.ControllerClienteScreen;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
-import javafx.stage.StageStyle;
 import model.Cliente;
 
 import java.io.IOException;
@@ -27,13 +21,25 @@ public class AdapterListCliente extends ListCell<Cliente> {
     private GridPane gridPane;
 
     @FXML
-    Label txtId, txtNome, txtCpf, txtEmail, txtTelefone;
+    Label txtId;
 
     @FXML
-    JFXButton btnEditar, btnExcluir;
+    Label txtNome;
 
-    private double xOffset = 0;
-    private double yOffset = 0;
+    @FXML
+    Label txtCpf;
+
+    @FXML
+    Label txtEmail;
+
+    @FXML
+    Label txtTelefone;
+
+    @FXML
+    JFXButton btnEditar;
+
+    @FXML
+    JFXButton btnExcluir;
 
     @Override
     protected void updateItem(Cliente cliente, boolean empty) {
@@ -64,12 +70,9 @@ public class AdapterListCliente extends ListCell<Cliente> {
             txtEmail.setText(cliente.getEmail());
             txtTelefone.setText(cliente.getCelular());
 
-            btnEditar.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent actionEvent) {
-                    ControllerClienteScreen c = new ControllerClienteScreen();
-                    c.abrirEditarCliente(cliente);
-                }
+            btnEditar.setOnAction(actionEvent -> {
+                ControllerClienteScreen c = new ControllerClienteScreen();
+                c.abrirEditarCliente(cliente);
             });
 
             setText(null);

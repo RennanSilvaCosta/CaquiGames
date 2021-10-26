@@ -40,24 +40,56 @@ public class ControllerFecharPedidoDinheiroScreen implements Initializable {
     Funcionario func = UserSession.getFuncionario();
     static Pedido pedido;
     public static Label txtValorSubTotalStatic, txtValorTotalStatic, txtValorRecebidoStatic, txtValorDescontoStatic, txtValorTrocoStatic;
-    public static double valorRecebido;
+    public static double valorRecebido = 0;
 
     PedidoService pedidoService = new PedidoService();
     List<Cliente> clientes = new ArrayList<>();
     ClienteService clienteService = new ClienteService();
     Cliente cliente;
 
-    @FXML
-    Pane paneValorTotalPedido, paneDesconto, paneValorRecebido, paneTroco, paneClienteSelecionado;
-
-    @FXML
-    Label txtValorTotal, txtCpfCliente, txtNomeCliente, txtEmailCliente, lblClienteSelecionado, txtValorDesconto, txtValorRecebido, txtValorSubTotal, txtValorTroco;
-
+    //TextFields
     @FXML
     JFXTextField txtAdicionarCliente;
 
+    //Paineis
     @FXML
-    JFXButton btnFinalizarPedido, btnAdicionarCliente, btnSair;
+    Pane paneValorTotalPedido;
+    @FXML
+    Pane paneDesconto;
+    @FXML
+    Pane paneValorRecebido;
+    @FXML
+    Pane paneTroco;
+    @FXML
+    Pane paneClienteSelecionado;
+
+    //Labels
+    @FXML
+    Label txtValorTotal;
+    @FXML
+    Label txtCpfCliente;
+    @FXML
+    Label txtNomeCliente;
+    @FXML
+    Label txtEmailCliente;
+    @FXML
+    Label lblClienteSelecionado;
+    @FXML
+    Label txtValorDesconto;
+    @FXML
+    Label txtValorRecebido;
+    @FXML
+    Label txtValorSubTotal;
+    @FXML
+    Label txtValorTroco;
+
+    //Botões
+    @FXML
+    JFXButton btnFinalizarPedido;
+    @FXML
+    JFXButton btnAdicionarCliente;
+    @FXML
+    JFXButton btnSair;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -75,7 +107,7 @@ public class ControllerFecharPedidoDinheiroScreen implements Initializable {
     }
 
     public void getPedido(Pedido pedido) {
-        this.pedido = pedido;
+        ControllerFecharPedidoDinheiroScreen.pedido = pedido;
         String valor = formataValor(pedido.getValorTotal());
         txtValorTotalStatic.setText(valor);
         txtValorRecebidoStatic.setText(valor);
@@ -89,7 +121,7 @@ public class ControllerFecharPedidoDinheiroScreen implements Initializable {
             pedido.setFuncionario(func);
             pedido.setData(LocalDate.now());
 
-            if (!(cliente == null)) {
+            if (cliente != null) {
                 pedido.setCliente(cliente);
                 pedidoService.salvarPedido(pedido);
                 fecharJanela();

@@ -13,7 +13,7 @@ public final class UserSession {
     }
 
     public static UserSession getInstace(Funcionario funcionario) {
-        if(instance == null) {
+        if (instance == null) {
             instance = new UserSession(funcionario);
         }
         return instance;

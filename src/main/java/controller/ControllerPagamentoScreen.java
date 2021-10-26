@@ -29,7 +29,11 @@ public class ControllerPagamentoScreen implements Initializable {
     static Pedido pedido;
 
     @FXML
-    private JFXButton btnDinheiro, btnCartaoCredito, btnSair;
+    JFXButton btnDinheiro;
+    @FXML
+    JFXButton btnCartaoCredito;
+    @FXML
+    JFXButton btnSair;
 
     @FXML
     private AnchorPane container;
@@ -42,7 +46,6 @@ public class ControllerPagamentoScreen implements Initializable {
 
         btnCartaoCredito.setGraphic(new ImageView(new Image("/icons/cartao-credito.png")));
         btnCartaoCredito.setGraphicTextGap(20.0);
-
     }
 
     @FXML
@@ -62,9 +65,7 @@ public class ControllerPagamentoScreen implements Initializable {
         KeyValue kv = new KeyValue(root.translateXProperty(), 0, Interpolator.EASE_IN);
         KeyFrame kf = new KeyFrame(Duration.millis(800), kv);
         timeline.getKeyFrames().add(kf);
-        timeline.setOnFinished(t -> {
-            parentContainer.getChildren().remove(container);
-        });
+        timeline.setOnFinished(t -> parentContainer.getChildren().remove(container));
         controller.getPedido(pedido);
         timeline.play();
     }
@@ -87,9 +88,7 @@ public class ControllerPagamentoScreen implements Initializable {
         KeyValue kv = new KeyValue(root.translateXProperty(), 0, Interpolator.EASE_IN);
         KeyFrame kf = new KeyFrame(Duration.millis(800), kv);
         timeline.getKeyFrames().add(kf);
-        timeline.setOnFinished(t -> {
-            parentContainer.getChildren().remove(container);
-        });
+        timeline.setOnFinished(t -> parentContainer.getChildren().remove(container));
         controller.getPedido(pedido);
         timeline.play();
     }
@@ -101,7 +100,7 @@ public class ControllerPagamentoScreen implements Initializable {
     }
 
     public void getPedido(Pedido pedido) {
-       this.pedido = pedido ;
+        ControllerPagamentoScreen.pedido = pedido ;
     }
 
 }

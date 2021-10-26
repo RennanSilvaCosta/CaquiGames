@@ -20,7 +20,9 @@ public class ControllerDialogParcela implements Initializable {
     JFXComboBox<Integer> comboParcelas = new JFXComboBox<>();
 
     @FXML
-    JFXButton btnCancelar, btnSalvar;
+    JFXButton btnCancelar;
+    @FXML
+    JFXButton btnSalvar;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -57,6 +59,6 @@ public class ControllerDialogParcela implements Initializable {
     }
 
     public void getValorTotal(Pedido pedido) {
-        this.pedido = pedido;
+        ControllerDialogParcela.pedido = pedido;
     }
 }

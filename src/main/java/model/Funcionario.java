@@ -29,7 +29,7 @@ public class Funcionario {
     private LocalDate dataNasc;
 
     @NotNull
-    @Column(length = 100)
+    @Column(length = 100, unique = true)
     private String email;
 
     @NotNull

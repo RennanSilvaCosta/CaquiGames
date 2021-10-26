@@ -7,8 +7,6 @@ import exceptions.FuncionarioJaExisteException;
 import exceptions.SenhaInvalidaException;
 import model.Funcionario;
 import session.UserSession;
-import validate.Validate;
-
 import javax.persistence.NoResultException;
 import java.util.List;
 import java.util.Objects;

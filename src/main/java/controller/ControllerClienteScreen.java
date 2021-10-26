@@ -3,13 +3,11 @@ package controller;
 import adapter.AdapterListCliente;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -19,7 +17,6 @@ import service.ClienteService;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -28,16 +25,16 @@ public class ControllerClienteScreen implements Initializable {
     private double xOffset = 0;
     private double yOffset = 0;
 
-    private List<Cliente> clientes = new ArrayList<>();
-
     private ClienteService clienteService = new ClienteService();
+    static JFXListView<Cliente> listaClienteStatic;
 
     @FXML
-    JFXButton btnSair, btnCadastrarNovoCliente;
+    JFXButton btnSair;
+    @FXML
+    JFXButton btnCadastrarNovoCliente;
+
     @FXML
     JFXListView<Cliente> listacliente;
-
-    static JFXListView<Cliente> listaClienteStatic;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -53,7 +50,6 @@ public class ControllerClienteScreen implements Initializable {
             Stage stage = new Stage();
             Scene scene = new Scene(parent);
             scene.setFill(Color.TRANSPARENT);
-            // stage.getIcons().add(new Image(""));
             stage.initStyle(StageStyle.TRANSPARENT);
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setScene(scene);
@@ -70,12 +66,7 @@ public class ControllerClienteScreen implements Initializable {
                 stage.setOpacity(0.7);
             });
 
-            scene.setOnMouseReleased(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent mouseEvent) {
-                    stage.setOpacity(1);
-                }
-            });
+            scene.setOnMouseReleased(mouseEvent -> stage.setOpacity(1));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -89,7 +80,6 @@ public class ControllerClienteScreen implements Initializable {
             Stage stage = new Stage();
             Scene scene = new Scene(parent);
             scene.setFill(Color.TRANSPARENT);
-            // stage.getIcons().add(new Image(""));
             stage.initStyle(StageStyle.TRANSPARENT);
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setScene(scene);
@@ -109,19 +99,14 @@ public class ControllerClienteScreen implements Initializable {
                 stage.setOpacity(0.7);
             });
 
-            scene.setOnMouseReleased(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent mouseEvent) {
-                    stage.setOpacity(1);
-                }
-            });
+            scene.setOnMouseReleased(mouseEvent -> stage.setOpacity(1));
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     public void inicializaListaCliente() {
-        clientes = clienteService.buscaTodosClientes();
+        List<Cliente> clientes = clienteService.buscaTodosClientes();
         for (Cliente c : clientes) {
             listacliente.getItems().add(c);
         }

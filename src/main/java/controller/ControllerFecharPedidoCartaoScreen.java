@@ -48,16 +48,40 @@ public class ControllerFecharPedidoCartaoScreen implements Initializable {
     Cliente cliente;
 
     @FXML
-    Pane paneValorTotalPedido, paneDesconto, paneQtdParcelas, paneClienteSelecionado;
+    Pane paneValorTotalPedido;
+    @FXML
+    Pane paneDesconto;
+    @FXML
+    Pane paneQtdParcelas;
+    @FXML
+    Pane paneClienteSelecionado;
 
     @FXML
-    Label txtValorTotal, txtCpfCliente, txtNomeCliente, txtEmailCliente, lblClienteSelecionado, txtValorDesconto, txtValorSubTotal, txtQtdParcelas;
+    Label txtValorTotal;
+    @FXML
+    Label txtCpfCliente;
+    @FXML
+    Label txtNomeCliente;
+    @FXML
+    Label txtEmailCliente;
+    @FXML
+    Label lblClienteSelecionado;
+    @FXML
+    Label txtValorDesconto;
+    @FXML
+    Label txtValorSubTotal;
+    @FXML
+    Label txtQtdParcelas;
 
     @FXML
     JFXTextField txtAdicionarCliente;
 
     @FXML
-    JFXButton btnFinalizarPedido, btnAdicionarCliente, btnSair;
+    JFXButton btnFinalizarPedido;
+    @FXML
+    JFXButton btnAdicionarCliente;
+    @FXML
+    JFXButton btnSair;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -74,7 +98,7 @@ public class ControllerFecharPedidoCartaoScreen implements Initializable {
     }
 
     public void getPedido(Pedido pedido) {
-        this.pedido = pedido;
+        ControllerFecharPedidoCartaoScreen.pedido = pedido;
         String valor = formataValor(pedido.getValorTotal());
         txtValorTotalStatic.setText(valor);
         txtValorSubTotalStatic.setText(valor + " x" + pedido.getQtdParcelas());
@@ -163,7 +187,7 @@ public class ControllerFecharPedidoCartaoScreen implements Initializable {
             pedido.setFuncionario(func);
             pedido.setData(LocalDate.now());
 
-            if (!(cliente == null)) {
+            if (cliente != null) {
                 pedido.setCliente(cliente);
                 pedidoService.salvarPedido(pedido);
                 fecharJanela();

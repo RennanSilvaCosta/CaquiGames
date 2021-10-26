@@ -1,8 +1,6 @@
 package adapter;
 
 import com.jfoenix.controls.JFXButton;
-import controller.ControllerClienteScreen;
-import controller.ControllerProdutoCadastroScreen;
 import controller.ControllerProdutoScreen;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -14,7 +12,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import model.Produto;
-import util.Helper;
 
 import java.io.IOException;
 
@@ -28,10 +25,28 @@ public class AdapterListProduto extends ListCell<Produto> {
     private GridPane gridPane;
 
     @FXML
-    Label txtId, txtDescricao, txtMarca, txtQtdEstoque, txtValor, txtCategoria;
+    Label txtId;
 
     @FXML
-    JFXButton btnEditarProduto, btnExcluirProduto;
+    Label txtDescricao;
+
+    @FXML
+    Label txtMarca;
+
+    @FXML
+    Label txtQtdEstoque;
+
+    @FXML
+    Label txtValor;
+
+    @FXML
+    Label txtCategoria;
+
+    @FXML
+    JFXButton btnEditarProduto;
+
+    @FXML
+    JFXButton btnExcluirProduto;
 
     @Override
     protected void updateItem(Produto produto, boolean empty) {
@@ -57,18 +72,19 @@ public class AdapterListProduto extends ListCell<Produto> {
             btnExcluirProduto.setGraphic(new ImageView(new Image("/icons/btn_excluir_cliente.png")));
 
             txtId.setText(String.valueOf(produto.getId()));
-            txtDescricao.setText(produto.getNome() + " " +  produto.getDescricao());
+            txtDescricao.setText(produto.getNome() + " " + produto.getDescricao());
             txtMarca.setText(produto.getMarca());
             txtQtdEstoque.setText(String.valueOf(produto.getQtdEstoque()));
             txtValor.setText(formataValor(produto.getValor()));
             txtCategoria.setText("Controles");
 
-            btnEditarProduto.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent actionEvent) {
-                    ControllerProdutoScreen c = new ControllerProdutoScreen();
-                    c.abrirEditarProduto(produto);
-                }
+            btnEditarProduto.setOnAction(actionEvent -> {
+                ControllerProdutoScreen c = new ControllerProdutoScreen();
+                c.abrirEditarProduto(produto);
+            });
+
+            btnExcluirProduto.setOnAction(actionEvent -> {
+
             });
 
             setText(null);

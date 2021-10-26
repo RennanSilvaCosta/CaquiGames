@@ -11,11 +11,11 @@ import java.nio.charset.StandardCharsets;
 
 public class ViaCepService {
 
-    private static String urlBase = "https://viacep.com.br/ws/";
-    private static String urlBaseTipo = "/json";
+    private static final String URLBASE = "https://viacep.com.br/ws/";
+    private static final String URLBASETIPO = "/json";
 
     public static EnderecoDTO buscaEnderecoViaCep(String cep) {
-        StringBuilder sb = new StringBuilder(urlBase).append(cep).append(urlBaseTipo);
+        StringBuilder sb = new StringBuilder(URLBASE).append(cep).append(URLBASETIPO);
         try {
             URL url = new URL(sb.toString());
             HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
@@ -24,9 +24,9 @@ public class ViaCepService {
             conexao.setRequestProperty("Accept", "application/json");
             conexao.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
 
-            if (conexao.getResponseCode() != 200)
+            if (conexao.getResponseCode() != 200) {
                 throw new RuntimeException("HTTP error code : " + conexao.getResponseCode());
-
+            }
             BufferedReader resposta = new BufferedReader(new InputStreamReader(conexao.getInputStream(), StandardCharsets.UTF_8));
             Gson gson = new Gson();
 

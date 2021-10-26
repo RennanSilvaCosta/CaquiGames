@@ -38,21 +38,29 @@ public class ControllerLoginScreen implements Initializable {
 
     FuncionarioService funcionarioService = new FuncionarioService();
 
-    @FXML
-    JFXButton btnSair, btnLogar;
-
+    //TextFields
     @FXML
     JFXTextField txtEmail;
 
+    //TextPassword
     @FXML
     JFXPasswordField txtSenha;
 
+    //Botoes
     @FXML
-    Label txtErrorEmail, txtErrorSenha;
+    JFXButton btnSair;
+    @FXML
+    JFXButton btnLogar;
+
+    //Labels
+    @FXML
+    Label txtErrorEmail;
+    @FXML
+    Label txtErrorSenha;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        // TODO document why this method is empty
     }
 
     public void logar() {
@@ -91,7 +99,6 @@ public class ControllerLoginScreen implements Initializable {
             Stage stage = new Stage();
             Scene scene = new Scene(parent);
             scene.setFill(Color.TRANSPARENT);
-            //stage.getIcons().add(new Image(""));
             stage.initStyle(StageStyle.TRANSPARENT);
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setScene(scene);
@@ -114,12 +121,7 @@ public class ControllerLoginScreen implements Initializable {
                 stage.setOpacity(0.7);
             });
 
-            scene.setOnMouseReleased(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent mouseEvent) {
-                    stage.setOpacity(1);
-                }
-            });
+            scene.setOnMouseReleased(mouseEvent -> stage.setOpacity(1));
         } catch (IOException e) {
             e.printStackTrace();
         }

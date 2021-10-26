@@ -3,8 +3,6 @@ package adapter;
 import animatefx.animation.FadeInDown;
 import com.jfoenix.controls.JFXButton;
 import controller.ControllerVendaScreen;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
@@ -26,10 +24,25 @@ public class AdapterListProdutoVenda extends ListCell<ItemPedido> {
     private GridPane gridPane;
 
     @FXML
-    Label txtIndice, txtNomeProduto, txtQuantidade, txtValorUnitario, txtValorTotal;
+    Label txtIndice;
 
     @FXML
-    JFXButton btnMenosQuantidade, btnMaisQuantidade;
+    Label txtNomeProduto;
+
+    @FXML
+    Label txtQuantidade;
+
+    @FXML
+    Label txtValorUnitario;
+
+    @FXML
+    Label txtValorTotal;
+
+    @FXML
+    JFXButton btnMenosQuantidade;
+
+    @FXML
+    JFXButton btnMaisQuantidade;
 
     @Override
     protected void updateItem(ItemPedido item, boolean empty) {
@@ -63,30 +76,24 @@ public class AdapterListProdutoVenda extends ListCell<ItemPedido> {
             desabilitaBotaoMenosQtd(item.getQuantidade());
             desabilitaBotaoMaisQtd(item.getProduto().getQtdEstoque(), item.getQuantidade());
 
-            btnMaisQuantidade.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent actionEvent) {
-                    item.setQuantidade(item.getQuantidade() + 1);
-                    txtQuantidade.setText(String.valueOf(item.getQuantidade()));
-                    txtValorTotal.setText(formataValor(item.getPreco() * item.getQuantidade()));
-                    desabilitaBotaoMenosQtd(item.getQuantidade());
-                    desabilitaBotaoMaisQtd(item.getProduto().getQtdEstoque(), item.getQuantidade());
-                    ControllerVendaScreen.txtValorTotalStatic.setText(String.valueOf(formataValor(ControllerVendaScreen.valorTotal += item.getPreco())));
-                    new FadeInDown(ControllerVendaScreen.txtValorTotalStatic).setSpeed(0.5).play();
-                }
+            btnMaisQuantidade.setOnAction(actionEvent -> {
+                item.setQuantidade(item.getQuantidade() + 1);
+                txtQuantidade.setText(String.valueOf(item.getQuantidade()));
+                txtValorTotal.setText(formataValor(item.getPreco() * item.getQuantidade()));
+                desabilitaBotaoMenosQtd(item.getQuantidade());
+                desabilitaBotaoMaisQtd(item.getProduto().getQtdEstoque(), item.getQuantidade());
+                ControllerVendaScreen.txtValorTotalStatic.setText(String.valueOf(formataValor(ControllerVendaScreen.valorTotal += item.getPreco())));
+                new FadeInDown(ControllerVendaScreen.txtValorTotalStatic).setSpeed(0.5).play();
             });
 
-            btnMenosQuantidade.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent actionEvent) {
-                    item.setQuantidade(item.getQuantidade() - 1);
-                    txtQuantidade.setText(String.valueOf(item.getQuantidade()));
-                    txtValorTotal.setText(formataValor((item.getPreco() * item.getQuantidade())));
-                    desabilitaBotaoMenosQtd(item.getQuantidade());
-                    desabilitaBotaoMaisQtd(item.getProduto().getQtdEstoque(), item.getQuantidade());
-                    ControllerVendaScreen.txtValorTotalStatic.setText(String.valueOf(formataValor(ControllerVendaScreen.valorTotal -= item.getPreco())));
-                    new FadeInDown(ControllerVendaScreen.txtValorTotalStatic).setSpeed(0.5).play();
-                }
+            btnMenosQuantidade.setOnAction(actionEvent -> {
+                item.setQuantidade(item.getQuantidade() - 1);
+                txtQuantidade.setText(String.valueOf(item.getQuantidade()));
+                txtValorTotal.setText(formataValor((item.getPreco() * item.getQuantidade())));
+                desabilitaBotaoMenosQtd(item.getQuantidade());
+                desabilitaBotaoMaisQtd(item.getProduto().getQtdEstoque(), item.getQuantidade());
+                ControllerVendaScreen.txtValorTotalStatic.setText(String.valueOf(formataValor(ControllerVendaScreen.valorTotal -= item.getPreco())));
+                new FadeInDown(ControllerVendaScreen.txtValorTotalStatic).setSpeed(0.5).play();
             });
 
             setText(null);

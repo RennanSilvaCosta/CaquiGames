@@ -22,7 +22,9 @@ public class ControllerDialogDesconto implements Initializable {
     JFXTextField txtDescontoPorcentagem;
 
     @FXML
-    JFXButton btnSalvarDesconto, btnCancelar;
+    JFXButton btnSalvarDesconto;
+    @FXML
+    JFXButton btnCancelar;
 
     static Pedido pedido;
     static double valorPedido;
@@ -30,6 +32,7 @@ public class ControllerDialogDesconto implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        // TODO document why this method is empty
     }
 
     @FXML
@@ -57,7 +60,7 @@ public class ControllerDialogDesconto implements Initializable {
     }
 
     public void getValorTotal(Pedido pedido) {
-        this.pedido = pedido;
+        ControllerDialogDesconto.pedido = pedido;
         valorPedido = pedido.getValorTotal();
     }
 
