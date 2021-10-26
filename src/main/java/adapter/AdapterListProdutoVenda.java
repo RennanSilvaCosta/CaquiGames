@@ -61,6 +61,7 @@ public class AdapterListProdutoVenda extends ListCell<ItemPedido> {
             txtValorTotal.setText(formataValor(item.getPreco() * item.getQuantidade()));
 
             desabilitaBotaoMenosQtd(item.getQuantidade());
+            desabilitaBotaoMaisQtd(item.getProduto().getQtdEstoque(), item.getQuantidade());
 
             btnMaisQuantidade.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
@@ -69,6 +70,7 @@ public class AdapterListProdutoVenda extends ListCell<ItemPedido> {
                     txtQuantidade.setText(String.valueOf(item.getQuantidade()));
                     txtValorTotal.setText(formataValor(item.getPreco() * item.getQuantidade()));
                     desabilitaBotaoMenosQtd(item.getQuantidade());
+                    desabilitaBotaoMaisQtd(item.getProduto().getQtdEstoque(), item.getQuantidade());
                     ControllerVendaScreen.txtValorTotalStatic.setText(String.valueOf(formataValor(ControllerVendaScreen.valorTotal += item.getPreco())));
                     new FadeInDown(ControllerVendaScreen.txtValorTotalStatic).setSpeed(0.5).play();
                 }
@@ -81,6 +83,7 @@ public class AdapterListProdutoVenda extends ListCell<ItemPedido> {
                     txtQuantidade.setText(String.valueOf(item.getQuantidade()));
                     txtValorTotal.setText(formataValor((item.getPreco() * item.getQuantidade())));
                     desabilitaBotaoMenosQtd(item.getQuantidade());
+                    desabilitaBotaoMaisQtd(item.getProduto().getQtdEstoque(), item.getQuantidade());
                     ControllerVendaScreen.txtValorTotalStatic.setText(String.valueOf(formataValor(ControllerVendaScreen.valorTotal -= item.getPreco())));
                     new FadeInDown(ControllerVendaScreen.txtValorTotalStatic).setSpeed(0.5).play();
                 }
@@ -93,6 +96,10 @@ public class AdapterListProdutoVenda extends ListCell<ItemPedido> {
 
     private void desabilitaBotaoMenosQtd(int quantidade) {
         btnMenosQuantidade.setDisable(quantidade == 1);
+    }
+
+    private void desabilitaBotaoMaisQtd(int qtdEstoque, int qtdSelecionada) {
+        btnMaisQuantidade.setDisable(qtdEstoque == qtdSelecionada);
     }
 
 }

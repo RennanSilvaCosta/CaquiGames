@@ -7,6 +7,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProdutoDAO {
@@ -72,6 +73,12 @@ public class ProdutoDAO {
         Produto produto = entityManager.find(Produto.class, buscaProduto(descricao));
         entityManager.getTransaction().begin();
         entityManager.remove(produto);
+        entityManager.getTransaction().commit();
+    }
+
+    public void subtraiEstoque(Produto produto) {
+        entityManager.getTransaction().begin();
+        entityManager.merge(produto);
         entityManager.getTransaction().commit();
     }
 }

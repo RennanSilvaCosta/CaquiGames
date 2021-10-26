@@ -171,10 +171,12 @@ public class ControllerFecharPedidoDinheiroScreen implements Initializable {
     }
 
     public void setValorDesconto(double desconto) {
-        String subTotal = formataValor(pedido.getValorTotal() - desconto);
+        double subTotal = pedido.getValorTotal() - desconto;
+        String subTotalString = formataValor(subTotal);
         pedido.setDesconto(desconto);
-        txtValorSubTotalStatic.setText(subTotal);
-        txtValorRecebidoStatic.setText(subTotal);
+        pedido.setSubTotal(subTotal);
+        txtValorSubTotalStatic.setText(subTotalString);
+        txtValorRecebidoStatic.setText(subTotalString);
         txtValorDescontoStatic.setText(formataValor(desconto));
     }
 
