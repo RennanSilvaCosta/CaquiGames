@@ -15,6 +15,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import model.Pedido;
 
@@ -28,7 +29,7 @@ public class ControllerPagamentoScreen implements Initializable {
     static Pedido pedido;
 
     @FXML
-    private JFXButton btnDinheiro, btnCartaoCredito;
+    private JFXButton btnDinheiro, btnCartaoCredito, btnSair;
 
     @FXML
     private AnchorPane container;
@@ -91,6 +92,12 @@ public class ControllerPagamentoScreen implements Initializable {
         });
         controller.getPedido(pedido);
         timeline.play();
+    }
+
+    @FXML
+    private void fecharJanela() {
+        Stage stage = (Stage) btnSair.getScene().getWindow();
+        stage.close();
     }
 
     public void getPedido(Pedido pedido) {

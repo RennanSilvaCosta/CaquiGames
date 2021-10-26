@@ -57,7 +57,7 @@ public class ControllerFecharPedidoDinheiroScreen implements Initializable {
     JFXTextField txtAdicionarCliente;
 
     @FXML
-    JFXButton btnFinalizarPedido, btnAdicionarCliente;
+    JFXButton btnFinalizarPedido, btnAdicionarCliente, btnSair;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

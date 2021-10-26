@@ -127,5 +127,9 @@
          <Font name="Ebrima Bold" size="14.0" />
       </font>
    </Label>
+   <JFXButton fx:id="btnSair" layoutX="969.0" layoutY="1.0" mnemonicParsing="false" onAction="#fecharJanela" prefHeight="35.0" prefWidth="35.0" styleClass="btnSair" stylesheets="@../stylesheets/styleButton.css" text="x">
+      <font>
+         <Font name="Ebrima Bold" size="12.0" />
+      </font></JFXButton>
 
 </AnchorPane>
