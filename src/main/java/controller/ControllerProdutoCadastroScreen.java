@@ -9,7 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.stage.Stage;
 import model.Produto;
 import service.ProdutoService;
-import util.CurrencyField;
+import utils.CurrencyField;
 
 import java.net.URL;
 import java.util.ArrayList;

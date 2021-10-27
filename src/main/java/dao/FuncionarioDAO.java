@@ -2,12 +2,15 @@ package dao;
 
 import dto.FuncionarioDTO;
 import model.Funcionario;
+import utils.ValidaCPF;
 
 import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
 
 public class FuncionarioDAO {
+
+    ValidaCPF validaCPF = new ValidaCPF();
 
     private static EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("caqui");
     private static EntityManager entityManager = entityManagerFactory.createEntityManager();
@@ -17,19 +20,6 @@ public class FuncionarioDAO {
         entityManager.persist(funcionario.getEndereco());
         entityManager.persist(funcionario);
         entityManager.getTransaction().begin();
-    }
-
-    public Funcionario buscaFuncionarioCPF(String cpf) {
-        String getFuncionarioPorCPF = "SELECT f FROM Funcionario f where cpf = :cpf";
-        TypedQuery<Funcionario> typedQuery = entityManager
-                .createQuery(getFuncionarioPorCPF, Funcionario.class)
-                .setParameter("cpf", cpf);
-        List<Funcionario> resultList = typedQuery.getResultList();
-        if (Objects.isNull(resultList) || resultList.isEmpty()) {
-            return null;
-        } else {
-            return resultList.get(0);
-        }
     }
 
     public List<Funcionario> buscaTodosFuncionarios() {
@@ -49,7 +39,7 @@ public class FuncionarioDAO {
     }
 
     public void deletaFuncionario(String cpf) {
-        Funcionario funcionario = entityManager.find(Funcionario.class, buscaFuncionarioCPF(cpf));
+        Funcionario funcionario = entityManager.find(Funcionario.class, validaCPF.buscaFuncionarioPorCPF(cpf));
         entityManager.getTransaction().begin();
         entityManager.remove(funcionario);
         entityManager.getTransaction().commit();
@@ -71,7 +61,7 @@ public class FuncionarioDAO {
     }
 
     public boolean isFuncionarioExiste(String cpf) {
-        return !Objects.isNull(buscaFuncionarioCPF(cpf));
+        return !Objects.isNull(validaCPF.buscaFuncionarioPorCPF(cpf));
     }
 
 }

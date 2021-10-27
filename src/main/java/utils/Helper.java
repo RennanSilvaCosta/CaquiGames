@@ -1,4 +1,4 @@
-package util;
+package utils;
 
 import com.jfoenix.controls.JFXButton;
 import javafx.scene.control.Alert;

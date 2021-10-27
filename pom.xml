@@ -14,6 +14,13 @@
     </properties>
 
     <dependencies>
+        <!-- UTILS E OUTROS -->
+        <dependency>
+            <groupId>br.com.caelum.stella</groupId>
+            <artifactId>caelum-stella-core</artifactId>
+            <version>2.1.2</version>
+        </dependency>
+
         <!-- DEPENDENCIAs DO FRONT-END -->
         <dependency>
             <groupId>com.jfoenix</groupId>

@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<?import util.*?>
+<?import utils.*?>
 
 <Pane prefHeight="530.0" prefWidth="922.0" style="-fx-background-color: #FF7C00; -fx-background-radius: 10 10 10 10;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerClienteCadastroScreen">
     <Pane layoutX="20.0" layoutY="66.0" prefHeight="450.0" prefWidth="881.0" style="-fx-background-color: #F8F7FC; -fx-background-radius: 10 10 10 10;">

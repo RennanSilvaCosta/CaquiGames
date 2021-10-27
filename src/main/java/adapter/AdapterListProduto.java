@@ -2,8 +2,6 @@ package adapter;
 
 import com.jfoenix.controls.JFXButton;
 import controller.ControllerProdutoScreen;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
@@ -15,7 +13,7 @@ import model.Produto;
 
 import java.io.IOException;
 
-import static util.Helper.formataValor;
+import static utils.Helper.formataValor;
 
 public class AdapterListProduto extends ListCell<Produto> {
 

@@ -7,7 +7,6 @@ import com.jfoenix.controls.JFXTextField;
 import dto.FuncionarioDTO;
 import exceptions.EmailInvalidoException;
 import exceptions.SenhaInvalidaException;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -17,7 +16,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -29,7 +27,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import static util.Helper.abrirDialog;
+import static utils.Helper.abrirDialog;
 
 public class ControllerLoginScreen implements Initializable {
 
@@ -83,7 +81,7 @@ public class ControllerLoginScreen implements Initializable {
             txtErrorSenha.setText(e.getMessage());
             new Shake(txtSenha).play();
         } catch (NoResultException e) {
-            abrirDialog("Credenciais Inválidas", "Email ou senha inválidos!",Alert.AlertType.ERROR);
+            abrirDialog("Credenciais Invï¿½lidas", "Email ou senha invï¿½lidos!",Alert.AlertType.ERROR);
         }
     }
 

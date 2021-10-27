@@ -8,7 +8,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import model.Pedido;
-import util.CurrencyField;
+import utils.CurrencyField;
 
 import java.net.URL;
 import java.util.ResourceBundle;

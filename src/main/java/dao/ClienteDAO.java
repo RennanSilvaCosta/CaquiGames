@@ -1,15 +1,16 @@
 package dao;
 
+import exceptions.ValidaCPFException;
 import model.Cliente;
+import utils.ValidaCPF;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.TypedQuery;
+import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
 
 public class ClienteDAO {
+
+    ValidaCPF validaCPF = new ValidaCPF();
 
     private static EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("caqui");
     private static EntityManager entityManager = entityManagerFactory.createEntityManager();
@@ -28,20 +29,6 @@ public class ClienteDAO {
         return typedQuery.getResultList();
     }
 
-    public Cliente buscaClienteCPF(String cpf) {
-        String getClientePorCPF = "select c from Cliente c where cpf = :cpf";
-        TypedQuery<Cliente> typedQuery = entityManager
-                .createQuery(getClientePorCPF, Cliente.class)
-                .setParameter("cpf", cpf);
-        List<Cliente> resultList = typedQuery.getResultList();
-        if (Objects.isNull(resultList) || resultList.isEmpty()) {
-            return null;
-        }
-        else {
-            return resultList.get(0);
-        }
-    }
-
     public List<Cliente> getClientesPorNome(String str) {
         String getClientesPorNome = "SELECT c FROM Cliente c WHERE c.nome LIKE :str";
         TypedQuery<Cliente> typedQuery = entityManager
@@ -52,7 +39,7 @@ public class ClienteDAO {
     }
     
     public void deletaCliente(String cpf) {
-        Cliente cliente = entityManager.find(Cliente.class, buscaClienteCPF(cpf));
+        Cliente cliente = entityManager.find(Cliente.class, validaCPF.buscaClientePorCPF(cpf));
         entityManager.getTransaction().begin();
         entityManager.remove(cliente);
         entityManager.getTransaction().commit();
@@ -65,7 +52,14 @@ public class ClienteDAO {
     }
 
     public boolean isClienteExiste(String cpf) {
-        return !Objects.isNull(buscaClienteCPF(cpf));
+        new Cliente();
+        Cliente c;
+        c = validaCPF.buscaClientePorCPF( cpf );
+        if( Objects.isNull( c ) ) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
 }
