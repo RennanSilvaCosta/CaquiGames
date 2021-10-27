@@ -15,15 +15,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 import javafx.util.Duration;
-import model.Funcionario;
-import model.ItemPedido;
 import model.Pedido;
-import session.UserSession;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 
 
@@ -32,7 +29,11 @@ public class ControllerPagamentoScreen implements Initializable {
     static Pedido pedido;
 
     @FXML
-    private JFXButton btnDinheiro, btnCartaoCredito;
+    JFXButton btnDinheiro;
+    @FXML
+    JFXButton btnCartaoCredito;
+    @FXML
+    JFXButton btnSair;
 
     @FXML
     private AnchorPane container;
@@ -45,19 +46,18 @@ public class ControllerPagamentoScreen implements Initializable {
 
         btnCartaoCredito.setGraphic(new ImageView(new Image("/icons/cartao-credito.png")));
         btnCartaoCredito.setGraphicTextGap(20.0);
-
     }
 
     @FXML
-    private void abrirFinalizarPedido(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/view/FecharPedidoScreen.fxml"));
+    private void abrirFinalizarPedidoDinheiro(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/view/FecharPedidoDinheiroScreen.fxml"));
         Scene scene = btnDinheiro.getScene();
         root.translateXProperty().set(scene.getWidth());
 
         StackPane parentContainer = (StackPane) btnDinheiro.getScene().getRoot();
 
         pedido.setFormaPagamento("Dinheiro");
-        ControllerFecharPedido controller = new ControllerFecharPedido();
+        ControllerFecharPedidoDinheiroScreen controller = new ControllerFecharPedidoDinheiroScreen();
 
         parentContainer.getChildren().add(root);
 
@@ -65,15 +65,42 @@ public class ControllerPagamentoScreen implements Initializable {
         KeyValue kv = new KeyValue(root.translateXProperty(), 0, Interpolator.EASE_IN);
         KeyFrame kf = new KeyFrame(Duration.millis(800), kv);
         timeline.getKeyFrames().add(kf);
-        timeline.setOnFinished(t -> {
-            parentContainer.getChildren().remove(container);
-        });
+        timeline.setOnFinished(t -> parentContainer.getChildren().remove(container));
         controller.getPedido(pedido);
         timeline.play();
     }
 
+    @FXML
+    private void abrirFinalizarPedidoCartao(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/view/FecharPedidoCartaoScreen.fxml"));
+        Scene scene = btnDinheiro.getScene();
+        root.translateXProperty().set(scene.getWidth());
+
+        StackPane parentContainer = (StackPane) btnDinheiro.getScene().getRoot();
+
+        pedido.setFormaPagamento("Cartão");
+        pedido.setQtdParcelas(1);
+        ControllerFecharPedidoCartaoScreen controller = new ControllerFecharPedidoCartaoScreen();
+
+        parentContainer.getChildren().add(root);
+
+        Timeline timeline = new Timeline();
+        KeyValue kv = new KeyValue(root.translateXProperty(), 0, Interpolator.EASE_IN);
+        KeyFrame kf = new KeyFrame(Duration.millis(800), kv);
+        timeline.getKeyFrames().add(kf);
+        timeline.setOnFinished(t -> parentContainer.getChildren().remove(container));
+        controller.getPedido(pedido);
+        timeline.play();
+    }
+
+    @FXML
+    private void fecharJanela() {
+        Stage stage = (Stage) btnSair.getScene().getWindow();
+        stage.close();
+    }
+
     public void getPedido(Pedido pedido) {
-       this.pedido = pedido ;
+        ControllerPagamentoScreen.pedido = pedido ;
     }
 
 }

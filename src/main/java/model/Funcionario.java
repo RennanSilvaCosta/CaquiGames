@@ -19,17 +19,17 @@ public class Funcionario {
     private String nome;
 
     @NotNull
-    @Column(length = 11)
+    @Column(length = 15)
     private String cpf;
 
-    @Column(length = 11)
+    @Column(length = 14)
     private String telefone;
 
     @Column(name = "data_nasc")
     private LocalDate dataNasc;
 
     @NotNull
-    @Column(length = 100)
+    @Column(length = 100, unique = true)
     private String email;
 
     @NotNull

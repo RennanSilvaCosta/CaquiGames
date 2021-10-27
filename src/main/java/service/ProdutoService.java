@@ -1,7 +1,7 @@
 package service;
 
-import model.Produto;
 import dao.ProdutoDAO;
+import model.Produto;
 
 import java.util.List;
 
@@ -33,4 +33,11 @@ public class ProdutoService {
         produtoDAO.deletaProduto(descricao);
     }
 
+    public void subtraiEstoque(Produto produto) {
+        produtoDAO.subtraiEstoque(produto);
+    }
+
+    public List<Produto> buscarProdutoParaVenda() {
+        return produtoDAO.litarProdutosParaVenda();
+    }
 }

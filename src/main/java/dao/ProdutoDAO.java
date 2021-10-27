@@ -6,7 +6,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
-import java.lang.reflect.Type;
 import java.util.List;
 
 public class ProdutoDAO {
@@ -53,6 +52,15 @@ public class ProdutoDAO {
         return nomesProdutos;
     }
 
+    public List<Produto> litarProdutosParaVenda() {
+        entityManager.getTransaction().begin();
+        String jpql = "select p from Produto p where quantidade_estoque > 0";
+        TypedQuery<Produto> typedQuery = entityManager.createQuery(jpql, Produto.class);
+        List<Produto> nomesProdutos = typedQuery.getResultList();
+        entityManager.getTransaction().commit();
+        return nomesProdutos;
+    }
+
     public void editaProduto(Produto produto) {
         entityManager.getTransaction().begin();
         entityManager.merge(produto);
@@ -63,6 +71,12 @@ public class ProdutoDAO {
         Produto produto = entityManager.find(Produto.class, buscaProduto(descricao));
         entityManager.getTransaction().begin();
         entityManager.remove(produto);
+        entityManager.getTransaction().commit();
+    }
+
+    public void subtraiEstoque(Produto produto) {
+        entityManager.getTransaction().begin();
+        entityManager.merge(produto);
         entityManager.getTransaction().commit();
     }
 }

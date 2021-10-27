@@ -5,17 +5,20 @@ import animatefx.animation.FadeInDown;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTextField;
+import exceptions.CarrinhoVazioException;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -30,6 +33,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
+import static util.Helper.abrirDialog;
 import static util.Helper.formataValor;
 
 public class ControllerVendaScreen implements Initializable {
@@ -43,15 +47,27 @@ public class ControllerVendaScreen implements Initializable {
     public static Label txtValorTotalStatic;
 
     @FXML
-    private Label txtQuantidadeItens, txtValorDesconto, txtValorTotal;
+    Label txtQuantidadeItens;
     @FXML
-    private JFXButton btnFecharPedido, btnAdicionarProduto, btnSair;
+    Label txtValorDesconto;
+    @FXML
+    Label txtValorTotal;
+
+    @FXML
+    private JFXButton btnFecharPedido;
+    @FXML
+    private JFXButton btnAdicionarProduto;
+    @FXML
+    private JFXButton btnSair;
+
     @FXML
     private AnchorPane anchorRoot;
     @FXML
     private StackPane parentContainer;
+
     @FXML
     private JFXListView<ItemPedido> listaProdutos;
+
     @FXML
     private JFXTextField txtAdicionarProduto;
 
@@ -62,13 +78,28 @@ public class ControllerVendaScreen implements Initializable {
     }
 
     @FXML
-    private void abrirFormaPagamento(ActionEvent event) throws IOException {
+    private void fecharPedido() {
+        try {
+            if (listaItens.isEmpty()) {
+                abrirFormaPagamento();
+            } else {
+                throw new CarrinhoVazioException();
+            }
+        } catch (IOException e) {
+            abrirDialog("Ops","Algo deu errado, tente novamente mais tarde.", Alert.AlertType.ERROR);
+        } catch (CarrinhoVazioException e) {
+            abrirDialog("Carrinho vazio", e.getMessage(), Alert.AlertType.ERROR);
+        }
+    }
+
+    private void abrirFormaPagamento() throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/PagamentoScreen.fxml"));
         Scene scene = btnFecharPedido.getScene();
 
         ControllerPagamentoScreen controller = new ControllerPagamentoScreen();
         Pedido p = new Pedido();
         p.setValorTotal(valorTotal);
+        p.setSubTotal(valorTotal);
         p.setQuantidadeItens(listaItens.size());
         p.setItens(listaItens);
         controller.getPedido(p);
@@ -80,9 +111,7 @@ public class ControllerVendaScreen implements Initializable {
         KeyValue kv = new KeyValue(root.translateXProperty(), 0, Interpolator.EASE_IN);
         KeyFrame kf = new KeyFrame(Duration.millis(800), kv);
         timeline.getKeyFrames().add(kf);
-        timeline.setOnFinished(t -> {
-            parentContainer.getChildren().remove(anchorRoot);
-        });
+        timeline.setOnFinished(t -> parentContainer.getChildren().remove(anchorRoot));
         timeline.play();
     }
 
@@ -112,7 +141,7 @@ public class ControllerVendaScreen implements Initializable {
     }
 
     private void inicializaListaProdutos() {
-        produtos = ps.buscaListaProdutos();
+        produtos = ps.buscarProdutoParaVenda();
         TextFields.bindAutoCompletion(txtAdicionarProduto, produtos).setPrefWidth(660);
     }
 
@@ -130,5 +159,14 @@ public class ControllerVendaScreen implements Initializable {
         valorTotal = 0;
         Stage stage = (Stage) btnSair.getScene().getWindow();
         stage.close();
+    }
+
+    @FXML
+    private void keyPressed(KeyEvent evt) {
+        if (evt.getCode() == KeyCode.ENTER || evt.getCode() == KeyCode.F3) {
+            adicionarItemCarrinho();
+        } else if (evt.getCode() == KeyCode.F8) {
+            fecharPedido();
+        }
     }
 }

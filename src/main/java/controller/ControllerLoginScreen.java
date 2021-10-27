@@ -15,6 +15,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
@@ -27,6 +29,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import static util.Helper.abrirDialog;
+
 public class ControllerLoginScreen implements Initializable {
 
     private double xOffset = 0;
@@ -34,21 +38,29 @@ public class ControllerLoginScreen implements Initializable {
 
     FuncionarioService funcionarioService = new FuncionarioService();
 
-    @FXML
-    JFXButton btnSair, btnLogar;
-
+    //TextFields
     @FXML
     JFXTextField txtEmail;
 
+    //TextPassword
     @FXML
     JFXPasswordField txtSenha;
 
+    //Botoes
     @FXML
-    Label txtErrorEmail, txtErrorSenha;
+    JFXButton btnSair;
+    @FXML
+    JFXButton btnLogar;
+
+    //Labels
+    @FXML
+    Label txtErrorEmail;
+    @FXML
+    Label txtErrorSenha;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        // TODO document why this method is empty
     }
 
     public void logar() {
@@ -71,10 +83,7 @@ public class ControllerLoginScreen implements Initializable {
             txtErrorSenha.setText(e.getMessage());
             new Shake(txtSenha).play();
         } catch (NoResultException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Credenciais Inválidas");
-            alert.setContentText("Email ou senha inválidos!");
-            alert.showAndWait();
+            abrirDialog("Credenciais Inválidas", "Email ou senha inválidos!",Alert.AlertType.ERROR);
         }
     }
 
@@ -90,7 +99,6 @@ public class ControllerLoginScreen implements Initializable {
             Stage stage = new Stage();
             Scene scene = new Scene(parent);
             scene.setFill(Color.TRANSPARENT);
-            //stage.getIcons().add(new Image(""));
             stage.initStyle(StageStyle.TRANSPARENT);
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setScene(scene);
@@ -113,12 +121,7 @@ public class ControllerLoginScreen implements Initializable {
                 stage.setOpacity(0.7);
             });
 
-            scene.setOnMouseReleased(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent mouseEvent) {
-                    stage.setOpacity(1);
-                }
-            });
+            scene.setOnMouseReleased(mouseEvent -> stage.setOpacity(1));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -127,6 +130,13 @@ public class ControllerLoginScreen implements Initializable {
     public void fecharJanela() {
         Stage stage = (Stage) btnSair.getScene().getWindow();
         stage.close();
+    }
+
+    @FXML
+    private void keyPressed(KeyEvent evt) {
+        if (evt.getCode() == KeyCode.ENTER) {
+            logar();
+        }
     }
 
 }

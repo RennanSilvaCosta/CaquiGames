@@ -13,7 +13,6 @@ import service.ClienteService;
 
 import java.net.URL;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -25,17 +24,39 @@ public class ControllerClienteCadastroScreen implements Initializable {
     Endereco end = new Endereco();
     ClienteService clienteService = new ClienteService();
 
-    private List<Cliente> clientes = new ArrayList<>();
+    @FXML
+    JFXButton btnSair;
+    @FXML
+    JFXButton btnSalvarCliente;
 
     @FXML
-    JFXButton btnSair, btnSalvarCliente;
-
+    JFXTextField txtCpf;
     @FXML
-    JFXTextField txtNome, txtCpf, txtEmail, txtDataNascimento, txtCelular, txtCep, txtEstado, txtCidade, txtBairro, txtLogradouro, txtNumero, txtComplemento;
+    JFXTextField txtNome;
+    @FXML
+    JFXTextField txtEmail;
+    @FXML
+    JFXTextField txtDataNascimento;
+    @FXML
+    JFXTextField txtCelular;
+    @FXML
+    JFXTextField txtCep;
+    @FXML
+    JFXTextField txtEstado;
+    @FXML
+    JFXTextField txtCidade;
+    @FXML
+    JFXTextField txtBairro;
+    @FXML
+    JFXTextField txtLogradouro;
+    @FXML
+    JFXTextField txtNumero;
+    @FXML
+    JFXTextField txtComplemento;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        // TODO document why this method is empty
     }
 
     public void getInfoCliente(Cliente cliente) {
@@ -66,12 +87,12 @@ public class ControllerClienteCadastroScreen implements Initializable {
     }
 
     private void atualizaListaClientes() {
-        clientes = clienteService.buscaTodosClientes();
+        List<Cliente> clientes = clienteService.buscaTodosClientes();
         ControllerClienteScreen.listaClienteStatic.getItems().clear();
         for (Cliente c : clientes) {
             ControllerClienteScreen.listaClienteStatic.getItems().add(c);
         }
-        ControllerClienteScreen.listaClienteStatic.setCellFactory(cliente -> new AdapterListCliente());
+        ControllerClienteScreen.listaClienteStatic.setCellFactory(cli -> new AdapterListCliente());
     }
 
     private void populaCliente() {
@@ -93,12 +114,12 @@ public class ControllerClienteCadastroScreen implements Initializable {
 
     public void buscaCep() {
         if (txtCep.getText().charAt(8) != '_') {
-            EnderecoDTO end = buscaEnderecoViaCep(txtCep.getText());
-            if (end != null) {
-                txtLogradouro.setText(end.getLogradouro());
-                txtBairro.setText(end.getBairro());
-                txtCidade.setText(end.getLocalidade());
-                txtEstado.setText(end.getUf());
+            EnderecoDTO dto = buscaEnderecoViaCep(txtCep.getText());
+            if (dto != null) {
+                txtLogradouro.setText(dto.getLogradouro());
+                txtBairro.setText(dto.getBairro());
+                txtCidade.setText(dto.getLocalidade());
+                txtEstado.setText(dto.getUf());
             }
         }
     }

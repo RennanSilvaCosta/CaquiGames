@@ -13,17 +13,17 @@ import java.util.ResourceBundle;
 public class ControllerRelatorioScreen implements Initializable {
 
     @FXML
-    JFXButton btnRelatorioSintetico, btnRelatorioAnalitico, btnSair;
+    JFXButton btnRelatorioSintetico;
+    @FXML
+    JFXButton btnRelatorioAnalitico;
+    @FXML
+    JFXButton btnSair;
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
-
-
         btnRelatorioSintetico.setGraphic(new ImageView(new Image("/icons/btn_relatorio_sintetico.png")));
         btnRelatorioAnalitico.setGraphic(new ImageView(new Image("/icons/btn_relatorio_analitico.png")));
-
     }
 
     public void fecharJanela() {

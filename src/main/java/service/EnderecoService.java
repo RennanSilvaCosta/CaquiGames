@@ -1,6 +1,5 @@
 package service;
 
-import dao.ClienteDAO;
 import dao.EnderecoDAO;
 import model.Endereco;
 

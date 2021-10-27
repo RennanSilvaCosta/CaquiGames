@@ -45,13 +45,7 @@ public class CurrencyField extends JFXTextField {
         });
 
         // Listen the text's changes
-        textProperty().addListener(new ChangeListener<String>() {
-
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                formatText(newValue);
-            }
-        });
+        textProperty().addListener((observable, oldValue, newValue) -> formatText(newValue));
     }
 
     /**

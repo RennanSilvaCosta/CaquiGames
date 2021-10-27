@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import util.*?>
+
+<DialogPane expanded="true" prefHeight="350.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/11.0.1" onKeyPressed="#keyPressed" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerDialogDesconto">
+    <content>
+        <Pane prefHeight="350.0" prefWidth="500.0" style="-fx-background-radius: 20 20 20 20;">
+         <CurrencyField fx:id="txtDescontoReais" alignment="CENTER_RIGHT" focusColor="#ff6800" layoutX="34.0" layoutY="117.0" onKeyReleased="#calculaPorcentagemDesconto" prefHeight="40.0" prefWidth="420.0" unFocusColor="#ff7c00">
+            <font>
+               <Font name="Ebrima" size="14.0" />
+            </font></CurrencyField>
+         <Label layoutX="34.0" layoutY="98.0" text="Desconto em R$">
+            <font>
+               <Font name="Ebrima" size="13.0" />
+            </font>
+         </Label>
+         <Label layoutX="34.0" layoutY="172.0" text="Desconto em %">
+            <font>
+               <Font name="Ebrima" size="13.0" />
+            </font>
+         </Label>
+         <JFXTextField fx:id="txtDescontoPorcentagem" disable="true" focusColor="#ff6800" layoutX="34.0" layoutY="191.0" prefHeight="40.0" prefWidth="420.0" unFocusColor="#ff7c00" />
+         <JFXButton fx:id="btnCancelar" layoutX="244.0" layoutY="271.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="100.0" text="CANCELAR" textFill="#575757">
+            <font>
+               <Font name="Ebrima" size="13.0" />
+            </font></JFXButton>
+         <JFXButton fx:id="btnSalvarDesconto" layoutX="349.0" layoutY="271.0" mnemonicParsing="false" onAction="#salvarDesconto" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #FF6800;" text="SALVAR" textFill="WHITE">
+            <font>
+               <Font name="Ebrima" size="13.0" />
+            </font>
+         </JFXButton>
+         <Label layoutX="34.0" layoutY="47.0" text="Descontos">
+            <font>
+               <Font name="Ebrima" size="18.0" />
+            </font>
+         </Label>
+        </Pane>
+    </content>
+    <ButtonType fx:constant="OK" />
+</DialogPane>

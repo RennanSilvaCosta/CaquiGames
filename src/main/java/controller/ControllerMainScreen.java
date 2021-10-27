@@ -3,14 +3,14 @@ package controller;
 import animatefx.animation.FadeInDown;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
-import javafx.event.EventHandler;
+import exceptions.OpcaoInvalidaException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import model.Funcionario;
 import session.UserSession;
+import util.Helper;
 
 import java.io.IOException;
 import java.net.URL;
@@ -33,9 +34,15 @@ public class ControllerMainScreen implements Initializable {
     @FXML
     private JFXListView<Label> listViewMainMenu = new JFXListView<>();
 
+    //Paineis
     @FXML
-    Pane paneTotalVendido, paneTotalPedidos, paneProdutoEstoque;
+    Pane paneTotalVendido;
+    @FXML
+    Pane paneTotalPedidos;
+    @FXML
+    Pane paneProdutoEstoque;
 
+    //Labels
     @FXML
     Label txtSaudacao;
 
@@ -62,22 +69,28 @@ public class ControllerMainScreen implements Initializable {
     }
 
     public void clickItemList() {
-        switch (listViewMainMenu.getSelectionModel().getSelectedItem().getText()) {
-            case "Vendas":
-                abreTela("/view/VendaScreen.fxml", null);
-                break;
+        try {
+            switch (listViewMainMenu.getSelectionModel().getSelectedItem().getText()) {
+                case "Vendas":
+                    abreTela("/view/VendaScreen.fxml", null);
+                    break;
 
-            case "Cadastro de Produtos":
-                abreTela("/view/ProdutoScreen.fxml", null);
-                break;
+                case "Cadastro de Produtos":
+                    abreTela("/view/ProdutoScreen.fxml", null);
+                    break;
 
-            case "Cadastros de Clientes":
-                abreTela("/view/ClienteScreen.fxml", null);
-                break;
+                case "Cadastros de Clientes":
+                    abreTela("/view/ClienteScreen.fxml", null);
+                    break;
 
-            case "Relatórios":
-                abreTela("/view/RelatorioScreen.fxml", null);
-                break;
+                case "Relatórios":
+                    abreTela("/view/RelatorioScreen.fxml", null);
+                    break;
+                default:
+                    throw new OpcaoInvalidaException();
+            }
+        } catch (OpcaoInvalidaException e) {
+            Helper.abrirDialog("Ops", e.getMessage(), Alert.AlertType.ERROR);
         }
     }
 
@@ -89,7 +102,6 @@ public class ControllerMainScreen implements Initializable {
             Stage stage = new Stage();
             Scene scene = new Scene(parent);
             scene.setFill(Color.TRANSPARENT);
-            //stage.getIcons().add(new Image(""));
             stage.initStyle(StageStyle.TRANSPARENT);
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setScene(scene);
@@ -112,12 +124,7 @@ public class ControllerMainScreen implements Initializable {
                 stage.setOpacity(0.7);
             });
 
-            scene.setOnMouseReleased(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent mouseEvent) {
-                    stage.setOpacity(1);
-                }
-            });
+            scene.setOnMouseReleased(mouseEvent -> stage.setOpacity(1));
         } catch (IOException e) {
             e.printStackTrace();
         }

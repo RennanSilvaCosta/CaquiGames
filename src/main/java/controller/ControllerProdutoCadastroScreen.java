@@ -7,7 +7,6 @@ import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.stage.Stage;
-import model.Categoria;
 import model.Produto;
 import service.ProdutoService;
 import util.CurrencyField;
@@ -21,24 +20,31 @@ public class ControllerProdutoCadastroScreen implements Initializable {
 
     List<Produto> produtos = new ArrayList<>();
     ProdutoService produtoService = new ProdutoService();
-    Categoria categoria = new Categoria();
     Produto produto = new Produto();
-
-    @FXML
-    JFXButton btnSair, btnSalvarProduto;
 
     @FXML
     CurrencyField txtValor;
 
     @FXML
-    JFXTextField txtNome, txtMarca, txtQtdEstoque;
-
-    @FXML
     JFXTextArea txtDescricao;
+
+    //Botoes
+    @FXML
+    JFXButton btnSair;
+    @FXML
+    JFXButton btnSalvarProduto;
+
+    //TextFields
+    @FXML
+    JFXTextField txtNome;
+    @FXML
+    JFXTextField txtMarca;
+    @FXML
+    JFXTextField txtQtdEstoque;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        // TODO document why this method is empty
     }
 
     public void getInfoProduto(Produto produto) {
