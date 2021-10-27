@@ -10,8 +10,6 @@ import java.util.Objects;
 
 public class FuncionarioDAO {
 
-    ValidaCPF validaCPF = new ValidaCPF();
-
     private static EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("caqui");
     private static EntityManager entityManager = entityManagerFactory.createEntityManager();
 
@@ -39,7 +37,7 @@ public class FuncionarioDAO {
     }
 
     public void deletaFuncionario(String cpf) {
-        Funcionario funcionario = entityManager.find(Funcionario.class, validaCPF.buscaFuncionarioPorCPF(cpf));
+        Funcionario funcionario = entityManager.find(Funcionario.class, buscaFuncionarioPorCPF(cpf));
         entityManager.getTransaction().begin();
         entityManager.remove(funcionario);
         entityManager.getTransaction().commit();
@@ -61,7 +59,18 @@ public class FuncionarioDAO {
     }
 
     public boolean isFuncionarioExiste(String cpf) {
-        return !Objects.isNull(validaCPF.buscaFuncionarioPorCPF(cpf));
+        new Funcionario();
+        Funcionario f;
+        f = buscaFuncionarioPorCPF(cpf);
+        return Objects.isNull( f );
+    }
+
+    public Funcionario buscaFuncionarioPorCPF( String cpf ) throws NoResultException {
+        String getFuncionarioPorCPF = "SELECT f FROM Funcionario f WHERE cpf = :cpf";
+        TypedQuery< Funcionario > typedQuery = entityManager
+                .createQuery( getFuncionarioPorCPF, Funcionario.class )
+                .setParameter( "cpf", cpf );
+        return typedQuery.getSingleResult();
     }
 
 }

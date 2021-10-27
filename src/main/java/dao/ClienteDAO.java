@@ -1,16 +1,15 @@
 package dao;
 
-import exceptions.ValidaCPFException;
 import model.Cliente;
-import utils.ValidaCPF;
 
-import javax.persistence.*;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
 import java.util.List;
 import java.util.Objects;
 
 public class ClienteDAO {
-
-    ValidaCPF validaCPF = new ValidaCPF();
 
     private static EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("caqui");
     private static EntityManager entityManager = entityManagerFactory.createEntityManager();
@@ -39,7 +38,7 @@ public class ClienteDAO {
     }
     
     public void deletaCliente(String cpf) {
-        Cliente cliente = entityManager.find(Cliente.class, validaCPF.buscaClientePorCPF(cpf));
+        Cliente cliente = entityManager.find(Cliente.class, buscaClientePorCPF(cpf));
         entityManager.getTransaction().begin();
         entityManager.remove(cliente);
         entityManager.getTransaction().commit();
@@ -54,12 +53,16 @@ public class ClienteDAO {
     public boolean isClienteExiste(String cpf) {
         new Cliente();
         Cliente c;
-        c = validaCPF.buscaClientePorCPF( cpf );
-        if( Objects.isNull( c ) ) {
-            return false;
-        } else {
-            return true;
-        }
+        c = buscaClientePorCPF( cpf );
+        return Objects.isNull( c );
+    }
+
+    public Cliente buscaClientePorCPF( String cpf ) {
+        String getClientePorCPF = "SELECT c FROM Cliente c WHERE cpf = :cpf";
+        TypedQuery< Cliente > typedQuery = entityManager
+                .createQuery( getClientePorCPF, Cliente.class )
+                .setParameter( "cpf", cpf );
+        return typedQuery.getSingleResult();
     }
 
 }

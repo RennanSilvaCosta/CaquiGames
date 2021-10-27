@@ -1,7 +1,6 @@
 package service;
 
 import dao.ClienteDAO;
-import enums.MessagesExceptions;
 import exceptions.ValidaCPFException;
 import model.Cliente;
 import utils.ValidaCPF;
@@ -19,26 +18,18 @@ public class ClienteService {
         boolean cpfValid = isCPFValid( cliente.getCpf() );
         boolean cpfDoesNotExists = isCPFExiste( cliente.getCpf() );
 
-        if( cpfValid && cpfDoesNotExists ) {
+        if( cpfValid && !cpfDoesNotExists ) {
             clienteDAO.criaCliente( cliente );
-        }
+        } //Falta um else ??? Rever..
 
     }
 
-    private boolean isCPFValid( String cpf ) {
-        boolean b = validaCPF.isCPFValido( cpf );
-        if( !b ) {
-            throw new ValidaCPFException( MessagesExceptions.CPF_INVALIDO );
-        }
-        return true;
+    private boolean isCPFValid( String cpf ) throws ValidaCPFException {
+        return validaCPF.isCPFValido( cpf );
     }
 
-    private boolean isCPFExiste( String cpf ) {
-        boolean b = clienteDAO.isClienteExiste( cpf );
-        if( b ) {
-            throw new ValidaCPFException( MessagesExceptions.CPF_JA_CADASTRADO );
-        }
-        return false;
+    private boolean isCPFExiste( String cpf ) throws ValidaCPFException {
+        return clienteDAO.isClienteExiste( cpf );
     }
 
     public List<Cliente> buscaTodosClientes() {
