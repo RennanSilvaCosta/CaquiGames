@@ -2,13 +2,11 @@ package service;
 
 import dao.ClienteDAO;
 import enums.MessagesExceptions;
-import exceptions.ClienteJaExisteException;
 import exceptions.ValidaCPFException;
 import model.Cliente;
 import utils.ValidaCPF;
 
 import java.util.List;
-import java.util.Objects;
 
 public class ClienteService {
 
