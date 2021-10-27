@@ -32,8 +32,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import static util.Helper.abrirDialog;
-import static util.Helper.formataValor;
+import static utils.Helper.abrirDialog;
+import static utils.Helper.formataValor;
 
 public class ControllerFecharPedidoCartaoScreen implements Initializable {
 

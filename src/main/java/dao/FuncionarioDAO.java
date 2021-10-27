@@ -2,6 +2,7 @@ package dao;
 
 import dto.FuncionarioDTO;
 import model.Funcionario;
+import utils.ValidaCPF;
 
 import javax.persistence.*;
 import java.util.List;
@@ -17,19 +18,6 @@ public class FuncionarioDAO {
         entityManager.persist(funcionario.getEndereco());
         entityManager.persist(funcionario);
         entityManager.getTransaction().begin();
-    }
-
-    public Funcionario buscaFuncionarioCPF(String cpf) {
-        String getFuncionarioPorCPF = "SELECT f FROM Funcionario f where cpf = :cpf";
-        TypedQuery<Funcionario> typedQuery = entityManager
-                .createQuery(getFuncionarioPorCPF, Funcionario.class)
-                .setParameter("cpf", cpf);
-        List<Funcionario> resultList = typedQuery.getResultList();
-        if (Objects.isNull(resultList) || resultList.isEmpty()) {
-            return null;
-        } else {
-            return resultList.get(0);
-        }
     }
 
     public List<Funcionario> buscaTodosFuncionarios() {
@@ -49,7 +37,7 @@ public class FuncionarioDAO {
     }
 
     public void deletaFuncionario(String cpf) {
-        Funcionario funcionario = entityManager.find(Funcionario.class, buscaFuncionarioCPF(cpf));
+        Funcionario funcionario = entityManager.find(Funcionario.class, buscaFuncionarioPorCPF(cpf));
         entityManager.getTransaction().begin();
         entityManager.remove(funcionario);
         entityManager.getTransaction().commit();
@@ -71,7 +59,18 @@ public class FuncionarioDAO {
     }
 
     public boolean isFuncionarioExiste(String cpf) {
-        return !Objects.isNull(buscaFuncionarioCPF(cpf));
+        new Funcionario();
+        Funcionario f;
+        f = buscaFuncionarioPorCPF(cpf);
+        return Objects.isNull( f );
+    }
+
+    public Funcionario buscaFuncionarioPorCPF( String cpf ) throws NoResultException {
+        String getFuncionarioPorCPF = "SELECT f FROM Funcionario f WHERE cpf = :cpf";
+        TypedQuery< Funcionario > typedQuery = entityManager
+                .createQuery( getFuncionarioPorCPF, Funcionario.class )
+                .setParameter( "cpf", cpf );
+        return typedQuery.getSingleResult();
     }
 
 }

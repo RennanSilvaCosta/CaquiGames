@@ -7,12 +7,12 @@ import javafx.scene.control.Alert;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
-import util.CurrencyField;
+import utils.CurrencyField;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import static util.Helper.abrirDialog;
+import static utils.Helper.abrirDialog;
 
 public class ControllerDialogValorRecebido implements Initializable {
 
@@ -40,7 +40,7 @@ public class ControllerDialogValorRecebido implements Initializable {
     @FXML
     private void salvarValorRecebido() {
         if (txtValorRecebido.getAmount() < valorRecebido) {
-            abrirDialog("Valor inválido", "O valor recebido não pode ser menor que o valor total do pedido!", Alert.AlertType.ERROR);
+            abrirDialog("Valor invÃ¡lido", "O valor recebido nÃ£o pode ser menor que o valor total do pedido!", Alert.AlertType.ERROR);
         } else {
             ControllerFecharPedidoDinheiroScreen c = new ControllerFecharPedidoDinheiroScreen();
             c.setValorRecebido(txtValorRecebido.getAmount());

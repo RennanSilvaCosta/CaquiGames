@@ -4,7 +4,7 @@ import dto.FuncionarioDTO;
 import exceptions.EmailInvalidoException;
 import exceptions.SenhaInvalidaException;
 
-import static util.Constante.REGEX_EMAIL;
+import static utils.Constante.REGEX_EMAIL;
 
 public class Validate {
 

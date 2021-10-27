@@ -1,34 +1,39 @@
 package service;
 
 import dao.ClienteDAO;
-import exceptions.ClienteJaExisteException;
+import exceptions.ValidaCPFException;
 import model.Cliente;
+import utils.ValidaCPF;
 
 import java.util.List;
-import java.util.Objects;
 
 public class ClienteService {
 
+    ValidaCPF validaCPF = new ValidaCPF();
+
     private ClienteDAO clienteDAO = new ClienteDAO();
 
-    public void cadastraCliente(Cliente cliente) {
+    public void cadastraCliente(Cliente cliente) throws ValidaCPFException {
 
-        boolean isCPFRegistrado = clienteDAO.isClienteExiste(cliente.getCpf());
+        boolean cpfValid = isCPFValid( cliente.getCpf() );
+        boolean cpfDoesNotExists = isCPFExiste( cliente.getCpf() );
 
-        if (Objects.equals(isCPFRegistrado, false)) {
-            clienteDAO.criaCliente(cliente);
-        } else {
-            throw new ClienteJaExisteException();
-        }
+        if( cpfValid && !cpfDoesNotExists ) {
+            clienteDAO.criaCliente( cliente );
+        } //Falta um else ??? Rever..
 
+    }
+
+    private boolean isCPFValid( String cpf ) throws ValidaCPFException {
+        return validaCPF.isCPFValido( cpf );
+    }
+
+    private boolean isCPFExiste( String cpf ) throws ValidaCPFException {
+        return clienteDAO.isClienteExiste( cpf );
     }
 
     public List<Cliente> buscaTodosClientes() {
        return clienteDAO.buscaTodosClientes();
-    }
-
-    public Cliente consultaCliente(String cpf) {
-        return clienteDAO.buscaClienteCPF(cpf);
     }
 
     public List<Cliente> consultaListaClientes(String str) {

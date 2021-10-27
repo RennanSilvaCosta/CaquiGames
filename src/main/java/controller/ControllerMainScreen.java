@@ -18,7 +18,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import model.Funcionario;
 import session.UserSession;
-import util.Helper;
+import utils.Helper;
 
 import java.io.IOException;
 import java.net.URL;

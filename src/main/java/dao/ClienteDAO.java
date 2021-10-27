@@ -28,20 +28,6 @@ public class ClienteDAO {
         return typedQuery.getResultList();
     }
 
-    public Cliente buscaClienteCPF(String cpf) {
-        String getClientePorCPF = "select c from Cliente c where cpf = :cpf";
-        TypedQuery<Cliente> typedQuery = entityManager
-                .createQuery(getClientePorCPF, Cliente.class)
-                .setParameter("cpf", cpf);
-        List<Cliente> resultList = typedQuery.getResultList();
-        if (Objects.isNull(resultList) || resultList.isEmpty()) {
-            return null;
-        }
-        else {
-            return resultList.get(0);
-        }
-    }
-
     public List<Cliente> getClientesPorNome(String str) {
         String getClientesPorNome = "SELECT c FROM Cliente c WHERE c.nome LIKE :str";
         TypedQuery<Cliente> typedQuery = entityManager
@@ -52,7 +38,7 @@ public class ClienteDAO {
     }
     
     public void deletaCliente(String cpf) {
-        Cliente cliente = entityManager.find(Cliente.class, buscaClienteCPF(cpf));
+        Cliente cliente = entityManager.find(Cliente.class, buscaClientePorCPF(cpf));
         entityManager.getTransaction().begin();
         entityManager.remove(cliente);
         entityManager.getTransaction().commit();
@@ -65,7 +51,18 @@ public class ClienteDAO {
     }
 
     public boolean isClienteExiste(String cpf) {
-        return !Objects.isNull(buscaClienteCPF(cpf));
+        new Cliente();
+        Cliente c;
+        c = buscaClientePorCPF( cpf );
+        return Objects.isNull( c );
+    }
+
+    public Cliente buscaClientePorCPF( String cpf ) {
+        String getClientePorCPF = "SELECT c FROM Cliente c WHERE cpf = :cpf";
+        TypedQuery< Cliente > typedQuery = entityManager
+                .createQuery( getClientePorCPF, Cliente.class )
+                .setParameter( "cpf", cpf );
+        return typedQuery.getSingleResult();
     }
 
 }

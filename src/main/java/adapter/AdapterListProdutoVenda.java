@@ -14,7 +14,7 @@ import model.ItemPedido;
 
 import java.io.IOException;
 
-import static util.Helper.formataValor;
+import static utils.Helper.formataValor;
 
 public class AdapterListProdutoVenda extends ListCell<ItemPedido> {
 

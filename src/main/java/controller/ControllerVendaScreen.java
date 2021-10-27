@@ -33,8 +33,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
-import static util.Helper.abrirDialog;
-import static util.Helper.formataValor;
+import static utils.Helper.abrirDialog;
+import static utils.Helper.formataValor;
 
 public class ControllerVendaScreen implements Initializable {
 
