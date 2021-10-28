@@ -4,12 +4,16 @@ import adapter.AdapterListCliente;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import dto.EnderecoDTO;
+import exceptions.CPFInvalidoException;
+import exceptions.CPFJaExisteException;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 import model.Cliente;
 import model.Endereco;
 import service.ClienteService;
+import utils.Helper;
 
 import java.net.URL;
 import java.time.LocalDate;
@@ -75,15 +79,22 @@ public class ControllerClienteCadastroScreen implements Initializable {
     }
 
     public void persistirCliente() {
-        populaEndereco();
-        populaCliente();
-        if (cliente.getId() != null) {
-            clienteService.atualizaCliente(this.cliente);
-        } else {
-            clienteService.cadastraCliente(this.cliente);
+
+        try {
+            populaEndereco();
+            populaCliente();
+            if (cliente.getId() != null) {
+                clienteService.atualizaCliente(this.cliente);
+            } else {
+                clienteService.cadastraCliente(this.cliente);
+            }
+            fecharCadastroCliente();
+            atualizaListaClientes();
+        } catch( CPFJaExisteException | CPFInvalidoException e ) {
+            Helper.abrirDialog( "Ops! Algo deu errado.", e.getMessage(), Alert.AlertType.ERROR );
         }
-        fecharCadastroCliente();
-        atualizaListaClientes();
+
+
     }
 
     private void atualizaListaClientes() {

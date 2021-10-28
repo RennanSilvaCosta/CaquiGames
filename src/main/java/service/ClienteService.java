@@ -1,10 +1,12 @@
 package service;
 
 import dao.ClienteDAO;
-import exceptions.ValidaCPFException;
+import exceptions.CPFInvalidoException;
+import exceptions.CPFJaExisteException;
 import model.Cliente;
 import utils.ValidaCPF;
 
+import javax.persistence.NoResultException;
 import java.util.List;
 
 public class ClienteService {
@@ -13,22 +15,25 @@ public class ClienteService {
 
     private ClienteDAO clienteDAO = new ClienteDAO();
 
-    public void cadastraCliente(Cliente cliente) throws ValidaCPFException {
+    public void cadastraCliente( Cliente cliente ) throws CPFJaExisteException, CPFInvalidoException {
 
-        boolean cpfValid = isCPFValid( cliente.getCpf() );
-        boolean cpfDoesNotExists = isCPFExiste( cliente.getCpf() );
-
-        if( cpfValid && !cpfDoesNotExists ) {
-            clienteDAO.criaCliente( cliente );
-        } //Falta um else ??? Rever..
+        if( isCPFValid( cliente.getCpf() ) ) {
+            if( !isCPFExiste( cliente.getCpf() ) ) {
+                clienteDAO.criaCliente( cliente );
+            } else {
+                throw new CPFJaExisteException();
+            }
+        } else {
+            throw new CPFInvalidoException();
+        }
 
     }
 
-    private boolean isCPFValid( String cpf ) throws ValidaCPFException {
+    private boolean isCPFValid( String cpf ) throws CPFJaExisteException {
         return validaCPF.isCPFValido( cpf );
     }
 
-    private boolean isCPFExiste( String cpf ) throws ValidaCPFException {
+    private boolean isCPFExiste( String cpf ) throws NoResultException, CPFJaExisteException {
         return clienteDAO.isClienteExiste( cpf );
     }
 

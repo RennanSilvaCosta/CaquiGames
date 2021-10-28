@@ -2,12 +2,8 @@ package dao;
 
 import model.Cliente;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.TypedQuery;
+import javax.persistence.*;
 import java.util.List;
-import java.util.Objects;
 
 public class ClienteDAO {
 
@@ -51,13 +47,15 @@ public class ClienteDAO {
     }
 
     public boolean isClienteExiste(String cpf) {
-        new Cliente();
-        Cliente c;
-        c = buscaClientePorCPF( cpf );
-        return Objects.isNull( c );
+        String getClientePorCPF = "SELECT c FROM Cliente c WHERE cpf = :cpf";
+        TypedQuery< Cliente > typedQuery = entityManager
+                .createQuery( getClientePorCPF, Cliente.class )
+                .setParameter( "cpf", cpf );
+        List<Cliente> resultList = typedQuery.getResultList();
+        return !resultList.isEmpty();
     }
 
-    public Cliente buscaClientePorCPF( String cpf ) {
+    public Cliente buscaClientePorCPF( String cpf ) throws NoResultException {
         String getClientePorCPF = "SELECT c FROM Cliente c WHERE cpf = :cpf";
         TypedQuery< Cliente > typedQuery = entityManager
                 .createQuery( getClientePorCPF, Cliente.class )
