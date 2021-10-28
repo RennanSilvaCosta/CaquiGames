@@ -19,8 +19,7 @@ public class Categoria {
 
     }
 
-    public Categoria(Long id, String descricao) {
-        this.id = id;
+    public Categoria(String descricao) {
         this.descricao = descricao;
     }
 
@@ -38,5 +37,10 @@ public class Categoria {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    @Override
+    public String toString() {
+        return descricao;
     }
 }

@@ -1,13 +1,25 @@
 package controller;
 
 import adapter.AdapterListProduto;
+import animatefx.animation.FadeIn;
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
+import javafx.animation.PathTransition;
+import javafx.animation.RotateTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.shape.LineTo;
+import javafx.scene.shape.MoveTo;
+import javafx.scene.shape.Path;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+import model.Categoria;
 import model.Produto;
+import service.CategoriaService;
 import service.ProdutoService;
 import utils.CurrencyField;
 
@@ -20,6 +32,7 @@ public class ControllerProdutoCadastroScreen implements Initializable {
 
     List<Produto> produtos = new ArrayList<>();
     ProdutoService produtoService = new ProdutoService();
+    CategoriaService categoriaService = new CategoriaService();
     Produto produto = new Produto();
 
     @FXML
@@ -28,11 +41,16 @@ public class ControllerProdutoCadastroScreen implements Initializable {
     @FXML
     JFXTextArea txtDescricao;
 
+    @FXML
+    JFXComboBox<Categoria> comboCategoria;
+
     //Botoes
     @FXML
     JFXButton btnSair;
     @FXML
     JFXButton btnSalvarProduto;
+    @FXML
+    JFXButton btnAddCategoria;
 
     //TextFields
     @FXML
@@ -41,10 +59,13 @@ public class ControllerProdutoCadastroScreen implements Initializable {
     JFXTextField txtMarca;
     @FXML
     JFXTextField txtQtdEstoque;
+    @FXML
+    JFXTextField txtCategoria;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        // TODO document why this method is empty
+        btnAddCategoria.setGraphic(new ImageView(new Image("/icons/mais.png")));
+        inicializaComboCategoria();
     }
 
     public void getInfoProduto(Produto produto) {
@@ -82,6 +103,68 @@ public class ControllerProdutoCadastroScreen implements Initializable {
             ControllerProdutoScreen.listaProdutosStatic.getItems().add(p);
         }
         ControllerProdutoScreen.listaProdutosStatic.setCellFactory(cliente -> new AdapterListProduto());
+    }
+
+    @FXML
+    private void addNovaCategoria() {
+        if (!comboCategoria.isDisabled()) {
+            deslizaCategoriaBaixo();
+            ImageView imgView = new ImageView(new Image("/icons/check.png"));
+            new FadeIn(imgView).play();
+            RotateTransition rotateTransition = new RotateTransition(Duration.millis(300), imgView);
+            rotateTransition.setFromAngle(45);
+            rotateTransition.setToAngle(360);
+            rotateTransition.play();
+            btnAddCategoria.setGraphic(imgView);
+            comboCategoria.setDisable(true);
+        } else {
+            deslizaCategoriaCima();
+            ImageView imgView = new ImageView(new Image("/icons/mais.png"));
+            new FadeIn(imgView).play();
+            RotateTransition rotateTransition = new RotateTransition(Duration.millis(300), imgView);
+            rotateTransition.setFromAngle(360);
+            rotateTransition.setToAngle(90);
+            rotateTransition.play();
+            btnAddCategoria.setGraphic(imgView);
+            comboCategoria.setDisable(false);
+
+            String novaCat = txtCategoria.getText();
+
+            if (!novaCat.isBlank()) {
+                categoriaService.cadastrarCategoria(novaCat);
+                inicializaComboCategoria();
+            }
+        }
+        txtCategoria.clear();
+    }
+
+    private void deslizaCategoriaBaixo() {
+        Path path = new Path();
+        path.getElements().add(new MoveTo(120, 46));
+        path.getElements().add(new LineTo(120, 70));
+
+        PathTransition transition = new PathTransition();
+        transition.setNode(txtCategoria);
+        transition.setDuration(Duration.millis(300));
+        transition.setPath(path);
+        transition.play();
+    }
+
+    private void deslizaCategoriaCima() {
+        Path path = new Path();
+        path.getElements().add(new MoveTo(120, 70));
+        path.getElements().add(new LineTo(120, 20));
+
+        PathTransition transition = new PathTransition();
+        transition.setNode(txtCategoria);
+        transition.setDuration(Duration.millis(300));
+        transition.setPath(path);
+        transition.play();
+    }
+
+    private void inicializaComboCategoria() {
+        comboCategoria.getItems().clear();
+        comboCategoria.getItems().addAll(categoriaService.buscaTodasCategoiras());
     }
 
     public void fecharJanela() {
