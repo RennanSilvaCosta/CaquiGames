@@ -80,7 +80,7 @@ public class ControllerVendaScreen implements Initializable {
     @FXML
     private void fecharPedido() {
         try {
-            if (listaItens.isEmpty()) {
+            if (!listaItens.isEmpty()) {
                 abrirFormaPagamento();
             } else {
                 throw new CarrinhoVazioException();

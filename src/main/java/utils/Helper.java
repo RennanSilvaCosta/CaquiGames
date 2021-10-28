@@ -21,6 +21,7 @@ public class Helper {
 
     public static void abrirDialog(String titulo, String mensagem, Alert.AlertType type) {
         Alert alert = new Alert(type);
+        alert.setHeaderText( titulo );
         alert.setTitle(titulo);
         alert.setContentText(mensagem);
         alert.showAndWait();

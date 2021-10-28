@@ -3,10 +3,11 @@ package model;
 import javax.persistence.Embeddable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import java.io.Serializable;
 import java.util.Objects;
 
 @Embeddable
-public class ItemPedidoPK {
+public class ItemPedidoPK implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "id_pedido")
