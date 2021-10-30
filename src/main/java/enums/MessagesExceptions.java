@@ -8,7 +8,9 @@ public enum MessagesExceptions {
     CARRINHO_VAZIO("O carrinho não pode está vazio, adicione ao menos um item!"),
     CLIENTE_NAO_SELECIONADO("Nenhum cliente selecionado, por favor selcione um cliente para poder finalizar a venda!"),
     OPCAO_INVALIDA("Algo deu errado, por favor tente novamente mais tarde!"),
-    CPF_INVALIDO("O CPF digitado é inválido!");
+    CPF_INVALIDO("O CPF digitado é inválido!"),
+    VALOR_INVALIDO("O valor informado é inválido!"),
+    CAMPO_OBRIGATORIO("Preencha os campos obrigatórios!");
 
     private String value;
 

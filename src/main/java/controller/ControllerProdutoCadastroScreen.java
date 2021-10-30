@@ -6,10 +6,13 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
+import exceptions.CampoObrigatorioException;
+import exceptions.ValorInvalidoException;
 import javafx.animation.PathTransition;
 import javafx.animation.RotateTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.LineTo;
@@ -22,11 +25,15 @@ import model.Produto;
 import service.CategoriaService;
 import service.ProdutoService;
 import utils.CurrencyField;
+import utils.Helper;
+import validate.Validate;
 
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+
+import static utils.Helper.abrirDialog;
 
 public class ControllerProdutoCadastroScreen implements Initializable {
 
@@ -78,22 +85,33 @@ public class ControllerProdutoCadastroScreen implements Initializable {
     }
 
     public void persistirProduto() {
-        popularProduto();
-        if (this.produto.getId() != null) {
-            produtoService.atualizaProduto(this.produto);
-        } else {
-            produtoService.cadastraProduto(this.produto);
+        try {
+            popularProduto();
+            if (this.produto.getId() != null) {
+                produtoService.atualizaProduto(this.produto);
+            } else {
+                produtoService.cadastraProduto(this.produto);
+            }
+            fecharJanela();
+            atualizaListaProdutos();
+        }catch (ValorInvalidoException | CampoObrigatorioException e) {
+            abrirDialog("Erro", e.getMessage(), Alert.AlertType.ERROR);
         }
-        fecharJanela();
-        atualizaListaProdutos();
     }
 
-    private void popularProduto() {
+    private void popularProduto() throws ValorInvalidoException, CampoObrigatorioException {
         this.produto.setNome(txtNome.getText());
         this.produto.setDescricao(txtDescricao.getText());
         this.produto.setMarca(txtMarca.getText());
-        this.produto.setQtdEstoque(Integer.parseInt(txtQtdEstoque.getText()));
         this.produto.setValor(txtValor.getAmount());
+        this.produto.setCategoria(comboCategoria.getSelectionModel().getSelectedItem());
+        String qtdEstoque = txtQtdEstoque.getText();
+        if (qtdEstoque.matches("^[0-9]+$")) {
+            this.produto.setQtdEstoque(Integer.parseInt(qtdEstoque));
+        } else {
+            throw new ValorInvalidoException();
+        }
+        Validate.validaFormCadastroProduto(produto);
     }
 
     private void atualizaListaProdutos() {
@@ -165,6 +183,7 @@ public class ControllerProdutoCadastroScreen implements Initializable {
     private void inicializaComboCategoria() {
         comboCategoria.getItems().clear();
         comboCategoria.getItems().addAll(categoriaService.buscaTodasCategoiras());
+        comboCategoria.getSelectionModel().selectLast();
     }
 
     public void fecharJanela() {

@@ -27,8 +27,8 @@
                 <Font name="Ebrima Bold" size="14.0" />
             </font>
         </Label>
-      <JFXTextField fx:id="txtCategoria" focusColor="#ff6800" layoutX="38.0" layoutY="273.0" prefHeight="40.0" prefWidth="240.0" promptText="NOVA CATEGORIA" unFocusColor="#ff7c00" />
-      <Pane layoutX="34.0" layoutY="273.0" prefHeight="50.0" prefWidth="247.0" style="-fx-background-color: #F8F7FC;">
+      <JFXTextField fx:id="txtCategoria" focusColor="#ff6800" layoutX="41.0" layoutY="273.0" prefHeight="40.0" prefWidth="240.0" promptText="NOVA CATEGORIA" unFocusColor="#ff7c00" />
+      <Pane layoutX="37.0" layoutY="273.0" prefHeight="50.0" prefWidth="247.0" style="-fx-background-color: #F8F7FC;">
          <children>
             <JFXComboBox fx:id="comboCategoria" focusColor="#ff6800" layoutX="4.0" layoutY="5.0" prefHeight="40.0" prefWidth="240.0" promptText="CATEGORIA" unFocusColor="#ff7c00" />
          </children></Pane>
