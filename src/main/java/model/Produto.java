@@ -3,11 +3,12 @@ package model;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-public class Produto {
+public class Produto implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

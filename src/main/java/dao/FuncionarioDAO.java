@@ -2,7 +2,6 @@ package dao;
 
 import dto.FuncionarioDTO;
 import model.Funcionario;
-import utils.ValidaCPF;
 
 import javax.persistence.*;
 import java.util.List;

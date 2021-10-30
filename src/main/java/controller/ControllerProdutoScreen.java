@@ -28,7 +28,7 @@ public class ControllerProdutoScreen implements Initializable {
 
     List<Produto> produtos = new ArrayList<>();
     ProdutoService produtoService = new ProdutoService();
-    static JFXListView<Produto> listaProdutosStatic;
+    public static JFXListView<Produto> listaProdutosStatic;
 
     @FXML
     JFXListView<Produto> listaProdutos;
@@ -44,7 +44,7 @@ public class ControllerProdutoScreen implements Initializable {
         inicializaListaProdutos();
     }
 
-    private void inicializaListaProdutos() {
+    public void inicializaListaProdutos() {
         produtos = produtoService.buscaListaProdutos();
         for (Produto p : produtos) {
             listaProdutos.getItems().add(p);

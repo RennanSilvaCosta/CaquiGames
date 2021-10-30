@@ -29,8 +29,8 @@ public class ProdutoService {
         produtoDAO.editaProduto(produto);
     }
 
-    public void excluiProduto(String descricao) {
-        produtoDAO.deletaProduto(descricao);
+    public void excluiProduto(String nome) {
+        produtoDAO.deletaProduto(nome);
     }
 
     public void subtraiEstoque(Produto produto) {

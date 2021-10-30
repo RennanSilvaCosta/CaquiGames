@@ -19,11 +19,11 @@ public class ProdutoDAO {
         entityManager.getTransaction().commit();
     }
 
-    public Produto buscaProduto(String descricao) {
-        String findProdutoUnicoPorNome = "select p from Produto where descricao = ':descricao'";
+    public Produto buscaProduto(String nome) {
+        String findProdutoUnicoPorNome = "SELECT p FROM Produto p WHERE nome = :nome";
         TypedQuery<Produto> typedQuery = entityManager
                 .createQuery(findProdutoUnicoPorNome, Produto.class)
-                .setParameter("descricao", descricao);
+                .setParameter("nome", nome);
         return typedQuery.getSingleResult();
     }
 
@@ -67,8 +67,8 @@ public class ProdutoDAO {
         entityManager.getTransaction().commit();
     }
 
-    public void deletaProduto(String descricao) {
-        Produto produto = entityManager.find(Produto.class, buscaProduto(descricao));
+    public void deletaProduto(String nome) {
+        Produto produto = buscaProduto(nome);
         entityManager.getTransaction().begin();
         entityManager.remove(produto);
         entityManager.getTransaction().commit();
