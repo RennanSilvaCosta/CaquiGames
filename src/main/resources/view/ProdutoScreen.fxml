@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: #F8F7FC; -fx-background-radius: 10 10 10 10;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerProdutoScreen">
+<Pane prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: #F8F7FC; -fx-background-radius: 10 10 10 10;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerProdutoScreen">
     <JFXListView fx:id="listaProdutos" layoutX="43.0" layoutY="214.0" prefHeight="453.0" prefWidth="915.0" style="-fx-background-radius: 10 10 10 10;" />
    <JFXTextField fx:id="txtPesquisarProduto" focusColor="#ffffff00" layoutX="43.0" layoutY="125.0" prefHeight="75.0" prefWidth="677.0" promptText="PESQUISAR PRODUTO" style="-fx-background-color: #FFFFFF; -fx-background-radius: 20 20 20 20;" unFocusColor="#ffffff00" />
    <JFXButton fx:id="btnCadastrarNovoProduto" layoutX="658.0" layoutY="125.0" mnemonicParsing="false" onAction="#abrirCadastroProduto" prefHeight="75.0" prefWidth="300.0" style="-fx-background-color: #FF6800; -fx-background-radius: 20 20 20 20;" text="CADASTRAR NOVO PRODUTO" textFill="WHITE">

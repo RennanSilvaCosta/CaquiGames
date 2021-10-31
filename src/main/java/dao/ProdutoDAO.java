@@ -28,15 +28,15 @@ public class ProdutoDAO {
     }
 
     public List<Produto> getProdutosPorNome(String str) {
-        String findProdutosPorNome = "select distinct p from Produto where descricao like '%:str%' order by nome limit 10";
+        String findProdutosPorNome = "SELECT p FROM Produto p WHERE p.nome LIKE :str OR p.marca LIKE :str";
         TypedQuery<Produto> typedQuery = entityManager
                 .createQuery(findProdutosPorNome, Produto.class)
-                .setParameter("str", str);
+                .setParameter("str", "%" + str + "%");
         return typedQuery.getResultList();
     }
 
     public List<Produto> getProdutosPorMarca(String str) {
-        String findProdutosPorMarca = "select distinct p from Produto where marca like '%:str' order by marca limit 10";
+        String findProdutosPorMarca = "select distinct p from Produto p where marca like % :str order by marca";
         TypedQuery<Produto> typedQuery = entityManager
                 .createQuery(findProdutosPorMarca, Produto.class)
                 .setParameter("str", str);

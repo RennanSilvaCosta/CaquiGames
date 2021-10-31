@@ -3,6 +3,9 @@ package controller;
 import adapter.AdapterListProduto;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
+import com.jfoenix.controls.JFXTextField;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -17,7 +20,6 @@ import service.ProdutoService;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -26,7 +28,6 @@ public class ControllerProdutoScreen implements Initializable {
     private double xOffset = 0;
     private double yOffset = 0;
 
-    List<Produto> produtos = new ArrayList<>();
     ProdutoService produtoService = new ProdutoService();
     public static JFXListView<Produto> listaProdutosStatic;
 
@@ -38,17 +39,23 @@ public class ControllerProdutoScreen implements Initializable {
     @FXML
     JFXButton btnCadastrarNovoProduto;
 
+    @FXML
+    JFXTextField txtPesquisarProduto;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         listaProdutosStatic = listaProdutos;
         inicializaListaProdutos();
+
+        txtPesquisarProduto.textProperty().addListener((observableValue, s, t1) -> {
+            List<Produto> pro = produtoService.listaProdutosPorNome(t1);
+            listaProdutos.getItems().setAll(pro);
+        });
     }
 
     public void inicializaListaProdutos() {
-        produtos = produtoService.buscaListaProdutos();
-        for (Produto p : produtos) {
-            listaProdutos.getItems().add(p);
-        }
+        ObservableList<Produto> observableArrayList = FXCollections.observableArrayList(produtoService.buscaListaProdutos());
+        listaProdutos.setItems(observableArrayList);
         listaProdutos.setCellFactory(cliente -> new AdapterListProduto());
     }
 

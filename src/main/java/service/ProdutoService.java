@@ -13,7 +13,7 @@ public class ProdutoService {
         produtoDAO.cadastraProduto(produto);
     }
 
-    public List<Produto> buscaListaProdutos(String str) {
+    public List<Produto> listaProdutosPorNome(String str) {
         return produtoDAO.getProdutosPorNome(str);
     }
 
