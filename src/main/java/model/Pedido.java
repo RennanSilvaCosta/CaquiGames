@@ -54,6 +54,12 @@ public class Pedido {
     public Pedido() {
     }
 
+    public Pedido(Long id, LocalDate data, Double valorTotal) {
+        this.id = id;
+        this.data = data;
+        this.valorTotal = valorTotal;
+    }
+
     public Pedido(Long id, Double valorTotal, String formaPagamento, Integer quantidadeItens, LocalDate data, Cliente cliente, Funcionario funcionario) {
         this.id = id;
         this.valorTotal = valorTotal;

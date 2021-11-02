@@ -1,9 +1,12 @@
 package service;
 
 import dao.PedidoDAO;
+import dto.PedidoRelatorioDTO;
 import model.ItemPedido;
 import model.Pedido;
 
+import java.time.LocalDate;
+import java.util.List;
 import java.util.Set;
 
 public class PedidoService {
@@ -24,6 +27,10 @@ public class PedidoService {
             it.getProduto().setQtdEstoque(qtdEstoque - qtdSelecionada);
             ps.subtraiEstoque(it.getProduto());
         }
+    }
+
+    public List<PedidoRelatorioDTO> consultarPedidos(LocalDate dataInicial, LocalDate dataFinal) {
+        return pedidoDAO.buscaPedidoRelatorio(dataInicial, dataFinal);
     }
 
 }

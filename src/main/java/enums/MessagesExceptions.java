@@ -10,7 +10,8 @@ public enum MessagesExceptions {
     OPCAO_INVALIDA("Algo deu errado, por favor tente novamente mais tarde!"),
     CPF_INVALIDO("O CPF digitado é inválido!"),
     VALOR_INVALIDO("O valor informado é inválido!"),
-    CAMPO_OBRIGATORIO("Preencha os campos obrigatórios!");
+    CAMPO_OBRIGATORIO("Preencha os campos obrigatórios!"),
+    DATA_INVALIDA("A data informada não é valida, por favor informe uma data válida!");
 
     private String value;
 
