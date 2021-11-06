@@ -1,7 +1,9 @@
 package service;
 
 import dao.PedidoDAO;
+import dto.DetalheItemPedidoDTO;
 import dto.PedidoRelatorioDTO;
+import dto.DetalhePedidoDTO;
 import model.ItemPedido;
 import model.Pedido;
 
@@ -18,10 +20,9 @@ public class PedidoService {
         pedidoDAO.registrarVenda(pedido);
         int qtdSelecionada = 0;
         int qtdEstoque = 0;
-
         Set<ItemPedido> itemPedidos = pedido.getItens();
 
-        for (ItemPedido it: itemPedidos) {
+        for (ItemPedido it : itemPedidos) {
             qtdSelecionada = it.getQuantidade();
             qtdEstoque = it.getProduto().getQtdEstoque();
             it.getProduto().setQtdEstoque(qtdEstoque - qtdSelecionada);
@@ -31,6 +32,17 @@ public class PedidoService {
 
     public List<PedidoRelatorioDTO> consultarPedidos(LocalDate dataInicial, LocalDate dataFinal) {
         return pedidoDAO.buscaPedidoRelatorio(dataInicial, dataFinal);
+    }
+
+    public List<DetalhePedidoDTO> listarDestalhesPedido(LocalDate dataInicial, LocalDate dataFinal) {
+        List<DetalhePedidoDTO> dto =  pedidoDAO.detalhesPedido(dataInicial, dataFinal);
+        List<DetalheItemPedidoDTO> item;
+
+        for (DetalhePedidoDTO d: dto) {
+            item = pedidoDAO.detalheItensPedido(d.getIdPedido());
+            d.getItens().addAll(item);
+        }
+        return dto;
     }
 
 }

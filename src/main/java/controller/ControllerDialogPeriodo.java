@@ -49,7 +49,14 @@ public class ControllerDialogPeriodo implements Initializable {
                 throw new DataInvalidaException();
             }
 
-            jr.gerarRelatorioSintetico(dataI, dataF);
+            ControllerRelatorioScreen c = new ControllerRelatorioScreen();
+            String tipoRelatorio = c.tipoRelatorio;
+
+            if (tipoRelatorio.equals("analitico")) {
+                jr.gerarRelatorioAnalitico(dataI, dataF);
+            } else {
+                jr.gerarRelatorioSintetico(dataI, dataF);
+            }
 
         } catch (FileNotFoundException | JRException | DataInvalidaException e) {
             abrirDialog("Algo deu errado", e.getMessage(), Alert.AlertType.ERROR);

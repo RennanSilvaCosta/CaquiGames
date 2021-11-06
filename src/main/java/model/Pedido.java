@@ -40,7 +40,7 @@ public class Pedido {
     @NotNull
     private LocalDate data;
 
-    @OneToMany(mappedBy = "id.pedido")
+    @OneToMany(mappedBy = "id.pedido", cascade = CascadeType.PERSIST)
     private Set<ItemPedido> itens = new HashSet<>();
 
     @ManyToOne

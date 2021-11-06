@@ -39,6 +39,7 @@ import static utils.Helper.formataValor;
 public class ControllerVendaScreen implements Initializable {
 
     ProdutoService ps = new ProdutoService();
+    Pedido p = new Pedido();
 
     private List<Produto> produtos = new ArrayList<>();
     Set<ItemPedido> listaItens = new HashSet<>();
@@ -97,11 +98,11 @@ public class ControllerVendaScreen implements Initializable {
         Scene scene = btnFecharPedido.getScene();
 
         ControllerPagamentoScreen controller = new ControllerPagamentoScreen();
-        Pedido p = new Pedido();
         p.setValorTotal(valorTotal);
         p.setSubTotal(valorTotal);
         p.setQuantidadeItens(listaItens.size());
         p.setItens(listaItens);
+
         controller.getPedido(p);
 
         root.translateXProperty().set(scene.getWidth());
@@ -127,7 +128,8 @@ public class ControllerVendaScreen implements Initializable {
                     break;
                 }
             }
-            ItemPedido item = new ItemPedido(produto, 0.0, 1, produto.getValor());
+            ItemPedido item = new ItemPedido(p, produto, 1, produto.getValor());
+            p.getItens().add(item);
             listaItens.add(item);
 
             listaProdutos.getItems().add(item);

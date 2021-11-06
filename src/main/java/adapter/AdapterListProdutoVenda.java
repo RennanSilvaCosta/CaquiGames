@@ -76,8 +76,11 @@ public class AdapterListProdutoVenda extends ListCell<ItemPedido> {
             desabilitaBotaoMenosQtd(item.getQuantidade());
             desabilitaBotaoMaisQtd(item.getProduto().getQtdEstoque(), item.getQuantidade());
 
+            item.setTotal(item.getQuantidade() * item.getPreco());
+
             btnMaisQuantidade.setOnAction(actionEvent -> {
                 item.setQuantidade(item.getQuantidade() + 1);
+                item.setTotal(item.getQuantidade() * item.getPreco());
                 txtQuantidade.setText(String.valueOf(item.getQuantidade()));
                 txtValorTotal.setText(formataValor(item.getPreco() * item.getQuantidade()));
                 desabilitaBotaoMenosQtd(item.getQuantidade());
@@ -88,6 +91,7 @@ public class AdapterListProdutoVenda extends ListCell<ItemPedido> {
 
             btnMenosQuantidade.setOnAction(actionEvent -> {
                 item.setQuantidade(item.getQuantidade() - 1);
+                item.setTotal(item.getQuantidade() * item.getPreco());
                 txtQuantidade.setText(String.valueOf(item.getQuantidade()));
                 txtValorTotal.setText(formataValor((item.getPreco() * item.getQuantidade())));
                 desabilitaBotaoMenosQtd(item.getQuantidade());

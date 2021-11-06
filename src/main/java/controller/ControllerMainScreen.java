@@ -18,13 +18,14 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import model.Funcionario;
 import session.UserSession;
-import utils.Helper;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
+
+import static utils.Helper.abrirDialog;
 
 public class ControllerMainScreen implements Initializable {
 
@@ -59,7 +60,7 @@ public class ControllerMainScreen implements Initializable {
         itemList.put("Vendas", "");
         itemList.put("Cadastro de Produtos", "");
         itemList.put("Cadastros de Clientes", "");
-        itemList.put("RelatÃ³rios", "");
+        itemList.put("Relatórios", "");
 
         for (String labelsItemList : itemList.keySet()) {
             Label itemListView = new Label(labelsItemList);
@@ -83,14 +84,14 @@ public class ControllerMainScreen implements Initializable {
                     abreTela("/view/ClienteScreen.fxml", null);
                     break;
 
-                case "RelatÃ³rios":
+                case "Relatórios":
                     abreTela("/view/RelatorioScreen.fxml", null);
                     break;
                 default:
                     throw new OpcaoInvalidaException();
             }
         } catch (OpcaoInvalidaException e) {
-            Helper.abrirDialog("Ops", e.getMessage(), Alert.AlertType.ERROR);
+            abrirDialog("Ops", e.getMessage(), Alert.AlertType.ERROR);
         }
     }
 
@@ -126,7 +127,7 @@ public class ControllerMainScreen implements Initializable {
 
             scene.setOnMouseReleased(mouseEvent -> stage.setOpacity(1));
         } catch (IOException e) {
-            e.printStackTrace();
+            abrirDialog("Ops", e.getMessage(), Alert.AlertType.ERROR);
         }
     }
 

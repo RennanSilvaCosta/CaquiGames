@@ -10,15 +10,16 @@ public class ItemPedido {
     @EmbeddedId
     private ItemPedidoPK id = new ItemPedidoPK();
 
-    private Double desconto;
     private Integer quantidade;
     private Double preco;
+    private Double total;
 
-    public ItemPedido() {}
+    public ItemPedido() {
+    }
 
-    public ItemPedido(Produto produto, Double desconto, Integer quantidade, Double preco) {
+    public ItemPedido(Pedido pedido, Produto produto, Integer quantidade, Double preco) {
         id.setProduto(produto);
-        this.desconto = desconto;
+        id.setPedido(pedido);
         this.quantidade = quantidade;
         this.preco = preco;
     }
@@ -39,14 +40,6 @@ public class ItemPedido {
         this.id = id;
     }
 
-    public Double getDesconto() {
-        return desconto;
-    }
-
-    public void setDesconto(Double desconto) {
-        this.desconto = desconto;
-    }
-
     public Integer getQuantidade() {
         return quantidade;
     }
@@ -61,5 +54,13 @@ public class ItemPedido {
 
     public void setPreco(Double preco) {
         this.preco = preco;
+    }
+
+    public Double getTotal() {
+        return total;
+    }
+
+    public void setTotal(Double total) {
+        this.total = total;
     }
 }
