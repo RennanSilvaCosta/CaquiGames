@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: #F8F7FC; -fx-background-radius: 10 10 10 10;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerFuncionarioScreen">
+   <JFXButton fx:id="btnSair" layoutX="965.0" mnemonicParsing="false" onAction="#fecharJanela" prefHeight="35.0" prefWidth="35.0" styleClass="btnSair" stylesheets="@../stylesheets/styleButton.css" text="x" textFill="WHITE">
+      <font>
+         <Font name="Ebrima Bold" size="12.0" />
+      </font></JFXButton>
+   <Label layoutX="43.0" layoutY="50.0" text="GERENCIAR FUNCIONARIOS" textFill="#ff6800">
+      <font>
+         <Font name="Ebrima Bold" size="24.0" />
+      </font>
+   </Label>
+   <JFXTextField fx:id="txtBuscaFuncionario" focusColor="#ffffff00" layoutX="43.0" layoutY="122.0" prefHeight="75.0" prefWidth="647.0" promptText="PESQUISAR FUNCIONARIO" style="-fx-background-color: WHITE; -fx-background-radius: 20 20 20 20;" unFocusColor="#4d4d4d00">
+      <font>
+         <Font name="Ebrima" size="14.0" />
+      </font></JFXTextField>
+   <JFXButton fx:id="btnCadastrarNovoFuncionario" layoutX="658.0" layoutY="122.0" onAction="#abrirCadastroFuncionario" maxWidth="300.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="300.0" ripplerFill="WHITE" style="-fx-background-color: #FF6800; -fx-background-radius: 20 20 20 20;" text="CADASTRAR NOVO FUNCIONARIO" textFill="WHITE">
+      <font>
+         <Font name="Ebrima" size="14.0" />
+      </font></JFXButton>
+   <JFXListView fx:id="listaFuncionario" layoutX="43.0" layoutY="216.0" prefHeight="453.0" prefWidth="915.0" style="-fx-background-radius: 10 10 10 10;" />
+
+</Pane>

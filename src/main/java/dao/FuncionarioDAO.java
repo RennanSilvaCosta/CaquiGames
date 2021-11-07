@@ -5,7 +5,6 @@ import model.Funcionario;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Objects;
 
 public class FuncionarioDAO {
 
@@ -14,9 +13,8 @@ public class FuncionarioDAO {
 
     public void criaFuncionario(Funcionario funcionario) {
         entityManager.getTransaction().begin();
-        entityManager.persist(funcionario.getEndereco());
         entityManager.persist(funcionario);
-        entityManager.getTransaction().begin();
+        entityManager.getTransaction().commit();
     }
 
     public List<Funcionario> buscaTodosFuncionarios() {
@@ -27,7 +25,7 @@ public class FuncionarioDAO {
     }
 
     public List<Funcionario> buscaFuncionariosPorNome(String str) {
-        String getFuncionariosPorNome = "SELECT f FROM Funcionario f WHERE f.nome LIKE :str";
+        String getFuncionariosPorNome = "SELECT f FROM Funcionario f WHERE f.nome LIKE :str OR f.cpf LIKE :str OR f.email LIKE :str";
         TypedQuery<Funcionario> typedQuery = entityManager
                 .createQuery(getFuncionariosPorNome, Funcionario.class)
                 .setParameter("str", "%" + str + "%")
@@ -36,7 +34,7 @@ public class FuncionarioDAO {
     }
 
     public void deletaFuncionario(String cpf) {
-        Funcionario funcionario = entityManager.find(Funcionario.class, buscaFuncionarioPorCPF(cpf));
+        Funcionario funcionario = buscaFuncionarioPorCPF(cpf);
         entityManager.getTransaction().begin();
         entityManager.remove(funcionario);
         entityManager.getTransaction().commit();
@@ -45,7 +43,7 @@ public class FuncionarioDAO {
     public void editaFuncionario(Funcionario funcionario) {
         entityManager.getTransaction().begin();
         entityManager.merge(funcionario);
-        entityManager.getTransaction();
+        entityManager.getTransaction().commit();
     }
 
     public Funcionario buscaFuncionarioEmaileSenha(FuncionarioDTO dto) throws NoResultException {
@@ -58,17 +56,19 @@ public class FuncionarioDAO {
     }
 
     public boolean isFuncionarioExiste(String cpf) {
-        new Funcionario();
-        Funcionario f;
-        f = buscaFuncionarioPorCPF(cpf);
-        return Objects.isNull( f );
+        String getClientePorCPF = "SELECT f FROM Funcionario f WHERE cpf = :cpf";
+        TypedQuery<Funcionario> typedQuery = entityManager
+                .createQuery(getClientePorCPF, Funcionario.class)
+                .setParameter("cpf", cpf);
+        List<Funcionario> resultList = typedQuery.getResultList();
+        return !resultList.isEmpty();
     }
 
-    public Funcionario buscaFuncionarioPorCPF( String cpf ) throws NoResultException {
+    public Funcionario buscaFuncionarioPorCPF(String cpf) throws NoResultException {
         String getFuncionarioPorCPF = "SELECT f FROM Funcionario f WHERE cpf = :cpf";
-        TypedQuery< Funcionario > typedQuery = entityManager
-                .createQuery( getFuncionarioPorCPF, Funcionario.class )
-                .setParameter( "cpf", cpf );
+        TypedQuery<Funcionario> typedQuery = entityManager
+                .createQuery(getFuncionarioPorCPF, Funcionario.class)
+                .setParameter("cpf", cpf);
         return typedQuery.getSingleResult();
     }
 

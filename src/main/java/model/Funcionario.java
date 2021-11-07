@@ -36,7 +36,7 @@ public class Funcionario {
     @Column(length = 100)
     private String senha;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Endereco endereco;
 
     @OneToMany(mappedBy = "funcionario")

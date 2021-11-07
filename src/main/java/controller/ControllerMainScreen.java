@@ -61,6 +61,7 @@ public class ControllerMainScreen implements Initializable {
         itemList.put("Cadastro de Produtos", "");
         itemList.put("Cadastros de Clientes", "");
         itemList.put("Relatórios", "");
+        itemList.put("Funcionarios", "");
 
         for (String labelsItemList : itemList.keySet()) {
             Label itemListView = new Label(labelsItemList);
@@ -86,6 +87,9 @@ public class ControllerMainScreen implements Initializable {
 
                 case "Relatórios":
                     abreTela("/view/RelatorioScreen.fxml", null);
+                    break;
+                case "Funcionarios":
+                    abreTela("/view/FuncionarioScreen.fxml", null);
                     break;
                 default:
                     throw new OpcaoInvalidaException();
