@@ -6,7 +6,7 @@
 <?import javafx.scene.text.*?>
 <?import utils.*?>
 
-<Pane prefHeight="559.0" prefWidth="922.0" style="-fx-background-color: #FF7C00; -fx-background-radius: 10 10 10 10;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerFuncionarioCadastroScreen">
+<Pane prefHeight="559.0" prefWidth="922.0" style="-fx-background-color: #FF7C00; -fx-background-radius: 10 10 10 10;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerFuncionarioAtualizaScreen">
     <Pane layoutX="20.0" layoutY="66.0" prefHeight="480.0" prefWidth="881.0" style="-fx-background-color: #F8F7FC; -fx-background-radius: 10 10 10 10;">
         <Label layoutX="39.0" layoutY="29.0" text="DADOS DE IDENTIFICAÇÃO" textFill="#a3a3a3">
             <font>
@@ -30,17 +30,12 @@
                 <Font name="Ebrima" size="14.0" />
             </font>
         </MaskedTextField>
-        <JFXTextField fx:id="txtEmail" focusColor="#ff6800" labelFloat="true" layoutX="39.0" layoutY="205.0" prefHeight="40.0" prefWidth="170.0" promptText="EMAIL" unFocusColor="#ff7c00">
+        <JFXTextField fx:id="txtEmail" focusColor="#ff6800" labelFloat="true" layoutX="39.0" layoutY="205.0" prefHeight="40.0" prefWidth="360.0" promptText="EMAIL" unFocusColor="#ff7c00">
             <font>
                 <Font name="Ebrima" size="14.0" />
             </font>
         </JFXTextField>
-        <JFXPasswordField fx:id="txtSenha" focusColor="#ff6800" labelFloat="true" layoutX="229.0" layoutY="205.0" prefHeight="40.0" prefWidth="170.0" promptText="SENHA" unFocusColor="#ff7c00">
-            <font>
-                <Font name="Ebrima" size="14.0" />
-            </font>
-        </JFXPasswordField>
-        <MaskedTextField fx:id="txtDataNascimento" focusColor="#ff6800" labelFloat="true" layoutX="39.0" layoutY="357.0" mask="##/##/####" prefHeight="40.0" prefWidth="170.0" promptText="DATA NASCIMENTO" unFocusColor="#ff7c00">
+        <MaskedTextField fx:id="txtDataNascimento" focusColor="#ff6800" labelFloat="true" layoutX="44.0" layoutY="362.0" mask="##/##/####" prefHeight="40.0" prefWidth="170.0" promptText="DATA NASCIMENTO" unFocusColor="#ff7c00">
             <font>
                 <Font name="Ebrima" size="14.0" />
             </font>
@@ -85,7 +80,7 @@
                 <Font name="Ebrima" size="14.0" />
             </font>
         </JFXTextField>
-        <JFXButton fx:id="btnSalvarFuncionario" buttonType="RAISED" layoutX="313.0" layoutY="416.0" mnemonicParsing="false" onAction="#persistirFuncionario" prefHeight="50.0" prefWidth="300.0" style="-fx-background-color: #56CAA4; -fx-background-radius: 20 20 20 20;" text="SALVAR CADASTRO" textFill="WHITE">
+        <JFXButton fx:id="btnSalvarFuncionario" buttonType="RAISED" layoutX="291.0" layoutY="416.0" mnemonicParsing="false" onAction="#persistirFuncionario" prefHeight="50.0" prefWidth="300.0" style="-fx-background-color: #56CAA4; -fx-background-radius: 20 20 20 20;" text="SALVAR CADASTRO" textFill="WHITE">
             <font>
                 <Font name="Ebrima" size="14.0" />
             </font>
@@ -97,7 +92,7 @@
             <Font name="Ebrima Bold" size="12.0" />
         </font>
     </JFXButton>
-    <Label layoutX="20.0" layoutY="25.0" text="CADASTRAR NOVO FUNCIONARIO" textFill="WHITE">
+    <Label layoutX="20.0" layoutY="25.0" text="ATUALIZAR FUNCIONARIO" textFill="WHITE">
         <font>
             <Font name="Ebrima Bold" size="18.0" />
         </font>

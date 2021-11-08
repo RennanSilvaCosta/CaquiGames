@@ -32,6 +32,8 @@ public class ControllerMainScreen implements Initializable {
     private double xOffset = 0;
     private double yOffset = 0;
 
+    Funcionario func;
+
     @FXML
     private JFXListView<Label> listViewMainMenu = new JFXListView<>();
 
@@ -49,7 +51,7 @@ public class ControllerMainScreen implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        Funcionario func = UserSession.getFuncionario();
+        func = UserSession.getFuncionario();
         txtSaudacao.setText(txtSaudacao.getText() + func.getNome());
         inicializaResumo();
         inicializaMainMenu();
@@ -61,7 +63,10 @@ public class ControllerMainScreen implements Initializable {
         itemList.put("Produtos", "");
         itemList.put("Clientes", "");
         itemList.put("Relatórios", "");
-        itemList.put("Funcionarios", "");
+
+        if (func.getPerfil().equals("ADM")) {
+            itemList.put("Funcionarios", "");
+        }
 
         for (String labelsItemList : itemList.keySet()) {
             Label itemListView = new Label(labelsItemList);

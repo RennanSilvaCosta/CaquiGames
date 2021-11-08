@@ -3,7 +3,6 @@ package controller;
 import adapter.AdapterListFuncionario;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
-import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import dto.EnderecoDTO;
 import exceptions.CPFInvalidoException;
@@ -25,22 +24,20 @@ import static service.ViaCepService.buscaEnderecoViaCep;
 import static utils.Helper.converteDataParaString;
 import static utils.Helper.converteStringParaData;
 
-public class ControllerFuncionarioCadastroScreen implements Initializable {
+public class ControllerFuncionarioAtualizaScreen implements Initializable {
 
     Funcionario funcionario = new Funcionario();
     Endereco end = new Endereco();
     FuncionarioService funcionarioService = new FuncionarioService();
 
-    @FXML
-    JFXPasswordField txtSenha;
-
-    @FXML
-    JFXComboBox<String> comboBoxPerfil;
 
     @FXML
     JFXButton btnSair;
     @FXML
     JFXButton btnSalvarFuncionario;
+
+    @FXML
+    JFXComboBox<String> comboBoxPerfil;
 
     @FXML
     JFXTextField txtCpf;
@@ -94,15 +91,11 @@ public class ControllerFuncionarioCadastroScreen implements Initializable {
         try {
             populaEndereco();
             populaFuncionario();
-            if (funcionario.getId() != null) {
-                funcionarioService.atualizaFuncionario(this.funcionario);
-            } else {
-                funcionarioService.cadastraFuncionario(this.funcionario);
-            }
+            funcionarioService.atualizaFuncionario(this.funcionario);
             fecharCadastroFuncionario();
             atualizaListaFuncionarios();
-        } catch( CPFJaExisteException | CPFInvalidoException e ) {
-            Helper.abrirDialog( "Ops! Algo deu errado.", e.getMessage(), Alert.AlertType.ERROR );
+        } catch (CPFJaExisteException | CPFInvalidoException e) {
+            Helper.abrirDialog("Ops! Algo deu errado.", e.getMessage(), Alert.AlertType.ERROR);
         }
     }
 
@@ -119,7 +112,6 @@ public class ControllerFuncionarioCadastroScreen implements Initializable {
         this.funcionario.setNome(txtNome.getText());
         this.funcionario.setCpf(txtCpf.getText());
         this.funcionario.setEmail(txtEmail.getText());
-        this.funcionario.setSenha(txtSenha.getText());
         this.funcionario.setDataNasc(converteStringParaData(txtDataNascimento.getText()));
         this.funcionario.setTelefone(txtCelular.getText());
         this.funcionario.setEndereco(end);

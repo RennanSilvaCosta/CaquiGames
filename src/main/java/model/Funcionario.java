@@ -36,6 +36,9 @@ public class Funcionario {
     @Column(length = 100)
     private String senha;
 
+    @NotNull
+    private String perfil;
+
     @OneToOne(cascade = CascadeType.ALL)
     private Endereco endereco;
 
@@ -45,7 +48,7 @@ public class Funcionario {
     public Funcionario() {
     }
 
-    public Funcionario(Long id, String nome, String cpf, String telefone, LocalDate dataNasc, String email, String senha, Endereco endereco) {
+    public Funcionario(Long id, String nome, String cpf, String telefone, LocalDate dataNasc, String email, String senha, String perfil, Endereco endereco) {
         this.id = id;
         this.nome = nome;
         this.cpf = cpf;
@@ -53,6 +56,7 @@ public class Funcionario {
         this.dataNasc = dataNasc;
         this.email = email;
         this.senha = senha;
+        this.perfil = perfil;
         this.endereco = endereco;
     }
 
@@ -122,5 +126,13 @@ public class Funcionario {
 
     public List<Pedido> getPedidos() {
         return pedidos;
+    }
+
+    public String getPerfil() {
+        return perfil;
+    }
+
+    public void setPerfil(String perfil) {
+        this.perfil = perfil;
     }
 }

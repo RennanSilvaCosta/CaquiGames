@@ -2,6 +2,7 @@ package dao;
 
 import dto.FuncionarioDTO;
 import model.Funcionario;
+import session.UserSession;
 
 import javax.persistence.*;
 import java.util.List;
@@ -18,14 +19,17 @@ public class FuncionarioDAO {
     }
 
     public List<Funcionario> buscaTodosFuncionarios() {
-        String getFuncionarios = "SELECT f FROM Funcionario f";
+        Funcionario func = UserSession.getFuncionario();
+        String getFuncionarios = "SELECT f FROM Funcionario f WHERE f.cpf != :cpf";
         TypedQuery<Funcionario> typedQuery = entityManager
-                .createQuery(getFuncionarios, Funcionario.class);
+                .createQuery(getFuncionarios, Funcionario.class)
+                .setParameter("cpf", func.getCpf());
         return typedQuery.getResultList();
     }
 
     public List<Funcionario> buscaFuncionariosPorNome(String str) {
-        String getFuncionariosPorNome = "SELECT f FROM Funcionario f WHERE f.nome LIKE :str OR f.cpf LIKE :str OR f.email LIKE :str";
+        Funcionario func = UserSession.getFuncionario();
+        String getFuncionariosPorNome = "SELECT f FROM Funcionario f WHERE f.nome LIKE :str OR f.cpf LIKE :str OR f.email LIKE :str AND f.cpf != :cpf";
         TypedQuery<Funcionario> typedQuery = entityManager
                 .createQuery(getFuncionariosPorNome, Funcionario.class)
                 .setParameter("str", "%" + str + "%")

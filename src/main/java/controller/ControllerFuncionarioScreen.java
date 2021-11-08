@@ -84,7 +84,7 @@ public class ControllerFuncionarioScreen implements Initializable {
     @FXML
     public void abrirEditarFuncionario(Funcionario funcionario) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/FuncionarioCadastroScreen.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/FuncionarioAtualizaScreen.fxml"));
             Parent parent = fxmlLoader.load();
             Stage stage = new Stage();
             Scene scene = new Scene(parent);
@@ -94,7 +94,7 @@ public class ControllerFuncionarioScreen implements Initializable {
             stage.setScene(scene);
             stage.show();
 
-            ControllerFuncionarioCadastroScreen controller = fxmlLoader.getController();
+            ControllerFuncionarioAtualizaScreen controller = fxmlLoader.getController();
             controller.getInfoFuncionario(funcionario);
 
             scene.setOnMousePressed(event -> {
