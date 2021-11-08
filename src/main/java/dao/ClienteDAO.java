@@ -25,16 +25,16 @@ public class ClienteDAO {
     }
 
     public List<Cliente> getClientesPorNome(String str) {
-        String getClientesPorNome = "SELECT c FROM Cliente c WHERE c.nome LIKE :str";
+        String getClientesPorNome = "SELECT c FROM Cliente c WHERE c.nome LIKE :str OR c.cpf LIKE :str";
         TypedQuery<Cliente> typedQuery = entityManager
                 .createQuery(getClientesPorNome, Cliente.class)
                 .setParameter("str", "%" + str + "%")
                 .setMaxResults(10);
         return typedQuery.getResultList();
     }
-    
+
     public void deletaCliente(String cpf) {
-        Cliente cliente = entityManager.find(Cliente.class, buscaClientePorCPF(cpf));
+        Cliente cliente = buscaClientePorCPF(cpf);
         entityManager.getTransaction().begin();
         entityManager.remove(cliente);
         entityManager.getTransaction().commit();
@@ -48,18 +48,18 @@ public class ClienteDAO {
 
     public boolean isClienteExiste(String cpf) {
         String getClientePorCPF = "SELECT c FROM Cliente c WHERE cpf = :cpf";
-        TypedQuery< Cliente > typedQuery = entityManager
-                .createQuery( getClientePorCPF, Cliente.class )
-                .setParameter( "cpf", cpf );
+        TypedQuery<Cliente> typedQuery = entityManager
+                .createQuery(getClientePorCPF, Cliente.class)
+                .setParameter("cpf", cpf);
         List<Cliente> resultList = typedQuery.getResultList();
         return !resultList.isEmpty();
     }
 
-    public Cliente buscaClientePorCPF( String cpf ) throws NoResultException {
+    public Cliente buscaClientePorCPF(String cpf) throws NoResultException {
         String getClientePorCPF = "SELECT c FROM Cliente c WHERE cpf = :cpf";
-        TypedQuery< Cliente > typedQuery = entityManager
-                .createQuery( getClientePorCPF, Cliente.class )
-                .setParameter( "cpf", cpf );
+        TypedQuery<Cliente> typedQuery = entityManager
+                .createQuery(getClientePorCPF, Cliente.class)
+                .setParameter("cpf", cpf);
         return typedQuery.getSingleResult();
     }
 

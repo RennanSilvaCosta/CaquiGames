@@ -4,16 +4,26 @@ import com.jfoenix.controls.JFXButton;
 import controller.ControllerClienteScreen;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import model.Cliente;
+import service.ClienteService;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 public class AdapterListCliente extends ListCell<Cliente> {
+
+    ControllerClienteScreen c = new ControllerClienteScreen();
+    List<Cliente> clientes = new ArrayList<>();
+    ClienteService clienteService = new ClienteService();
 
     private FXMLLoader mLLoader;
 
@@ -71,12 +81,37 @@ public class AdapterListCliente extends ListCell<Cliente> {
             txtTelefone.setText(cliente.getCelular());
 
             btnEditar.setOnAction(actionEvent -> {
-                ControllerClienteScreen c = new ControllerClienteScreen();
                 c.abrirEditarCliente(cliente);
+            });
+
+            btnExcluir.setOnAction(actionEvent -> {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Exclusão cliente");
+                alert.setHeaderText("Excluir cliente");
+                alert.setContentText("Você realmente deseja excluir este cliente?");
+                ButtonType btnSim = new ButtonType("SIM");
+                ButtonType btnCancelar = new ButtonType("CANCELAR");
+                alert.getButtonTypes().setAll(btnSim, btnCancelar);
+
+                Optional<ButtonType> result = alert.showAndWait();
+
+                if (result.get() == btnSim) {
+                    clienteService.excluiCliente(cliente.getCpf());
+                    atualizarListaClientes();
+                }
             });
 
             setText(null);
             setGraphic(gridPane);
         }
+    }
+
+    private void atualizarListaClientes() {
+        clientes = clienteService.buscaTodosClientes();
+        ControllerClienteScreen.listaClienteStatic.getItems().clear();
+        for (Cliente c : clientes) {
+            ControllerClienteScreen.listaClienteStatic.getItems().add(c);
+        }
+        ControllerClienteScreen.listaClienteStatic.setCellFactory(cliente -> new AdapterListCliente());
     }
 }

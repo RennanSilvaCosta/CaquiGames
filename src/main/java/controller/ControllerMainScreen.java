@@ -58,8 +58,8 @@ public class ControllerMainScreen implements Initializable {
     private void inicializaMainMenu() {
         Map<String, String> itemList = new HashMap<>();
         itemList.put("Vendas", "");
-        itemList.put("Cadastro de Produtos", "");
-        itemList.put("Cadastros de Clientes", "");
+        itemList.put("Produtos", "");
+        itemList.put("Clientes", "");
         itemList.put("Relatórios", "");
         itemList.put("Funcionarios", "");
 
@@ -77,25 +77,27 @@ public class ControllerMainScreen implements Initializable {
                     abreTela("/view/VendaScreen.fxml", null);
                     break;
 
-                case "Cadastro de Produtos":
+                case "Produtos":
                     abreTela("/view/ProdutoScreen.fxml", null);
                     break;
 
-                case "Cadastros de Clientes":
+                case "Clientes":
                     abreTela("/view/ClienteScreen.fxml", null);
                     break;
 
                 case "Relatórios":
                     abreTela("/view/RelatorioScreen.fxml", null);
                     break;
+
                 case "Funcionarios":
                     abreTela("/view/FuncionarioScreen.fxml", null);
                     break;
+
                 default:
                     throw new OpcaoInvalidaException();
             }
         } catch (OpcaoInvalidaException e) {
-            abrirDialog("Ops", e.getMessage(), Alert.AlertType.ERROR);
+            abrirDialog("Algo deu errado!", e.getMessage(), Alert.AlertType.ERROR);
         }
     }
 
@@ -131,7 +133,7 @@ public class ControllerMainScreen implements Initializable {
 
             scene.setOnMouseReleased(mouseEvent -> stage.setOpacity(1));
         } catch (IOException e) {
-            abrirDialog("Ops", e.getMessage(), Alert.AlertType.ERROR);
+            abrirDialog("Algo deu errado", e.getMessage(), Alert.AlertType.ERROR);
         }
     }
 

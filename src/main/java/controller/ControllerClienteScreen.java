@@ -3,6 +3,7 @@ package controller;
 import adapter.AdapterListCliente;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
+import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -26,7 +27,10 @@ public class ControllerClienteScreen implements Initializable {
     private double yOffset = 0;
 
     private ClienteService clienteService = new ClienteService();
-    static JFXListView<Cliente> listaClienteStatic;
+    public static JFXListView<Cliente> listaClienteStatic;
+
+    @FXML
+    JFXTextField txtBuscaCliente;
 
     @FXML
     JFXButton btnSair;
@@ -40,6 +44,11 @@ public class ControllerClienteScreen implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         listaClienteStatic = listacliente;
         inicializaListaCliente();
+
+        txtBuscaCliente.textProperty().addListener((observableValue, s, t1) -> {
+            List<Cliente> pro = clienteService.buscaClienteNome(t1);
+            listacliente.getItems().setAll(pro);
+        });
     }
 
     @FXML

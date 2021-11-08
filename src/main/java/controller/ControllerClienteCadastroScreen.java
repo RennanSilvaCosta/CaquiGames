@@ -79,7 +79,6 @@ public class ControllerClienteCadastroScreen implements Initializable {
     }
 
     public void persistirCliente() {
-
         try {
             populaEndereco();
             populaCliente();
@@ -93,8 +92,6 @@ public class ControllerClienteCadastroScreen implements Initializable {
         } catch( CPFJaExisteException | CPFInvalidoException e ) {
             Helper.abrirDialog( "Ops! Algo deu errado.", e.getMessage(), Alert.AlertType.ERROR );
         }
-
-
     }
 
     private void atualizaListaClientes() {
