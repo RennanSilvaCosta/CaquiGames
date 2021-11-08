@@ -21,6 +21,8 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import static service.ViaCepService.buscaEnderecoViaCep;
+import static utils.Helper.converteDataParaString;
+import static utils.Helper.converteStringParaData;
 
 public class ControllerClienteCadastroScreen implements Initializable {
 
@@ -69,7 +71,7 @@ public class ControllerClienteCadastroScreen implements Initializable {
         txtNome.setText(cliente.getNome());
         txtCpf.setText(cliente.getCpf());
         txtEmail.setText(cliente.getEmail());
-        txtDataNascimento.setText(cliente.getDataNasc().toString());
+        txtDataNascimento.setText(converteDataParaString(cliente.getDataNasc()));
         txtCelular.setText(cliente.getCelular());
         txtCep.setText(cliente.getEndereco().getCep());
         txtBairro.setText(cliente.getEndereco().getBairro());
@@ -109,7 +111,7 @@ public class ControllerClienteCadastroScreen implements Initializable {
         this.cliente.setNome(txtNome.getText());
         this.cliente.setCpf(txtCpf.getText());
         this.cliente.setEmail(txtEmail.getText());
-        this.cliente.setDataNasc(LocalDate.now());
+        this.cliente.setDataNasc(converteStringParaData(txtDataNascimento.getText()));
         this.cliente.setCelular(txtCelular.getText());
         this.cliente.setEndereco(end);
     }

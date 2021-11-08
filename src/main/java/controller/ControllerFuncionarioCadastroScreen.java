@@ -17,11 +17,12 @@ import service.FuncionarioService;
 import utils.Helper;
 
 import java.net.URL;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
 
 import static service.ViaCepService.buscaEnderecoViaCep;
+import static utils.Helper.converteDataParaString;
+import static utils.Helper.converteStringParaData;
 
 public class ControllerFuncionarioCadastroScreen implements Initializable {
 
@@ -72,7 +73,7 @@ public class ControllerFuncionarioCadastroScreen implements Initializable {
         txtNome.setText(func.getNome());
         txtCpf.setText(func.getCpf());
         txtEmail.setText(func.getEmail());
-        txtDataNascimento.setText(func.getDataNasc().toString());
+        txtDataNascimento.setText(converteDataParaString(func.getDataNasc()));
         txtCelular.setText(func.getTelefone());
         txtCep.setText(func.getEndereco().getCep());
         txtBairro.setText(func.getEndereco().getBairro());
@@ -113,7 +114,7 @@ public class ControllerFuncionarioCadastroScreen implements Initializable {
         this.funcionario.setCpf(txtCpf.getText());
         this.funcionario.setEmail(txtEmail.getText());
         this.funcionario.setSenha(txtSenha.getText());
-        this.funcionario.setDataNasc(LocalDate.now());
+        this.funcionario.setDataNasc(converteStringParaData(txtDataNascimento.getText()));
         this.funcionario.setTelefone(txtCelular.getText());
         this.funcionario.setEndereco(end);
     }
