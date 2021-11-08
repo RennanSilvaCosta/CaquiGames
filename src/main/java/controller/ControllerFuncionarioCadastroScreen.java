@@ -76,6 +76,8 @@ public class ControllerFuncionarioCadastroScreen implements Initializable {
         txtCelular.setText(func.getTelefone());
         txtCep.setText(func.getEndereco().getCep());
         txtBairro.setText(func.getEndereco().getBairro());
+        txtEstado.setText(func.getEndereco().getEstado());
+        txtCidade.setText(func.getEndereco().getCidade());
         txtLogradouro.setText(func.getEndereco().getLogradouro());
         txtNumero.setText(func.getEndereco().getNumero().toString());
         txtComplemento.setText(func.getEndereco().getComplemento());
@@ -120,6 +122,8 @@ public class ControllerFuncionarioCadastroScreen implements Initializable {
         this.end.setCep(txtCep.getText());
         this.end.setLogradouro(txtLogradouro.getText());
         this.end.setBairro(txtBairro.getText());
+        this.end.setEstado(txtEstado.getText());
+        this.end.setCidade(txtCidade.getText());
         this.end.setNumero(Integer.parseInt(txtNumero.getText()));
         this.end.setComplemento(txtComplemento.getText());
     }

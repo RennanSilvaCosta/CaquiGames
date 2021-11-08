@@ -73,6 +73,8 @@ public class ControllerClienteCadastroScreen implements Initializable {
         txtCelular.setText(cliente.getCelular());
         txtCep.setText(cliente.getEndereco().getCep());
         txtBairro.setText(cliente.getEndereco().getBairro());
+        txtEstado.setText(cliente.getEndereco().getEstado());
+        txtCidade.setText(cliente.getEndereco().getCidade());
         txtLogradouro.setText(cliente.getEndereco().getLogradouro());
         txtNumero.setText(cliente.getEndereco().getNumero().toString());
         txtComplemento.setText(cliente.getEndereco().getComplemento());
@@ -116,6 +118,8 @@ public class ControllerClienteCadastroScreen implements Initializable {
         this.end.setCep(txtCep.getText());
         this.end.setLogradouro(txtLogradouro.getText());
         this.end.setBairro(txtBairro.getText());
+        this.end.setEstado(txtEstado.getText());
+        this.end.setCidade(txtCidade.getText());
         this.end.setNumero(Integer.parseInt(txtNumero.getText()));
         this.end.setComplemento(txtComplemento.getText());
     }
