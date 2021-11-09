@@ -40,3 +40,8 @@
     -fx-border-style: solid;
     -fx-border-radius: 20px;
 }
+
+.btnEsqueceu:hover {
+    -fx-text-fill: #6747CD;
+    -fx-underline: true;
+}

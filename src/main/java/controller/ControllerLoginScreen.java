@@ -81,7 +81,7 @@ public class ControllerLoginScreen implements Initializable {
             txtErrorSenha.setText(e.getMessage());
             new Shake(txtSenha).play();
         } catch (NoResultException e) {
-            abrirDialog("Credenciais Inv√°lidas", "Email ou senha inv√°lidos!",Alert.AlertType.ERROR);
+            abrirDialog("Credenciais Inv·lidas", "Email ou senha inv·lidos!",Alert.AlertType.ERROR);
         }
     }
 
