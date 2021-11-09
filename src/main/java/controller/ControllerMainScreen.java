@@ -1,9 +1,11 @@
 package controller;
 
+import animatefx.animation.FadeIn;
 import animatefx.animation.FadeInDown;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
 import exceptions.OpcaoInvalidaException;
+import javafx.animation.PathTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -13,9 +15,13 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.LineTo;
+import javafx.scene.shape.MoveTo;
+import javafx.scene.shape.Path;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Duration;
 import model.Funcionario;
 import service.MainService;
 import session.UserSession;
@@ -176,13 +182,91 @@ public class ControllerMainScreen implements Initializable {
     }
 
     public void inicializaResumo() {
-        new FadeInDown(paneTotalVendidoStatic).setSpeed(0.5).play();
-        new FadeInDown(paneTotalPedidosStatic).setSpeed(0.5).play();
-        new FadeInDown(paneProdutoEstoqueStatic).setSpeed(0.5).play();
+        new FadeIn(paneTotalVendidoStatic).setSpeed(0.5).play();
+        new FadeIn(paneTotalPedidosStatic).setSpeed(0.5).play();
+        new FadeIn(paneProdutoEstoqueStatic).setSpeed(0.5).play();
 
         txtTotalVendidoStatic.setText(Helper.formataValor(mainService.obterTotalVendido()));
         txtTotalPedidoStatic.setText(String.valueOf(mainService.obterTotalPedidos()));
         txtProdutosEstoqueStatic.setText(String.valueOf(mainService.obterTotalProdutos()));
+    }
+
+    @FXML
+    private void deslizarPainelTotalVendidoCima() {
+        Path path = new Path();
+        path.getElements().add(new MoveTo(100, 75));
+        path.getElements().add(new LineTo(100, 65));
+
+        PathTransition transition = new PathTransition();
+        transition.setNode(paneTotalVendido);
+        transition.setDuration(Duration.millis(300));
+        transition.setPath(path);
+        transition.play();
+    }
+
+    @FXML
+    private void deslizarPainelTotalVendidoBaixo() {
+        Path path = new Path();
+        path.getElements().add(new MoveTo(100, 65));
+        path.getElements().add(new LineTo(100, 75));
+
+        PathTransition transition = new PathTransition();
+        transition.setNode(paneTotalVendido);
+        transition.setDuration(Duration.millis(300));
+        transition.setPath(path);
+        transition.play();
+    }
+
+    @FXML
+    private void deslizarPainelTotalPedidosCima() {
+        Path path = new Path();
+        path.getElements().add(new MoveTo(100, 75));
+        path.getElements().add(new LineTo(100, 65));
+
+        PathTransition transition = new PathTransition();
+        transition.setNode(paneTotalPedidos);
+        transition.setDuration(Duration.millis(300));
+        transition.setPath(path);
+        transition.play();
+    }
+
+    @FXML
+    private void deslizarPainelTotalPedidosBaixo() {
+        Path path = new Path();
+        path.getElements().add(new MoveTo(100, 65));
+        path.getElements().add(new LineTo(100, 75));
+
+        PathTransition transition = new PathTransition();
+        transition.setNode(paneTotalPedidos);
+        transition.setDuration(Duration.millis(300));
+        transition.setPath(path);
+        transition.play();
+    }
+
+    @FXML
+    private void deslizarPainelProdutoEstoqueCima() {
+        Path path = new Path();
+        path.getElements().add(new MoveTo(100, 75));
+        path.getElements().add(new LineTo(100, 65));
+
+        PathTransition transition = new PathTransition();
+        transition.setNode(paneProdutoEstoque);
+        transition.setDuration(Duration.millis(300));
+        transition.setPath(path);
+        transition.play();
+    }
+
+    @FXML
+    private void deslizarPainelProdutoEstoqueBaixo() {
+        Path path = new Path();
+        path.getElements().add(new MoveTo(100, 65));
+        path.getElements().add(new LineTo(100, 75));
+
+        PathTransition transition = new PathTransition();
+        transition.setNode(paneProdutoEstoque);
+        transition.setDuration(Duration.millis(300));
+        transition.setPath(path);
+        transition.play();
     }
 
     @FXML

@@ -221,8 +221,8 @@ public class ControllerFecharPedidoCartaoScreen implements Initializable {
     @FXML
     private void deslizarPainelValorTotalCima() {
         Path path = new Path();
-        path.getElements().add(new MoveTo(110, 70));
-        path.getElements().add(new LineTo(110, 46));
+        path.getElements().add(new MoveTo(110, 75));
+        path.getElements().add(new LineTo(110, 65));
 
         PathTransition transition = new PathTransition();
         transition.setNode(paneValorTotalPedido);
@@ -234,8 +234,8 @@ public class ControllerFecharPedidoCartaoScreen implements Initializable {
     @FXML
     private void deslizarPainelValorTotalBaixo() {
         Path path = new Path();
-        path.getElements().add(new MoveTo(110, 46));
-        path.getElements().add(new LineTo(110, 70));
+        path.getElements().add(new MoveTo(110, 65));
+        path.getElements().add(new LineTo(110, 75));
 
         PathTransition transition = new PathTransition();
         transition.setNode(paneValorTotalPedido);
@@ -247,8 +247,8 @@ public class ControllerFecharPedidoCartaoScreen implements Initializable {
     @FXML
     private void deslizarPainelDescontoCima() {
         Path path = new Path();
-        path.getElements().add(new MoveTo(110, 70));
-        path.getElements().add(new LineTo(110, 46));
+        path.getElements().add(new MoveTo(110, 75));
+        path.getElements().add(new LineTo(110, 65));
 
         PathTransition transition = new PathTransition();
         transition.setNode(paneDesconto);
@@ -260,8 +260,8 @@ public class ControllerFecharPedidoCartaoScreen implements Initializable {
     @FXML
     private void deslizarPainelDescontoBaixo() {
         Path path = new Path();
-        path.getElements().add(new MoveTo(110, 46));
-        path.getElements().add(new LineTo(110, 70));
+        path.getElements().add(new MoveTo(110, 65));
+        path.getElements().add(new LineTo(110, 75));
 
         PathTransition transition = new PathTransition();
         transition.setNode(paneDesconto);
@@ -273,8 +273,8 @@ public class ControllerFecharPedidoCartaoScreen implements Initializable {
     @FXML
     private void deslizarPainelQtdParcelasCima() {
         Path path = new Path();
-        path.getElements().add(new MoveTo(110, 70));
-        path.getElements().add(new LineTo(110, 46));
+        path.getElements().add(new MoveTo(110, 75));
+        path.getElements().add(new LineTo(110, 65));
 
         PathTransition transition = new PathTransition();
         transition.setNode(paneQtdParcelas);
@@ -286,8 +286,8 @@ public class ControllerFecharPedidoCartaoScreen implements Initializable {
     @FXML
     private void deslizarPainelQtdParcelasBaixo() {
         Path path = new Path();
-        path.getElements().add(new MoveTo(110, 46));
-        path.getElements().add(new LineTo(110, 70));
+        path.getElements().add(new MoveTo(110, 65));
+        path.getElements().add(new LineTo(110, 75));
 
         PathTransition transition = new PathTransition();
         transition.setNode(paneQtdParcelas);

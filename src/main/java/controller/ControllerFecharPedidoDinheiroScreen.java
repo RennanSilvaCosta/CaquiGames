@@ -217,8 +217,8 @@ public class ControllerFecharPedidoDinheiroScreen implements Initializable {
     @FXML
     private void deslizarPainelValorTotalCima() {
         Path path = new Path();
-        path.getElements().add(new MoveTo(110, 70));
-        path.getElements().add(new LineTo(110, 46));
+        path.getElements().add(new MoveTo(110, 75));
+        path.getElements().add(new LineTo(110, 65));
 
         PathTransition transition = new PathTransition();
         transition.setNode(paneValorTotalPedido);
@@ -230,8 +230,8 @@ public class ControllerFecharPedidoDinheiroScreen implements Initializable {
     @FXML
     private void deslizarPainelValorTotalBaixo() {
         Path path = new Path();
-        path.getElements().add(new MoveTo(110, 46));
-        path.getElements().add(new LineTo(110, 70));
+        path.getElements().add(new MoveTo(110, 65));
+        path.getElements().add(new LineTo(110, 75));
 
         PathTransition transition = new PathTransition();
         transition.setNode(paneValorTotalPedido);
@@ -243,8 +243,8 @@ public class ControllerFecharPedidoDinheiroScreen implements Initializable {
     @FXML
     private void deslizarPainelDescontoCima() {
         Path path = new Path();
-        path.getElements().add(new MoveTo(110, 70));
-        path.getElements().add(new LineTo(110, 46));
+        path.getElements().add(new MoveTo(110, 75));
+        path.getElements().add(new LineTo(110, 65));
 
         PathTransition transition = new PathTransition();
         transition.setNode(paneDesconto);
@@ -256,8 +256,8 @@ public class ControllerFecharPedidoDinheiroScreen implements Initializable {
     @FXML
     private void deslizarPainelDescontoBaixo() {
         Path path = new Path();
-        path.getElements().add(new MoveTo(110, 46));
-        path.getElements().add(new LineTo(110, 70));
+        path.getElements().add(new MoveTo(110, 65));
+        path.getElements().add(new LineTo(110, 75));
 
         PathTransition transition = new PathTransition();
         transition.setNode(paneDesconto);
@@ -269,8 +269,8 @@ public class ControllerFecharPedidoDinheiroScreen implements Initializable {
     @FXML
     private void deslizarPainelValorRecebidoCima() {
         Path path = new Path();
-        path.getElements().add(new MoveTo(110, 70));
-        path.getElements().add(new LineTo(110, 46));
+        path.getElements().add(new MoveTo(110, 75));
+        path.getElements().add(new LineTo(110, 65));
 
         PathTransition transition = new PathTransition();
         transition.setNode(paneValorRecebido);
@@ -282,8 +282,8 @@ public class ControllerFecharPedidoDinheiroScreen implements Initializable {
     @FXML
     private void deslizarPainelValorRecebidoBaixo() {
         Path path = new Path();
-        path.getElements().add(new MoveTo(110, 46));
-        path.getElements().add(new LineTo(110, 70));
+        path.getElements().add(new MoveTo(110, 65));
+        path.getElements().add(new LineTo(110, 75));
 
         PathTransition transition = new PathTransition();
         transition.setNode(paneValorRecebido);
@@ -295,8 +295,8 @@ public class ControllerFecharPedidoDinheiroScreen implements Initializable {
     @FXML
     private void deslizarPainelTrocoCima() {
         Path path = new Path();
-        path.getElements().add(new MoveTo(110, 70));
-        path.getElements().add(new LineTo(110, 46));
+        path.getElements().add(new MoveTo(110, 75));
+        path.getElements().add(new LineTo(110, 65));
 
         PathTransition transition = new PathTransition();
         transition.setNode(paneTroco);
@@ -308,8 +308,8 @@ public class ControllerFecharPedidoDinheiroScreen implements Initializable {
     @FXML
     private void deslizarPainelTrocoBaixo() {
         Path path = new Path();
-        path.getElements().add(new MoveTo(110, 46));
-        path.getElements().add(new LineTo(110, 70));
+        path.getElements().add(new MoveTo(110, 65));
+        path.getElements().add(new LineTo(110, 75));
 
         PathTransition transition = new PathTransition();
         transition.setNode(paneTroco);

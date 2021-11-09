@@ -16,7 +16,7 @@
         <Pane fx:id="paneColor" layoutY="-50.0" prefHeight="700.0" prefWidth="265.0" style="-fx-border-color: black; -fx-background-radius: 18 18 18 18; -fx-border-radius: 18 18 18 18;" stylesheets="@../stylesheets/styleMain.css">
             <JFXListView fx:id="listViewMainMenu" layoutY="211.0" onMouseClicked="#clickItemList" prefHeight="330.0" prefWidth="265.0" stylesheets="@../stylesheets/styleListView.css" />
         </Pane>
-        <Pane fx:id="paneTotalVendido" layoutX="313.0" layoutY="150.0" prefHeight="150.0" prefWidth="200.0" style="-fx-background-radius: 10 10 10 10; -fx-background-color: fff;">
+        <Pane fx:id="paneTotalVendido" layoutX="313.0" layoutY="150.0" onMouseEntered="#deslizarPainelTotalVendidoCima" onMouseExited="#deslizarPainelTotalVendidoBaixo" prefHeight="150.0" prefWidth="200.0" style="-fx-background-radius: 10 10 10 10; -fx-background-color: fff;">
             <children>
                 <Pane fx:id="imgPaneTotalVendido" layoutX="14.0" layoutY="-25.0" prefHeight="100.0" prefWidth="110.0" style="-fx-background-radius: 10 10 10 10; -fx-background-color: #56CAA4;">
                     <children>
@@ -39,7 +39,7 @@
                 </Label>
             </children>
         </Pane>
-        <Pane fx:id="paneTotalPedidos" layoutX="526.0" layoutY="150.0" prefHeight="150.0" prefWidth="200.0" style="-fx-background-radius: 10 10 10 10; -fx-background-color: fff;">
+        <Pane fx:id="paneTotalPedidos" layoutX="526.0" layoutY="150.0" onMouseEntered="#deslizarPainelTotalPedidosCima" onMouseExited="#deslizarPainelTotalPedidosBaixo" prefHeight="150.0" prefWidth="200.0" style="-fx-background-radius: 10 10 10 10; -fx-background-color: fff;">
             <children>
                 <Pane layoutX="14.0" layoutY="-25.0" prefHeight="100.0" prefWidth="110.0" style="-fx-background-radius: 10 10 10 10; -fx-background-color: #FF7C00;">
                     <children>
@@ -62,7 +62,7 @@
                 </Label>
             </children>
         </Pane>
-        <Pane fx:id="paneProdutoEstoque" layoutX="737.0" layoutY="150.0" prefHeight="150.0" prefWidth="200.0" style="-fx-background-radius: 10 10 10 10; -fx-background-color: fff;">
+        <Pane fx:id="paneProdutoEstoque" layoutX="737.0" layoutY="150.0" onMouseEntered="#deslizarPainelProdutoEstoqueCima" onMouseExited="#deslizarPainelProdutoEstoqueBaixo" prefHeight="150.0" prefWidth="200.0" style="-fx-background-radius: 10 10 10 10; -fx-background-color: fff;">
             <children>
                 <Pane layoutX="14.0" layoutY="-25.0" prefHeight="100.0" prefWidth="110.0" style="-fx-background-radius: 10 10 10 10; -fx-background-color: #FF0000;">
                     <children>
