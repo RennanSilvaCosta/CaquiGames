@@ -17,10 +17,13 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import model.Funcionario;
+import service.MainService;
 import session.UserSession;
+import utils.Helper;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -31,6 +34,16 @@ public class ControllerMainScreen implements Initializable {
 
     private double xOffset = 0;
     private double yOffset = 0;
+
+    public static Label txtTotalVendidoStatic;
+    public static Label txtTotalPedidoStatic;
+    public static Label txtProdutosEstoqueStatic;
+
+    public static Pane paneTotalVendidoStatic;
+    public static Pane paneTotalPedidosStatic;
+    public static Pane paneProdutoEstoqueStatic;
+
+    MainService mainService = new MainService();
 
     Funcionario func;
 
@@ -47,12 +60,23 @@ public class ControllerMainScreen implements Initializable {
 
     //Labels
     @FXML
+    Label txtDia;
+    @FXML
     Label txtSaudacao;
+    @FXML
+    Label txtTotalVendido;
+    @FXML
+    Label txtTotalPedido;
+    @FXML
+    Label txtProdutosEstoque;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         func = UserSession.getFuncionario();
         txtSaudacao.setText(txtSaudacao.getText() + func.getNome());
+        txtDia.setText(txtDia.getText() + Helper.converteDataParaString(LocalDate.now()));
+
+        inicializaComponentesEstaticos();
         inicializaResumo();
         inicializaMainMenu();
     }
@@ -142,10 +166,23 @@ public class ControllerMainScreen implements Initializable {
         }
     }
 
+    private void inicializaComponentesEstaticos() {
+        txtTotalVendidoStatic = txtTotalVendido;
+        txtTotalPedidoStatic = txtTotalPedido;
+        txtProdutosEstoqueStatic = txtProdutosEstoque;
+        paneTotalVendidoStatic = paneTotalVendido;
+        paneTotalPedidosStatic = paneTotalPedidos;
+        paneProdutoEstoqueStatic = paneProdutoEstoque;
+    }
+
     public void inicializaResumo() {
-        new FadeInDown(paneTotalVendido).setSpeed(0.5).play();
-        new FadeInDown(paneTotalPedidos).setSpeed(0.5).play();
-        new FadeInDown(paneProdutoEstoque).setSpeed(0.5).play();
+        new FadeInDown(paneTotalVendidoStatic).setSpeed(0.5).play();
+        new FadeInDown(paneTotalPedidosStatic).setSpeed(0.5).play();
+        new FadeInDown(paneProdutoEstoqueStatic).setSpeed(0.5).play();
+
+        txtTotalVendidoStatic.setText(Helper.formataValor(mainService.obterTotalVendido()));
+        txtTotalPedidoStatic.setText(String.valueOf(mainService.obterTotalPedidos()));
+        txtProdutosEstoqueStatic.setText(String.valueOf(mainService.obterTotalProdutos()));
     }
 
     @FXML

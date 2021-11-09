@@ -121,6 +121,8 @@ public class ControllerProdutoScreen implements Initializable {
     }
 
     public void fecharJanela() {
+        ControllerMainScreen c = new ControllerMainScreen();
+        c.inicializaResumo();
         listaProdutosStatic.getItems().clear();
         Stage stage = (Stage) btnSair.getScene().getWindow();
         stage.close();

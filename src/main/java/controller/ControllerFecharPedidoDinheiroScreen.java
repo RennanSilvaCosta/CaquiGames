@@ -116,6 +116,7 @@ public class ControllerFecharPedidoDinheiroScreen implements Initializable {
 
     @FXML
     private void finalizarVenda() {
+        ControllerMainScreen c = new ControllerMainScreen();
         try {
             func = UserSession.getFuncionario();
             pedido.setFuncionario(func);
@@ -125,6 +126,7 @@ public class ControllerFecharPedidoDinheiroScreen implements Initializable {
                 pedido.setCliente(cliente);
                 pedidoService.salvarPedido(pedido);
                 fecharJanela();
+                c.inicializaResumo();
             } else {
                 throw new NenhumClienteSelecionadoException();
             }

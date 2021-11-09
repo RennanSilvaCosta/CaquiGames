@@ -114,6 +114,7 @@ public class ControllerVendaScreen implements Initializable {
         timeline.getKeyFrames().add(kf);
         timeline.setOnFinished(t -> parentContainer.getChildren().remove(anchorRoot));
         timeline.play();
+        zerarLabels();
     }
 
     @FXML
@@ -158,7 +159,7 @@ public class ControllerVendaScreen implements Initializable {
     }
 
     public void fecharJanela() {
-        valorTotal = 0;
+        zerarLabels();
         Stage stage = (Stage) btnSair.getScene().getWindow();
         stage.close();
     }
@@ -170,5 +171,9 @@ public class ControllerVendaScreen implements Initializable {
         } else if (evt.getCode() == KeyCode.F8) {
             fecharPedido();
         }
+    }
+
+    public void zerarLabels() {
+        valorTotal = 0;
     }
 }
