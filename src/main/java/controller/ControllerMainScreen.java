@@ -13,6 +13,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.LineTo;
@@ -89,17 +91,19 @@ public class ControllerMainScreen implements Initializable {
 
     private void inicializaMainMenu() {
         Map<String, String> itemList = new HashMap<>();
-        itemList.put("Vendas", "");
-        itemList.put("Produtos", "");
-        itemList.put("Clientes", "");
-        itemList.put("Relatórios", "");
+        itemList.put("Vendas", "icons/menu/icon-vendas-menu.png");
+        itemList.put("Produtos", "icons/menu/icon-produto-menu.png");
+        itemList.put("Clientes", "icons/menu/icon-cliente-menu.png");
+        itemList.put("Relatórios", "icons/menu/icon-relatorio-menu.png");
 
         if (func.getPerfil().equals("ADM")) {
-            itemList.put("Funcionarios", "");
+            itemList.put("Funcionarios", "icons/menu/icon-funcionario-menu.png");
         }
 
         for (String labelsItemList : itemList.keySet()) {
             Label itemListView = new Label(labelsItemList);
+            itemListView.setGraphic(new ImageView(new Image(itemList.get(labelsItemList))));
+            itemListView.setGraphicTextGap(20);
             itemListView.getStyleClass().add("label-style-jfx");
             listViewMainMenu.getItems().add(itemListView);
         }

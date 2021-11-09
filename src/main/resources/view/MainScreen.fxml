@@ -85,14 +85,14 @@
                 </Label>
             </children>
         </Pane>
-      <Label fx:id="txtSaudacao" alignment="CENTER" layoutX="310.0" layoutY="22.0" prefHeight="27.0" prefWidth="630.0" text="Bem vindo de volta ">
+      <Label fx:id="txtSaudacao" alignment="CENTER" layoutX="310.0" layoutY="22.0" prefHeight="27.0" prefWidth="630.0" text="Bem vindo de volta " textFill="#575757">
          <font>
             <Font name="Ebrima" size="18.0" />
          </font>
       </Label>
-      <Label fx:id="txtDia" alignment="CENTER" layoutX="314.0" layoutY="49.0" prefHeight="27.0" prefWidth="630.0" text="Resumo do dia ">
+      <Label fx:id="txtDia" alignment="CENTER" layoutX="314.0" layoutY="49.0" prefHeight="27.0" prefWidth="630.0" text="Resumo do dia " textFill="#575757">
          <font>
-            <Font name="Ebrima" size="18.0" />
+            <Font name="Ebrima" size="14.0" />
          </font>
       </Label>
     </Pane>

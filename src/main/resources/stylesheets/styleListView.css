@@ -4,6 +4,7 @@
 
 .jfx-list-cell:hover {
     -fx-background-color: #FF6800;
+
 }
 
 .jfx-list-cell {
@@ -18,4 +19,5 @@
 .label-style-jfx {
     -fx-font-size: 14;
     -fx-font-weight: bold;
+    -fx-text-fill: white;
 }
