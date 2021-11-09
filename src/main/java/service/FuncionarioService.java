@@ -2,10 +2,7 @@ package service;
 
 import dao.FuncionarioDAO;
 import dto.FuncionarioDTO;
-import exceptions.CPFInvalidoException;
-import exceptions.CPFJaExisteException;
-import exceptions.EmailInvalidoException;
-import exceptions.SenhaInvalidaException;
+import exceptions.*;
 import model.Funcionario;
 import session.UserSession;
 import utils.ValidaCPF;
@@ -23,7 +20,11 @@ public class FuncionarioService {
     public void cadastraFuncionario(Funcionario funcionario) throws CPFJaExisteException, CPFInvalidoException {
         if (isCPFValid(funcionario.getCpf())) {
             if (!isCPFExiste(funcionario.getCpf())) {
-                funcionarioDAO.criaFuncionario(funcionario);
+                if (!isEmailExiste(funcionario.getEmail())) {
+                    funcionarioDAO.criaFuncionario(funcionario);
+                } else {
+                    throw new EmailJaExisteException();
+                }
             } else {
                 throw new CPFJaExisteException();
             }
@@ -32,12 +33,16 @@ public class FuncionarioService {
         }
     }
 
-    private boolean isCPFValid( String cpf ) throws CPFJaExisteException {
-        return validaCPF.isCPFValido( cpf );
+    private boolean isCPFValid(String cpf) throws CPFJaExisteException {
+        return validaCPF.isCPFValido(cpf);
     }
 
-    private boolean isCPFExiste( String cpf ) throws NoResultException, CPFJaExisteException {
-        return funcionarioDAO.isFuncionarioExiste( cpf );
+    private boolean isCPFExiste(String cpf) throws NoResultException, CPFJaExisteException {
+        return funcionarioDAO.isFuncionarioExiste(cpf);
+    }
+
+    private boolean isEmailExiste(String email) {
+        return funcionarioDAO.isEmailExiste(email);
     }
 
     public List<Funcionario> buscaTodosFuncionarios() {

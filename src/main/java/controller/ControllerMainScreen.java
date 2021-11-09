@@ -1,7 +1,6 @@
 package controller;
 
 import animatefx.animation.FadeIn;
-import animatefx.animation.FadeInDown;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
 import exceptions.OpcaoInvalidaException;
@@ -17,6 +16,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.LineTo;
 import javafx.scene.shape.MoveTo;
 import javafx.scene.shape.Path;
@@ -29,6 +30,8 @@ import service.MainService;
 import session.UserSession;
 import utils.Helper;
 
+import javax.swing.*;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
@@ -77,14 +80,23 @@ public class ControllerMainScreen implements Initializable {
     Label txtTotalPedido;
     @FXML
     Label txtProdutosEstoque;
+    @FXML
+    Label txtNomeFuncionario;
+    @FXML
+    Label txtEmailFuncionario;
+
+
+    @FXML
+    Circle fotoPerfil;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        inicializaComponentesEstaticos();
         func = UserSession.getFuncionario();
         txtSaudacao.setText(txtSaudacao.getText() + func.getNome());
+        txtNomeFuncionario.setText(func.getNome());
+        txtEmailFuncionario.setText(func.getEmail());
         txtDia.setText(txtDia.getText() + Helper.converteDataParaString(LocalDate.now()));
-
-        inicializaComponentesEstaticos();
         inicializaResumo();
         inicializaMainMenu();
     }

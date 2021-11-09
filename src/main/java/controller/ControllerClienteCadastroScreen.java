@@ -16,13 +16,13 @@ import service.ClienteService;
 import utils.Helper;
 
 import java.net.URL;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
 
 import static service.ViaCepService.buscaEnderecoViaCep;
 import static utils.Helper.converteDataParaString;
 import static utils.Helper.converteStringParaData;
+
 
 public class ControllerClienteCadastroScreen implements Initializable {
 
@@ -114,6 +114,7 @@ public class ControllerClienteCadastroScreen implements Initializable {
         this.cliente.setDataNasc(converteStringParaData(txtDataNascimento.getText()));
         this.cliente.setCelular(txtCelular.getText());
         this.cliente.setEndereco(end);
+        //validaFormCadastroCliente(cliente);
     }
 
     private void populaEndereco() {

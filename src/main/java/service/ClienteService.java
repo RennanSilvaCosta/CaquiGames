@@ -3,6 +3,7 @@ package service;
 import dao.ClienteDAO;
 import exceptions.CPFInvalidoException;
 import exceptions.CPFJaExisteException;
+import exceptions.EmailJaExisteException;
 import model.Cliente;
 import utils.ValidaCPF;
 
@@ -17,7 +18,11 @@ public class ClienteService {
     public void cadastraCliente(Cliente cliente) throws CPFJaExisteException, CPFInvalidoException {
         if (isCPFValid(cliente.getCpf())) {
             if (!isCPFExiste(cliente.getCpf())) {
-                clienteDAO.criaCliente(cliente);
+                if (!isEmailExiste(cliente.getEmail())) {
+                    clienteDAO.criaCliente(cliente);
+                } else {
+                    throw new EmailJaExisteException();
+                }
             } else {
                 throw new CPFJaExisteException();
             }
@@ -32,6 +37,10 @@ public class ClienteService {
 
     private boolean isCPFExiste(String cpf) throws NoResultException, CPFJaExisteException {
         return clienteDAO.isClienteExiste(cpf);
+    }
+
+    private boolean isEmailExiste(String email) {
+        return clienteDAO.isEmailExiste(email);
     }
 
     public List<Cliente> buscaTodosClientes() {

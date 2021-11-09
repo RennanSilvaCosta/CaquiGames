@@ -63,4 +63,12 @@ public class ClienteDAO {
         return typedQuery.getSingleResult();
     }
 
+    public boolean isEmailExiste(String email) {
+        String getClientePorEmail = "SELECT c FROM Cliente c WHERE c.email = :email";
+        TypedQuery<Cliente> typedQuery = entityManager
+                .createQuery(getClientePorEmail, Cliente.class)
+                .setParameter("email", email);
+        List<Cliente> resultList = typedQuery.getResultList();
+        return !resultList.isEmpty();
+    }
 }

@@ -6,8 +6,8 @@
 <?import javafx.scene.text.*?>
 <?import utils.*?>
 
-<Pane prefHeight="559.0" prefWidth="922.0" style="-fx-background-color: #FF7C00; -fx-background-radius: 10 10 10 10;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerFuncionarioCadastroScreen">
-    <Pane layoutX="20.0" layoutY="66.0" prefHeight="480.0" prefWidth="881.0" style="-fx-background-color: #F8F7FC; -fx-background-radius: 10 10 10 10;">
+<Pane prefHeight="670.0" prefWidth="922.0" style="-fx-background-color: #FF7C00; -fx-background-radius: 10 10 10 10;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerFuncionarioCadastroScreen">
+    <Pane layoutX="21.0" layoutY="66.0" prefHeight="590.0" prefWidth="881.0" style="-fx-background-color: #F8F7FC; -fx-background-radius: 10 10 10 10;">
         <Label layoutX="39.0" layoutY="29.0" text="DADOS DE IDENTIFICAÇÃO" textFill="#a3a3a3">
             <font>
                 <Font name="Ebrima Bold" size="14.0" />
@@ -25,27 +25,28 @@
                 <Font name="Ebrima" size="14.0" />
             </font>
         </JFXTextField>
-        <MaskedTextField fx:id="txtCpf" focusColor="#ff6800" labelFloat="true" layoutX="39.0" layoutY="135.0" mask="###.###.###-##" placeholder=" " prefHeight="40.0" prefWidth="360.0" promptText="CPF" unFocusColor="#ff7c00">
+        <MaskedTextField fx:id="txtCpf" focusColor="#ff6800" labelFloat="true" layoutX="39.0" layoutY="166.0" mask="###.###.###-##" placeholder=" " prefHeight="40.0" prefWidth="360.0" promptText="CPF" unFocusColor="#ff7c00">
             <font>
                 <Font name="Ebrima" size="14.0" />
             </font>
         </MaskedTextField>
-        <JFXTextField fx:id="txtEmail" focusColor="#ff6800" labelFloat="true" layoutX="39.0" layoutY="205.0" prefHeight="40.0" prefWidth="170.0" promptText="EMAIL" unFocusColor="#ff7c00">
+        <JFXTextField fx:id="txtEmail" focusColor="#ff6800" labelFloat="true" layoutX="39.0" layoutY="245.0" prefHeight="40.0" prefWidth="170.0" promptText="EMAIL" unFocusColor="#ff7c00">
             <font>
                 <Font name="Ebrima" size="14.0" />
             </font>
         </JFXTextField>
-        <JFXPasswordField fx:id="txtSenha" focusColor="#ff6800" labelFloat="true" layoutX="229.0" layoutY="205.0" prefHeight="40.0" prefWidth="170.0" promptText="SENHA" unFocusColor="#ff7c00">
+        <JFXPasswordField fx:id="txtSenha" focusColor="#ff6800" labelFloat="true" layoutX="229.0" layoutY="245.0" prefHeight="40.0" prefWidth="170.0" promptText="SENHA" unFocusColor="#ff7c00">
             <font>
                 <Font name="Ebrima" size="14.0" />
             </font>
         </JFXPasswordField>
-        <MaskedTextField fx:id="txtDataNascimento" focusColor="#ff6800" labelFloat="true" layoutX="39.0" layoutY="357.0" mask="##/##/####" prefHeight="40.0" prefWidth="170.0" promptText="DATA NASCIMENTO" unFocusColor="#ff7c00">
+        <JFXComboBox fx:id="comboBoxPerfil" focusColor="#ff6800" layoutX="39.0" layoutY="336.0" prefHeight="40.0" prefWidth="170.0" promptText="PERFIL" unFocusColor="#ff7c00" />
+        <MaskedTextField fx:id="txtCelular" focusColor="#ff6800" labelFloat="true" layoutX="229.0" layoutY="336.0" mask="(##)#####-####" prefHeight="40.0" prefWidth="170.0" promptText="CELULAR" unFocusColor="#ff7c00">
             <font>
                 <Font name="Ebrima" size="14.0" />
             </font>
         </MaskedTextField>
-        <MaskedTextField fx:id="txtCelular" focusColor="#ff6800" labelFloat="true" layoutX="229.0" layoutY="277.0" mask="(##)#####-####" prefHeight="40.0" prefWidth="170.0" promptText="CELULAR" unFocusColor="#ff7c00">
+        <MaskedTextField fx:id="txtDataNascimento" focusColor="#ff6800" labelFloat="true" layoutX="39.0" layoutY="436.0" mask="##/##/####" prefHeight="40.0" prefWidth="170.0" promptText="DATA NASCIMENTO" unFocusColor="#ff7c00">
             <font>
                 <Font name="Ebrima" size="14.0" />
             </font>
@@ -60,37 +61,45 @@
                 <Font name="Ebrima" size="14.0" />
             </font>
         </JFXTextField>
-        <JFXTextField fx:id="txtCidade" disable="true" focusColor="#ff6800" labelFloat="true" layoutX="483.0" layoutY="135.0" prefHeight="40.0" prefWidth="170.0" promptText="CIDADE" unFocusColor="#ff7c00">
+        <JFXTextField fx:id="txtCidade" disable="true" focusColor="#ff6800" labelFloat="true" layoutX="480.0" layoutY="154.0" prefHeight="40.0" prefWidth="170.0" promptText="CIDADE" unFocusColor="#ff7c00">
             <font>
                 <Font name="Ebrima" size="14.0" />
             </font>
         </JFXTextField>
-        <JFXTextField fx:id="txtBairro" disable="true" focusColor="#ff6800" labelFloat="true" layoutX="680.0" layoutY="135.0" prefHeight="40.0" prefWidth="170.0" promptText="BAIRRO" unFocusColor="#ff7c00">
+        <JFXTextField fx:id="txtBairro" disable="true" focusColor="#ff6800" labelFloat="true" layoutX="677.0" layoutY="154.0" prefHeight="40.0" prefWidth="170.0" promptText="BAIRRO" unFocusColor="#ff7c00">
             <font>
                 <Font name="Ebrima" size="14.0" />
             </font>
         </JFXTextField>
-        <JFXTextField fx:id="txtLogradouro" disable="true" focusColor="#ff6800" labelFloat="true" layoutX="483.0" layoutY="205.0" prefHeight="40.0" prefWidth="360.0" promptText="LOGRADOURO" unFocusColor="#ff7c00">
+        <JFXTextField fx:id="txtLogradouro" disable="true" focusColor="#ff6800" labelFloat="true" layoutX="480.0" layoutY="224.0" prefHeight="40.0" prefWidth="360.0" promptText="LOGRADOURO" unFocusColor="#ff7c00">
             <font>
                 <Font name="Ebrima" size="14.0" />
             </font>
         </JFXTextField>
-        <JFXTextField fx:id="txtNumero" focusColor="#ff6800" labelFloat="true" layoutX="483.0" layoutY="277.0" prefHeight="40.0" prefWidth="170.0" promptText="NUMERO" unFocusColor="#ff7c00">
+        <JFXTextField fx:id="txtNumero" focusColor="#ff6800" labelFloat="true" layoutX="480.0" layoutY="296.0" prefHeight="40.0" prefWidth="170.0" promptText="NUMERO" unFocusColor="#ff7c00">
             <font>
                 <Font name="Ebrima" size="14.0" />
             </font>
         </JFXTextField>
-        <JFXTextField fx:id="txtComplemento" focusColor="#ff6800" labelFloat="true" layoutX="680.0" layoutY="277.0" prefHeight="40.0" prefWidth="170.0" promptText="COMPLEMENTO" unFocusColor="#ff7c00">
+        <JFXTextField fx:id="txtComplemento" focusColor="#ff6800" labelFloat="true" layoutX="677.0" layoutY="296.0" prefHeight="40.0" prefWidth="170.0" promptText="COMPLEMENTO" unFocusColor="#ff7c00">
             <font>
                 <Font name="Ebrima" size="14.0" />
             </font>
         </JFXTextField>
-        <JFXButton fx:id="btnSalvarFuncionario" buttonType="RAISED" layoutX="313.0" layoutY="416.0" mnemonicParsing="false" onAction="#persistirFuncionario" prefHeight="50.0" prefWidth="300.0" style="-fx-background-color: #56CAA4; -fx-background-radius: 20 20 20 20;" text="SALVAR CADASTRO" textFill="WHITE">
+        <JFXButton fx:id="btnSalvarFuncionario" buttonType="RAISED" layoutX="313.0" layoutY="526.0" mnemonicParsing="false" onAction="#persistirFuncionario" prefHeight="50.0" prefWidth="300.0" style="-fx-background-color: #56CAA4; -fx-background-radius: 20 20 20 20;" text="SALVAR CADASTRO" textFill="WHITE">
             <font>
                 <Font name="Ebrima" size="14.0" />
             </font>
         </JFXButton>
-      <JFXComboBox fx:id="comboBoxPerfil" focusColor="#ff6800" layoutX="39.0" layoutY="277.0" prefHeight="40.0" prefWidth="170.0" promptText="PERFIL" unFocusColor="#ff7c00" />
+      <Label fx:id="lblErrorNome" layoutX="53.0" layoutY="116.0" textFill="RED" />
+      <Label fx:id="lblErrorCPF" layoutX="53.0" layoutY="208.0" textFill="RED" />
+      <Label fx:id="lblErrorEmail" layoutX="53.0" layoutY="289.0" textFill="RED" />
+      <Label fx:id="lblErrorSenha" layoutX="237.0" layoutY="289.0" textFill="RED" />
+      <Label fx:id="lblErrorPerfil" layoutX="53.0" layoutY="380.0" textFill="RED" />
+      <Label fx:id="lblErrorTelefone" layoutX="237.0" layoutY="380.0" textFill="RED" />
+      <Label fx:id="lblErrorNumero" layoutX="490.0" layoutY="340.0" textFill="RED" />
+      <Label fx:id="lblErrorCEP" layoutX="490.0" layoutY="116.0" textFill="RED" />
+      <Label fx:id="lblErrorData" layoutX="53.0" layoutY="478.0" textFill="RED" />
     </Pane>
     <JFXButton fx:id="btnSair" layoutX="886.0" mnemonicParsing="false" onAction="#fecharCadastroFuncionario" prefHeight="35.0" prefWidth="35.0" styleClass="btnSair" stylesheets="@../stylesheets/styleButton.css" text="x" textFill="WHITE">
         <font>

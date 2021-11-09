@@ -14,7 +14,17 @@
             </font>
         </JFXButton>
         <Pane fx:id="paneColor" layoutY="-50.0" prefHeight="700.0" prefWidth="265.0" style="-fx-border-color: black; -fx-background-radius: 18 18 18 18; -fx-border-radius: 18 18 18 18;" stylesheets="@../stylesheets/styleMain.css">
-            <JFXListView fx:id="listViewMainMenu" layoutY="211.0" onMouseClicked="#clickItemList" prefHeight="330.0" prefWidth="265.0" stylesheets="@../stylesheets/styleListView.css" />
+            <JFXListView fx:id="listViewMainMenu" layoutY="264.0" onMouseClicked="#clickItemList" prefHeight="330.0" prefWidth="265.0" stylesheets="@../stylesheets/styleListView.css" />
+         <Label fx:id="txtNomeFuncionario" layoutX="14.0" layoutY="164.0" prefHeight="27.0" prefWidth="238.0" textFill="WHITE">
+            <font>
+               <Font name="Ebrima Bold" size="14.0" />
+            </font>
+         </Label>
+         <Label fx:id="txtEmailFuncionario" layoutX="14.0" layoutY="191.0" prefHeight="27.0" prefWidth="238.0" textFill="WHITE">
+            <font>
+               <Font name="Ebrima Bold" size="14.0" />
+            </font>
+         </Label>
         </Pane>
         <Pane fx:id="paneTotalVendido" layoutX="313.0" layoutY="150.0" onMouseEntered="#deslizarPainelTotalVendidoCima" onMouseExited="#deslizarPainelTotalVendidoBaixo" prefHeight="150.0" prefWidth="200.0" style="-fx-background-radius: 10 10 10 10; -fx-background-color: fff;">
             <children>

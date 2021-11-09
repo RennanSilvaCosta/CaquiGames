@@ -33,8 +33,10 @@ public class MainDAO {
     }
 
     public BigInteger obterTotalPedidos() {
+        Funcionario func = UserSession.getFuncionario();
         entityManager.getTransaction().begin();
-        Query query = entityManager.createNativeQuery("SELECT COUNT(pedido.id) AS 'totalPedidos' FROM pedido");
+        Query query = entityManager.createNativeQuery("SELECT COUNT(pedido.id) AS 'totalPedidos' FROM pedido WHERE pedido.id_funcionario = :idFunc");
+        query.setParameter("idFunc", func.getId());
         entityManager.getTransaction().commit();
         return (BigInteger) query.getSingleResult();
     }

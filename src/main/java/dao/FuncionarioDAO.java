@@ -60,7 +60,7 @@ public class FuncionarioDAO {
     }
 
     public boolean isFuncionarioExiste(String cpf) {
-        String getClientePorCPF = "SELECT f FROM Funcionario f WHERE cpf = :cpf";
+        String getClientePorCPF = "SELECT f FROM Funcionario f WHERE f.cpf = :cpf";
         TypedQuery<Funcionario> typedQuery = entityManager
                 .createQuery(getClientePorCPF, Funcionario.class)
                 .setParameter("cpf", cpf);
@@ -69,11 +69,19 @@ public class FuncionarioDAO {
     }
 
     public Funcionario buscaFuncionarioPorCPF(String cpf) throws NoResultException {
-        String getFuncionarioPorCPF = "SELECT f FROM Funcionario f WHERE cpf = :cpf";
+        String getFuncionarioPorCPF = "SELECT f FROM Funcionario f WHERE f.cpf = :cpf";
         TypedQuery<Funcionario> typedQuery = entityManager
                 .createQuery(getFuncionarioPorCPF, Funcionario.class)
                 .setParameter("cpf", cpf);
         return typedQuery.getSingleResult();
     }
 
+    public boolean isEmailExiste(String email) {
+        String getClientePorEmail = "SELECT f FROM Funcionario f WHERE f.email = :email";
+        TypedQuery<Funcionario> typedQuery = entityManager
+                .createQuery(getClientePorEmail, Funcionario.class)
+                .setParameter("email", email);
+        List<Funcionario> resultList = typedQuery.getResultList();
+        return !resultList.isEmpty();
+    }
 }

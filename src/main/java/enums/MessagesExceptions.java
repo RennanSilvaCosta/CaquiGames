@@ -11,7 +11,10 @@ public enum MessagesExceptions {
     CPF_INVALIDO("O CPF digitado é inválido!"),
     VALOR_INVALIDO("O valor informado é inválido!"),
     CAMPO_OBRIGATORIO("Preencha os campos obrigatórios!"),
-    DATA_INVALIDA("A data informada não é valida, por favor informe uma data válida!");
+    DATA_INVALIDA("A data informada não é valida, por favor informe uma data válida!"),
+    EMAIL_EXISTENTE("O email informado já existe!"),
+    TELEFONE_INVALIDO("O numero de telefone informado não é valido!"),
+    CEP_INVALIDO("O cep informado não é valido!");
 
     private String value;
 

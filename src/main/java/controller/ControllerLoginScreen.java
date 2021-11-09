@@ -1,5 +1,6 @@
 package controller;
 
+import animatefx.animation.FadeIn;
 import animatefx.animation.Shake;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
@@ -76,9 +77,11 @@ public class ControllerLoginScreen implements Initializable {
 
         } catch (EmailInvalidoException e) {
             txtErrorEmail.setText(e.getMessage());
+            new FadeIn(txtErrorEmail).play();
             new Shake(txtEmail).play();
         } catch (SenhaInvalidaException e) {
             txtErrorSenha.setText(e.getMessage());
+            new FadeIn(txtErrorSenha).play();
             new Shake(txtSenha).play();
         } catch (NoResultException e) {
             abrirDialog("Credenciais Inválidas", "Email ou senha inválidos!",Alert.AlertType.ERROR);

@@ -10,7 +10,7 @@ public class MainService {
     MainDAO mainDAO = new MainDAO();
 
     public Double obterTotalVendido() {
-        return mainDAO.obterTotalVendido();
+         return mainDAO.obterTotalVendido();
     }
 
     public BigInteger obterTotalPedidos() {

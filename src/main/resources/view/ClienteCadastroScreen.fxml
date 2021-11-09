@@ -6,8 +6,8 @@
 <?import javafx.scene.text.*?>
 <?import utils.*?>
 
-<Pane prefHeight="530.0" prefWidth="922.0" style="-fx-background-color: #FF7C00; -fx-background-radius: 10 10 10 10;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerClienteCadastroScreen">
-    <Pane layoutX="20.0" layoutY="66.0" prefHeight="450.0" prefWidth="881.0" style="-fx-background-color: #F8F7FC; -fx-background-radius: 10 10 10 10;">
+<Pane prefHeight="515.0" prefWidth="922.0" style="-fx-background-color: #FF7C00; -fx-background-radius: 10 10 10 10;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerClienteCadastroScreen">
+    <Pane layoutX="20.0" layoutY="66.0" prefHeight="430.0" prefWidth="881.0" style="-fx-background-color: #F8F7FC; -fx-background-radius: 10 10 10 10;">
         <Label layoutX="39.0" layoutY="29.0" text="DADOS DE IDENTIFICAÇÃO" textFill="#a3a3a3">
             <font>
                 <Font name="Ebrima Bold" size="14.0" />
@@ -80,7 +80,7 @@
             <Font name="Ebrima" size="14.0" />
          </font>
       </JFXTextField>
-      <JFXButton fx:id="btnSalvarCliente" buttonType="RAISED" layoutX="313.0" layoutY="372.0" mnemonicParsing="false" onAction="#persistirCliente" prefHeight="50.0" prefWidth="300.0" style="-fx-background-color: #56CAA4; -fx-background-radius: 20 20 20 20;" text="SALVAR CADASTRO" textFill="WHITE">
+      <JFXButton fx:id="btnSalvarCliente" buttonType="RAISED" layoutX="291.0" layoutY="357.0" mnemonicParsing="false" onAction="#persistirCliente" prefHeight="50.0" prefWidth="300.0" style="-fx-background-color: #56CAA4; -fx-background-radius: 20 20 20 20;" text="SALVAR CADASTRO" textFill="WHITE">
          <font>
             <Font name="Ebrima" size="14.0" />
          </font></JFXButton>

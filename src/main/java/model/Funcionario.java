@@ -1,14 +1,16 @@
 package model;
 
 import com.sun.istack.NotNull;
+import dto.FuncionarioValidaDTO;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Funcionario {
+public class Funcionario implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,6 +41,8 @@ public class Funcionario {
     @NotNull
     private String perfil;
 
+    private byte[] image;
+
     @OneToOne(cascade = CascadeType.ALL)
     private Endereco endereco;
 
@@ -58,6 +62,14 @@ public class Funcionario {
         this.senha = senha;
         this.perfil = perfil;
         this.endereco = endereco;
+    }
+
+    public byte[] getImage() {
+        return this.image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 
     public Long getId() {

@@ -26,7 +26,7 @@ public class Cliente implements Serializable {
     @Column(length = 14)
     private String celular;
 
-    @Column(length = 100)
+    @Column(length = 100, unique = true)
     private String email;
 
     @Column(name = "data_nasc")
