@@ -2,17 +2,19 @@ package controller;
 
 import adapter.AdapterListProduto;
 import animatefx.animation.FadeIn;
+import animatefx.animation.Shake;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
+import dto.ProdutoValidaDTO;
 import exceptions.CampoObrigatorioException;
 import exceptions.ValorInvalidoException;
 import javafx.animation.PathTransition;
 import javafx.animation.RotateTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.LineTo;
@@ -25,15 +27,10 @@ import model.Produto;
 import service.CategoriaService;
 import service.ProdutoService;
 import utils.CurrencyField;
-import utils.Helper;
 import validate.Validate;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
-
-import static utils.Helper.abrirDialog;
+import java.util.*;
 
 public class ControllerProdutoCadastroScreen implements Initializable {
 
@@ -41,6 +38,9 @@ public class ControllerProdutoCadastroScreen implements Initializable {
     ProdutoService produtoService = new ProdutoService();
     CategoriaService categoriaService = new CategoriaService();
     Produto produto = new Produto();
+
+    Validate validate = new Validate();
+    Map<String, String> errors = new HashMap<>();
 
     @FXML
     CurrencyField txtValor;
@@ -69,6 +69,17 @@ public class ControllerProdutoCadastroScreen implements Initializable {
     @FXML
     JFXTextField txtCategoria;
 
+    @FXML
+    Label lblErrorProduto;
+    @FXML
+    Label lblErrorDescricao;
+    @FXML
+    Label lblErrorMarca;
+    @FXML
+    Label lblErrorValor;
+    @FXML
+    Label lblErrorEstoque;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         btnAddCategoria.setGraphic(new ImageView(new Image("/icons/mais.png")));
@@ -85,7 +96,8 @@ public class ControllerProdutoCadastroScreen implements Initializable {
     }
 
     public void persistirProduto() {
-        try {
+        errors = validaFormularioCadastroProduto();
+        if (errors.isEmpty()) {
             popularProduto();
             if (this.produto.getId() != null) {
                 produtoService.atualizaProduto(this.produto);
@@ -94,24 +106,18 @@ public class ControllerProdutoCadastroScreen implements Initializable {
             }
             fecharJanela();
             atualizaListaProdutos();
-        }catch (ValorInvalidoException | CampoObrigatorioException e) {
-            abrirDialog("Erro", e.getMessage(), Alert.AlertType.ERROR);
+        } else {
+            setErrorMessages(errors);
         }
     }
 
-    private void popularProduto() throws ValorInvalidoException, CampoObrigatorioException {
+    private void popularProduto()  {
         this.produto.setNome(txtNome.getText());
         this.produto.setDescricao(txtDescricao.getText());
         this.produto.setMarca(txtMarca.getText());
         this.produto.setValor(txtValor.getAmount());
         this.produto.setCategoria(comboCategoria.getSelectionModel().getSelectedItem());
-        String qtdEstoque = txtQtdEstoque.getText();
-        if (qtdEstoque.matches("^[0-9]+$")) {
-            this.produto.setQtdEstoque(Integer.parseInt(qtdEstoque));
-        } else {
-            throw new ValorInvalidoException();
-        }
-        Validate.validaFormCadastroProduto(produto);
+        this.produto.setQtdEstoque(Integer.parseInt(txtQtdEstoque.getText()));
     }
 
     private void atualizaListaProdutos() {
@@ -154,6 +160,50 @@ public class ControllerProdutoCadastroScreen implements Initializable {
             }
         }
         txtCategoria.clear();
+    }
+
+    private Map<String, String> validaFormularioCadastroProduto() {
+        ProdutoValidaDTO dto = new ProdutoValidaDTO();
+        dto.setProduto(txtNome.getText());
+        dto.setDescricao(txtDescricao.getText());
+        dto.setMarca(txtMarca.getText());
+        dto.setValor(txtValor.getAmount());
+        dto.setEstoque(txtQtdEstoque.getText());
+        return validate.validaFormularioCadastroProduto(dto);
+    }
+
+    private void setErrorMessages(Map<String, String> errors) {
+        Set<String> fields = errors.keySet();
+        limparLabelsErro();
+
+        if (fields.contains("nomeProduto")) {
+            lblErrorProduto.setText(errors.get("nomeProduto"));
+            new Shake(txtNome).play();
+        }
+        if (fields.contains("descProduto")) {
+            lblErrorDescricao.setText(errors.get("descProduto"));
+            new Shake(txtDescricao).play();
+        }
+        if (fields.contains("marcaProduto")) {
+            lblErrorMarca.setText(errors.get("marcaProduto"));
+            new Shake(txtMarca).play();
+        }
+        if (fields.contains("valor")) {
+            lblErrorValor.setText(errors.get("valor"));
+            new Shake(txtValor).play();
+        }
+        if (fields.contains("estoque")) {
+            lblErrorEstoque.setText(errors.get("estoque"));
+            new Shake(txtQtdEstoque).play();
+        }
+    }
+
+    private void limparLabelsErro() {
+        lblErrorProduto.setText("");
+        lblErrorDescricao.setText("");
+        lblErrorMarca.setText("");
+        lblErrorValor.setText("");
+        lblErrorEstoque.setText("");
     }
 
     private void deslizaCategoriaBaixo() {

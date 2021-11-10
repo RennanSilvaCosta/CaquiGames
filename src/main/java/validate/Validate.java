@@ -3,6 +3,7 @@ package validate;
 import dto.ClienteValidaDTO;
 import dto.FuncionarioDTO;
 import dto.FuncionarioValidaDTO;
+import dto.ProdutoValidaDTO;
 import exceptions.CampoObrigatorioException;
 import exceptions.EmailInvalidoException;
 import exceptions.SenhaInvalidaException;
@@ -77,11 +78,62 @@ public class Validate {
         return exception.getErrors();
     }
 
+    public Map<String, String> validaFormularioCadastroProduto(ProdutoValidaDTO produto) {
+        exception.getErrors().clear();
+        validaNomeProduto(produto.getProduto());
+        validaDescricaoProduto(produto.getDescricao());
+        validaMarcaProduto(produto.getMarca());
+        validaValorProduto(produto.getValor());
+        validaQtdEstoque(produto.getEstoque());
+        return exception.getErrors();
+    }
+
+    private void validaQtdEstoque(String estoque) {
+        try {
+            int num = Integer.parseInt(estoque);
+            if (num <= 0) {
+                exception.addError("estoque", "A quantidade não poder ser menor ou igual a 0");
+            }
+        } catch (NumberFormatException e) {
+            exception.addError("estoque", "A quantidade informado é inválido!");
+        }
+    }
+
+    private void validaValorProduto(Double valor) {
+        if (valor <= 0) {
+            exception.addError("valor", "O valor não poder ser menor ou igual a 0");
+        }
+    }
+
+    private void validaMarcaProduto(String marcaProduto) {
+        if (marcaProduto == null || marcaProduto.trim().isBlank()) {
+            exception.addError("marcaProduto", "A marca do produto não pode ser nula!");
+        } else if (marcaProduto.length() < 3) {
+            exception.addError("marcaProduto", "A marca deve conter no minimo 3 caracteres");
+        }
+    }
+
+    private void validaDescricaoProduto(String descProduto) {
+        if (descProduto == null || descProduto.trim().isBlank()) {
+            exception.addError("descProduto", "A descrição do produto não pode ser nula!");
+        } else if (descProduto.length() < 10) {
+            exception.addError("descProduto", "A descrição do produto deve conter no minimo 10 caracteres");
+        }
+    }
+
+    private void validaNomeProduto(String nomeProduto) {
+        if (nomeProduto == null || nomeProduto.trim().isBlank()) {
+            exception.addError("nomeProduto", "O nome do produto não pode ser nulo!");
+        } else if (nomeProduto.length() < 3) {
+            exception.addError("nomeProduto", "O nome do produto deve conter no minimo 3 caracteres");
+        }
+    }
+
     private void validateNome(String nome) {
         if (nome == null || nome.trim().isBlank()) {
             exception.addError("nome", "O nome de Usuario não pode ser nulo!");
         } else if (nome.length() < 10) {
-            exception.addError("nome", "O nome deve converter no minimo 10 caracteres");
+            exception.addError("nome", "O nome deve conter no minimo 10 caracteres");
         } else if (nome.matches("^[0-9]+$")) {
             exception.addError("nome", "O nome não pode conter números!");
         }
@@ -99,7 +151,7 @@ public class Validate {
         if (senha == null || senha.trim().isBlank()) {
             exception.addError("senha", "A senha não pode ser nula!");
         } else if (senha.length() < 8) {
-            exception.addError("senha", "A senha tem que ter no minimo 8 caracteres");
+            exception.addError("senha", "A senha deve conter no minimo 8 caracteres");
         }
     }
 
@@ -115,7 +167,7 @@ public class Validate {
         try {
             Helper.converteStringParaData(data);
         } catch (DateTimeParseException e) {
-            exception.addError("data", "A data de nascimetno é inválida!");
+            exception.addError("data", "A data de nascimento é inválida!");
         }
     }
 
@@ -131,7 +183,7 @@ public class Validate {
         try {
             int num = Integer.parseInt(numero);
             if (num <= 0) {
-                exception.addError("numero", "O número não poder menor ou igual a 0");
+                exception.addError("numero", "O número não poder ser menor ou igual a 0");
             }
         } catch (NumberFormatException e) {
             exception.addError("numero", "O número informado é inválido!");

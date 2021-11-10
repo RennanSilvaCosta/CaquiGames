@@ -6,33 +6,38 @@
 <?import javafx.scene.text.*?>
 <?import utils.*?>
 
-<Pane prefHeight="520.0" prefWidth="720.0" style="-fx-background-color: #FF7C00; -fx-background-radius: 10 10 10 10;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerProdutoCadastroScreen">
-    <Pane layoutX="35.0" layoutY="35.0" prefHeight="470.0" prefWidth="650.0" style="-fx-background-color: #F8F7FC; -fx-background-radius: 10 10 10 10;">
+<Pane prefHeight="540.0" prefWidth="720.0" style="-fx-background-color: #FF7C00; -fx-background-radius: 10 10 10 10;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerProdutoCadastroScreen">
+    <Pane layoutX="35.0" layoutY="35.0" prefHeight="490.0" prefWidth="650.0" style="-fx-background-color: #F8F7FC; -fx-background-radius: 10 10 10 10;">
         <JFXTextField fx:id="txtNome" focusColor="#ff6800" labelFloat="true" layoutX="37.0" layoutY="120.0" prefHeight="40.0" prefWidth="300.0" promptText="PRODUTO" unFocusColor="#ff7c00" />
-        <JFXTextArea fx:id="txtDescricao" focusColor="#ff6800" labelFloat="true" layoutX="37.0" layoutY="198.0" prefHeight="40.0" prefWidth="300.0" promptText="DESCRIÇÃO" unFocusColor="#ff7c00" />
+        <JFXTextArea fx:id="txtDescricao" focusColor="#ff6800" labelFloat="true" layoutX="37.0" layoutY="218.0" prefHeight="40.0" prefWidth="300.0" promptText="DESCRIÇÃO" unFocusColor="#ff7c00" />
         <JFXTextField fx:id="txtMarca" focusColor="#ff6800" labelFloat="true" layoutX="394.0" layoutY="120.0" prefHeight="40.0" prefWidth="220.0" promptText="MARCA" unFocusColor="#ff7c00" />
-        <CurrencyField fx:id="txtValor" alignment="CENTER_RIGHT" focusColor="#ff6800" labelFloat="true" layoutX="394.0" layoutY="198.0" prefHeight="40.0" prefWidth="220.0" unFocusColor="#ff7c00">
+        <CurrencyField fx:id="txtValor" alignment="CENTER_RIGHT" focusColor="#ff6800" labelFloat="true" layoutX="394.0" layoutY="218.0" prefHeight="40.0" prefWidth="220.0" unFocusColor="#ff7c00">
          <font>
             <Font name="Ebrima" size="14.0" />
          </font></CurrencyField>
-        <JFXTextField fx:id="txtQtdEstoque" focusColor="#ff6800" labelFloat="true" layoutX="394.0" layoutY="275.0" prefHeight="40.0" prefWidth="220.0" promptText="QTDE. EM ESTOQUE" unFocusColor="#ff7c00" />
-        <JFXButton fx:id="btnSalvarProduto" layoutX="187.0" layoutY="388.0" mnemonicParsing="false" onAction="#persistirProduto" prefHeight="50.0" prefWidth="300.0" style="-fx-background-radius: 20 20 20 20; -fx-background-color: #56CAA4;" text="SALVAR PRODUTO" textFill="WHITE">
+        <JFXTextField fx:id="txtQtdEstoque" focusColor="#ff6800" labelFloat="true" layoutX="394.0" layoutY="315.0" prefHeight="40.0" prefWidth="220.0" promptText="QTDE. EM ESTOQUE" unFocusColor="#ff7c00" />
+        <JFXButton fx:id="btnSalvarProduto" layoutX="187.0" layoutY="426.0" mnemonicParsing="false" onAction="#persistirProduto" prefHeight="50.0" prefWidth="300.0" style="-fx-background-radius: 20 20 20 20; -fx-background-color: #56CAA4;" text="SALVAR PRODUTO" textFill="WHITE">
             <font>
                 <Font name="Ebrima" size="14.0" />
             </font>
         </JFXButton>
         <Separator layoutX="36.0" layoutY="74.0" prefHeight="1.0" prefWidth="580.0" />
-        <Label layoutX="264.0" layoutY="33.0" text="DADOS DO PRODUTO" textFill="#a3a3a3">
+        <Label layoutX="253.0" layoutY="33.0" text="DADOS DO PRODUTO" textFill="#a3a3a3">
             <font>
                 <Font name="Ebrima Bold" size="14.0" />
             </font>
         </Label>
-      <JFXTextField fx:id="txtCategoria" focusColor="#ff6800" layoutX="41.0" layoutY="273.0" prefHeight="40.0" prefWidth="240.0" promptText="NOVA CATEGORIA" unFocusColor="#ff7c00" />
-      <Pane layoutX="37.0" layoutY="273.0" prefHeight="50.0" prefWidth="247.0" style="-fx-background-color: #F8F7FC;">
-         <children>
-            <JFXComboBox fx:id="comboCategoria" focusColor="#ff6800" layoutX="4.0" layoutY="5.0" prefHeight="40.0" prefWidth="240.0" promptText="CATEGORIA" unFocusColor="#ff7c00" />
-         </children></Pane>
-      <JFXButton fx:id="btnAddCategoria" contentDisplay="GRAPHIC_ONLY" layoutX="302.0" layoutY="280.0" mnemonicParsing="false" onAction="#addNovaCategoria" prefHeight="35.0" prefWidth="35.0" style="-fx-background-radius: 50 50 50 50;" text="Button" />
+        <JFXTextField fx:id="txtCategoria" focusColor="#ff6800" layoutX="40.0" layoutY="310.0" prefHeight="40.0" prefWidth="240.0" promptText="NOVA CATEGORIA" unFocusColor="#ff7c00" />
+        <Pane layoutX="36.0" layoutY="310.0" prefHeight="50.0" prefWidth="247.0" style="-fx-background-color: #F8F7FC;">
+            <children>
+                <JFXComboBox fx:id="comboCategoria" focusColor="#ff6800" layoutX="4.0" layoutY="5.0" prefHeight="40.0" prefWidth="240.0" promptText="CATEGORIA" unFocusColor="#ff7c00" />
+            </children></Pane>
+        <JFXButton fx:id="btnAddCategoria" contentDisplay="GRAPHIC_ONLY" layoutX="302.0" layoutY="318.0" mnemonicParsing="false" onAction="#addNovaCategoria" prefHeight="35.0" prefWidth="35.0" style="-fx-background-radius: 50 50 50 50;" text="Button" />
+      <Label fx:id="lblErrorProduto" layoutX="40.0" layoutY="163.0" textFill="RED" />
+      <Label fx:id="lblErrorDescricao" layoutX="40.0" layoutY="262.0" textFill="RED" />
+      <Label fx:id="lblErrorValor" layoutX="394.0" layoutY="262.0" textFill="RED" />
+      <Label fx:id="lblErrorMarca" layoutX="394.0" layoutY="163.0" textFill="RED" />
+      <Label fx:id="lblErrorEstoque" layoutX="394.0" layoutY="360.0" textFill="RED" />
     </Pane>
     <JFXButton fx:id="btnSair" layoutX="685.0" mnemonicParsing="false" onAction="#fecharJanela" prefHeight="35.0" prefWidth="35.0" styleClass="btnSair" stylesheets="@../stylesheets/styleButton.css" text="x" textFill="WHITE">
         <font>
