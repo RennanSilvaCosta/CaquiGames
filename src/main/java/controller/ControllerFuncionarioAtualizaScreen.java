@@ -9,6 +9,7 @@ import dto.EnderecoDTO;
 import dto.FuncionarioValidaDTO;
 import exceptions.CPFInvalidoException;
 import exceptions.CPFJaExisteException;
+import exceptions.CepInvalidoException;
 import exceptions.EmailJaExisteException;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -25,8 +26,7 @@ import java.net.URL;
 import java.util.*;
 
 import static service.ViaCepService.buscaEnderecoViaCep;
-import static utils.Helper.converteDataParaString;
-import static utils.Helper.converteStringParaData;
+import static utils.Helper.*;
 
 public class ControllerFuncionarioAtualizaScreen implements Initializable {
 
@@ -222,12 +222,19 @@ public class ControllerFuncionarioAtualizaScreen implements Initializable {
 
     public void buscaCep() {
         if (txtCep.getText().charAt(8) != '_') {
+            lblErrorCEP.setText("");
             EnderecoDTO dto = buscaEnderecoViaCep(txtCep.getText());
-            if (dto != null) {
-                txtLogradouro.setText(dto.getLogradouro());
-                txtBairro.setText(dto.getBairro());
-                txtCidade.setText(dto.getLocalidade());
-                txtEstado.setText(dto.getUf());
+            try {
+                if (dto.getLogradouro() != null) {
+                    txtLogradouro.setText(dto.getLogradouro());
+                    txtBairro.setText(dto.getBairro());
+                    txtCidade.setText(dto.getLocalidade());
+                    txtEstado.setText(dto.getUf());
+                } else {
+                    throw new CepInvalidoException();
+                }
+            } catch (CepInvalidoException e) {
+                abrirDialog("Cep Invalido", e.getMessage(), Alert.AlertType.ERROR);
             }
         }
     }

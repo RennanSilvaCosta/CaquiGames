@@ -1,5 +1,6 @@
 package validate;
 
+import dto.ClienteValidaDTO;
 import dto.FuncionarioDTO;
 import dto.FuncionarioValidaDTO;
 import exceptions.CampoObrigatorioException;
@@ -61,6 +62,18 @@ public class Validate {
         validaDataNascimento(funcionarioValidaDTO.getData());
         validaNumeroEndereco(funcionarioValidaDTO.getNumero());
         validaCepEdenreco(funcionarioValidaDTO.getCep());
+        return exception.getErrors();
+    }
+
+    public Map<String, String> validaFormularioCadastroCliente(ClienteValidaDTO cliente) {
+        exception.getErrors().clear();
+        validateNome(cliente.getNome());
+        validaCpf(cliente.getCpf());
+        validateEmail(cliente.getEmail());
+        validaTelefone(cliente.getCelular());
+        validaDataNascimento(cliente.getDataNasc());
+        validaNumeroEndereco(cliente.getNumero());
+        validaCepEdenreco(cliente.getCep());
         return exception.getErrors();
     }
 
