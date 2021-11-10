@@ -23,7 +23,8 @@ public final class UserSession {
         return funcionario;
     }
 
-    public void cleanUserSession() {
+    public static void cleanUserSession() {
+        instance = null;
         funcionario = new Funcionario();// or null
     }
 

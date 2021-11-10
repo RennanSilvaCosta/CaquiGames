@@ -11,6 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -34,6 +35,7 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import static utils.Helper.abrirDialog;
@@ -81,6 +83,9 @@ public class ControllerMainScreen implements Initializable {
     Label txtNomeFuncionario;
     @FXML
     Label txtEmailFuncionario;
+
+    @FXML
+    JFXButton btnSair;
 
     @FXML
     Circle fotoPerfil;
@@ -283,6 +288,19 @@ public class ControllerMainScreen implements Initializable {
 
     @FXML
     private void sair() {
-        System.exit(0);
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Sair");
+        alert.setHeaderText("Fazer Logout");
+        alert.setContentText("Você realmente deseja sair?");
+        ButtonType btnSim = new ButtonType("SIM");
+        ButtonType btnCancelar = new ButtonType("CANCELAR");
+        alert.getButtonTypes().setAll(btnSim, btnCancelar);
+
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if (result.get() == btnSim) {
+            UserSession.cleanUserSession();
+            abreTela("/view/LoginScreen.fxml", btnSair);
+        }
     }
 }
