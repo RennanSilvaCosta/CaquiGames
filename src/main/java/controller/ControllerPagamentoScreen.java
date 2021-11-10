@@ -100,7 +100,7 @@ public class ControllerPagamentoScreen implements Initializable {
     }
 
     public void getPedido(Pedido pedido) {
-        ControllerPagamentoScreen.pedido = pedido ;
+        ControllerPagamentoScreen.pedido = pedido;
     }
 
 }

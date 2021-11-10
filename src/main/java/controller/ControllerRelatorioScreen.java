@@ -45,7 +45,7 @@ public class ControllerRelatorioScreen implements Initializable {
             dialog.setDialogPane(dialogPane);
             dialog.setTitle("Periodo");
             dialog.showAndWait();
-        }catch (IOException e) {
+        } catch (IOException e) {
             abrirDialog("Algo deu errado!", e.getMessage(), Alert.AlertType.ERROR);
         }
     }
@@ -61,7 +61,7 @@ public class ControllerRelatorioScreen implements Initializable {
             dialog.setTitle("Periodo");
             tipoRelatorio = "analitico";
             dialog.showAndWait();
-        }catch (IOException e) {
+        } catch (IOException e) {
             abrirDialog("Algo deu errado!", e.getMessage(), Alert.AlertType.ERROR);
         }
     }

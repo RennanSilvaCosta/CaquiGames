@@ -8,8 +8,6 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import dto.ProdutoValidaDTO;
-import exceptions.CampoObrigatorioException;
-import exceptions.ValorInvalidoException;
 import javafx.animation.PathTransition;
 import javafx.animation.RotateTransition;
 import javafx.fxml.FXML;
@@ -111,7 +109,7 @@ public class ControllerProdutoCadastroScreen implements Initializable {
         }
     }
 
-    private void popularProduto()  {
+    private void popularProduto() {
         this.produto.setNome(txtNome.getText());
         this.produto.setDescricao(txtDescricao.getText());
         this.produto.setMarca(txtMarca.getText());

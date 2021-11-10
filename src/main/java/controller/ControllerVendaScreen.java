@@ -87,7 +87,7 @@ public class ControllerVendaScreen implements Initializable {
                 throw new CarrinhoVazioException();
             }
         } catch (IOException e) {
-            abrirDialog("Ops","Algo deu errado, tente novamente mais tarde.", Alert.AlertType.ERROR);
+            abrirDialog("Ops", "Algo deu errado, tente novamente mais tarde.", Alert.AlertType.ERROR);
         } catch (CarrinhoVazioException e) {
             abrirDialog("Carrinho vazio", e.getMessage(), Alert.AlertType.ERROR);
         }

@@ -4,11 +4,9 @@ import dto.ClienteValidaDTO;
 import dto.FuncionarioDTO;
 import dto.FuncionarioValidaDTO;
 import dto.ProdutoValidaDTO;
-import exceptions.CampoObrigatorioException;
 import exceptions.EmailInvalidoException;
 import exceptions.SenhaInvalidaException;
 import exceptions.ValidatorException;
-import model.Produto;
 import utils.Helper;
 
 import java.time.format.DateTimeParseException;
@@ -19,27 +17,6 @@ import static utils.Constante.REGEX_EMAIL;
 public class Validate {
 
     ValidatorException exception = new ValidatorException();
-
-    public static void validaFormCadastroProduto(Produto produto) throws CampoObrigatorioException {
-        if (produto.getNome().isBlank()) {
-            throw new CampoObrigatorioException();
-        }
-        if (produto.getMarca().isBlank()) {
-            throw new CampoObrigatorioException();
-        }
-        if (produto.getDescricao().isBlank()) {
-            throw new CampoObrigatorioException();
-        }
-        if (produto.getValor() <= 0) {
-            throw new CampoObrigatorioException();
-        }
-        if (produto.getQtdEstoque() <= 0) {
-            throw new CampoObrigatorioException();
-        }
-        if (produto.getCategoria() == null) {
-            throw new CampoObrigatorioException();
-        }
-    }
 
     public Map<String, String> validaFormCadastroFuncionario(FuncionarioValidaDTO funcionarioValidaDTO) {
         exception.getErrors().clear();
