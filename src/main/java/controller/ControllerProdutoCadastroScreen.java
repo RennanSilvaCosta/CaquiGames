@@ -90,7 +90,7 @@ public class ControllerProdutoCadastroScreen implements Initializable {
         txtDescricao.setText(produto.getDescricao());
         txtMarca.setText(produto.getMarca());
         txtQtdEstoque.setText(produto.getQtdEstoque().toString());
-        txtValor.setText(produto.getValor().toString());
+        txtValor.setAmount(produto.getValor());
     }
 
     public void persistirProduto() {

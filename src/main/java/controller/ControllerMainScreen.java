@@ -82,7 +82,6 @@ public class ControllerMainScreen implements Initializable {
     @FXML
     Label txtEmailFuncionario;
 
-
     @FXML
     Circle fotoPerfil;
 
@@ -103,10 +102,10 @@ public class ControllerMainScreen implements Initializable {
         itemList.put("Vendas", "icons/menu/icon-vendas-menu.png");
         itemList.put("Produtos", "icons/menu/icon-produto-menu.png");
         itemList.put("Clientes", "icons/menu/icon-cliente-menu.png");
-        itemList.put("Relatórios", "icons/menu/icon-relatorio-menu.png");
 
         if (func.getPerfil().equals("ADM")) {
             itemList.put("Funcionarios", "icons/menu/icon-funcionario-menu.png");
+            itemList.put("Relatórios", "icons/menu/icon-relatorio-menu.png");
         }
 
         for (String labelsItemList : itemList.keySet()) {

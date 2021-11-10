@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXPasswordField?>
-<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
+
 <Pane depthTest="ENABLE" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onKeyPressed="#keyPressed" prefHeight="604.0" prefWidth="846.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerLoginScreen">
    <Pane layoutX="73.0" layoutY="65.0" prefHeight="475.0" prefWidth="700.0" style="-fx-background-radius: 10 10 10 10; -fx-background-color: #FFF;">
       <JFXTextField fx:id="txtEmail" focusColor="#ff6800" labelFloat="true" layoutX="420.0" layoutY="144.0" prefHeight="35.0" prefWidth="230.0" promptText="EMAIL" unFocusColor="#ff7c00">
@@ -35,11 +34,6 @@
          <font>
             <Font name="Ebrima" size="14.0" />
          </font></JFXButton>
-      <Label fx:id="txtEsqueceuSenha" layoutX="467.0" layoutY="382.0" styleClass="btnEsqueceu" stylesheets="@../stylesheets/styleButton.css" text="Esqueceu a senha?" textFill="#a3a3a3">
-         <font>
-            <Font name="Ebrima" size="14.0" />
-         </font>
-      </Label>
       <Label fx:id="lblErrorEmail" layoutX="420.0" layoutY="183.0" textFill="RED">
          <font>
             <Font name="Ebrima" size="13.0" />

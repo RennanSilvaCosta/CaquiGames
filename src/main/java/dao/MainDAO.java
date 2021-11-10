@@ -9,6 +9,7 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.time.LocalDate;
 
 public class MainDAO {
 
@@ -16,11 +17,12 @@ public class MainDAO {
     private static EntityManager entityManager = entityManagerFactory.createEntityManager();
 
 
-    public Double obterTotalVendido() {
+    public Double obterTotalVendido(LocalDate data) {
         Funcionario func = UserSession.getFuncionario();
         entityManager.getTransaction().begin();
-        Query query = entityManager.createNativeQuery("SELECT SUM(pedido.valor_total) AS 'totalVendido' FROM pedido WHERE pedido.id_funcionario = :idFunc");
+        Query query = entityManager.createNativeQuery("SELECT SUM(pedido.valor_total) AS 'totalVendido' FROM pedido WHERE pedido.id_funcionario = :idFunc AND pedido.data = :data");
         query.setParameter("idFunc", func.getId());
+        query.setParameter("data", data);
         entityManager.getTransaction().commit();
         return (Double) query.getSingleResult();
     }
@@ -32,11 +34,12 @@ public class MainDAO {
         return (BigDecimal) query.getSingleResult();
     }
 
-    public BigInteger obterTotalPedidos() {
+    public BigInteger obterTotalPedidos(LocalDate data) {
         Funcionario func = UserSession.getFuncionario();
         entityManager.getTransaction().begin();
-        Query query = entityManager.createNativeQuery("SELECT COUNT(pedido.id) AS 'totalPedidos' FROM pedido WHERE pedido.id_funcionario = :idFunc");
+        Query query = entityManager.createNativeQuery("SELECT COUNT(pedido.id) AS 'totalPedidos' FROM pedido WHERE pedido.id_funcionario = :idFunc AND pedido.data = :data");
         query.setParameter("idFunc", func.getId());
+        query.setParameter("data", data);
         entityManager.getTransaction().commit();
         return (BigInteger) query.getSingleResult();
     }
