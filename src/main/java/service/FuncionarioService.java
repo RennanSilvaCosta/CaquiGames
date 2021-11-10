@@ -10,8 +10,6 @@ import utils.ValidaCPF;
 import javax.persistence.NoResultException;
 import java.util.List;
 
-import static validate.Validate.validaFormLogin;
-
 public class FuncionarioService {
 
     private FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
@@ -62,9 +60,7 @@ public class FuncionarioService {
     }
 
     public void logarFuncionario(FuncionarioDTO dto) throws EmailInvalidoException, SenhaInvalidaException, NoResultException {
-        if (validaFormLogin(dto)) {
-            UserSession.getInstace(funcionarioDAO.buscaFuncionarioEmaileSenha(dto));
-        }
+        UserSession.getInstace(funcionarioDAO.buscaFuncionarioEmaileSenha(dto));
     }
 
 }

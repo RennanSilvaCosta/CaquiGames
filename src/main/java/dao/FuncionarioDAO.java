@@ -29,10 +29,11 @@ public class FuncionarioDAO {
 
     public List<Funcionario> buscaFuncionariosPorNome(String str) {
         Funcionario func = UserSession.getFuncionario();
-        String getFuncionariosPorNome = "SELECT f FROM Funcionario f WHERE f.nome LIKE :str OR f.cpf LIKE :str OR f.email LIKE :str AND f.cpf != :cpf";
+        String getFuncionariosPorNome = "SELECT f FROM Funcionario f WHERE f.nome LIKE :str OR f.cpf LIKE :str AND f.cpf != :cpfFunc";
         TypedQuery<Funcionario> typedQuery = entityManager
                 .createQuery(getFuncionariosPorNome, Funcionario.class)
                 .setParameter("str", "%" + str + "%")
+                .setParameter("cpfFunc", func.getCpf())
                 .setMaxResults(10);
         return typedQuery.getResultList();
     }

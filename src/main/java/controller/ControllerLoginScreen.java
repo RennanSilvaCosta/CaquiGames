@@ -1,13 +1,10 @@
 package controller;
 
-import animatefx.animation.FadeIn;
 import animatefx.animation.Shake;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import dto.FuncionarioDTO;
-import exceptions.EmailInvalidoException;
-import exceptions.SenhaInvalidaException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -22,11 +19,15 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import service.FuncionarioService;
+import validate.Validate;
 
 import javax.persistence.NoResultException;
 import java.io.IOException;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 import static utils.Helper.abrirDialog;
 
@@ -36,6 +37,8 @@ public class ControllerLoginScreen implements Initializable {
     private double yOffset = 0;
 
     FuncionarioService funcionarioService = new FuncionarioService();
+    Validate validate = new Validate();
+    Map<String, String> errors = new HashMap<>();
 
     //TextFields
     @FXML
@@ -53,9 +56,9 @@ public class ControllerLoginScreen implements Initializable {
 
     //Labels
     @FXML
-    Label txtErrorEmail;
+    Label lblErrorEmail;
     @FXML
-    Label txtErrorSenha;
+    Label lblErrorSenha;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -64,7 +67,7 @@ public class ControllerLoginScreen implements Initializable {
 
     public void logar() {
         try {
-            limparErrorLabels();
+            limparLabelsErro();
             FuncionarioDTO dto = new FuncionarioDTO();
             String email = txtEmail.getText();
             String senha = txtSenha.getText();
@@ -72,25 +75,19 @@ public class ControllerLoginScreen implements Initializable {
             dto.setEmail(email);
             dto.setSenha(senha);
 
-            funcionarioService.logarFuncionario(dto);
-            abrirMainScreen();
+            errors = validate.validaFormLogin(dto);
 
-        } catch (EmailInvalidoException e) {
-            txtErrorEmail.setText(e.getMessage());
-            new FadeIn(txtErrorEmail).play();
-            new Shake(txtEmail).play();
-        } catch (SenhaInvalidaException e) {
-            txtErrorSenha.setText(e.getMessage());
-            new FadeIn(txtErrorSenha).play();
-            new Shake(txtSenha).play();
+            if (errors.isEmpty()) {
+                funcionarioService.logarFuncionario(dto);
+                abrirMainScreen();
+            } else {
+                setErrorMessages(errors);
+            }
         } catch (NoResultException e) {
-            abrirDialog("Credenciais Inválidas", "Email ou senha inválidos!",Alert.AlertType.ERROR);
+            new Shake(txtEmail).play();
+            new Shake(txtSenha).play();
+            abrirDialog("Credenciais Inválidas", "Email ou senha inválidos!", Alert.AlertType.ERROR);
         }
-    }
-
-    public void limparErrorLabels() {
-        txtErrorEmail.setText("");
-        txtErrorSenha.setText("");
     }
 
     private void abrirMainScreen() {
@@ -126,6 +123,25 @@ public class ControllerLoginScreen implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void setErrorMessages(Map<String, String> errors) {
+        Set<String> fields = errors.keySet();
+        limparLabelsErro();
+
+        if (fields.contains("email")) {
+            lblErrorEmail.setText(errors.get("email"));
+            new Shake(txtEmail).play();
+        }
+        if (fields.contains("senha")) {
+            lblErrorSenha.setText(errors.get("senha"));
+            new Shake(txtSenha).play();
+        }
+    }
+
+    private void limparLabelsErro() {
+        lblErrorEmail.setText("");
+        lblErrorSenha.setText("");
     }
 
     public void fecharJanela() {

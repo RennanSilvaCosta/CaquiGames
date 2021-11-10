@@ -4,8 +4,6 @@ import dto.ClienteValidaDTO;
 import dto.FuncionarioDTO;
 import dto.FuncionarioValidaDTO;
 import dto.ProdutoValidaDTO;
-import exceptions.EmailInvalidoException;
-import exceptions.SenhaInvalidaException;
 import exceptions.ValidatorException;
 import utils.Helper;
 
@@ -17,6 +15,14 @@ import static utils.Constante.REGEX_EMAIL;
 public class Validate {
 
     ValidatorException exception = new ValidatorException();
+
+    public Map<String, String> validaFormLogin(FuncionarioDTO dto) {
+        exception.getErrors().clear();
+        validateEmail(dto.getEmail());
+        validateSenha(dto.getSenha());
+        return exception.getErrors();
+    }
+
 
     public Map<String, String> validaFormCadastroFuncionario(FuncionarioValidaDTO funcionarioValidaDTO) {
         exception.getErrors().clear();
@@ -175,24 +181,5 @@ public class Validate {
         }
     }
 
-    public static boolean validaFormLogin(FuncionarioDTO dto) throws EmailInvalidoException, SenhaInvalidaException {
-        return validaEmail(dto.getEmail()) && validaSenha(dto.getSenha());
-    }
-
-    private static boolean validaEmail(String email) throws EmailInvalidoException {
-        if (email.matches(REGEX_EMAIL)) {
-            return true;
-        } else {
-            throw new EmailInvalidoException();
-        }
-    }
-
-    private static boolean validaSenha(String senha) throws SenhaInvalidaException {
-        if (!senha.trim().isBlank()) {
-            return true;
-        } else {
-            throw new SenhaInvalidaException();
-        }
-    }
 
 }
