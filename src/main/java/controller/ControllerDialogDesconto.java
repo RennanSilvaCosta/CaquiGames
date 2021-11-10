@@ -61,7 +61,7 @@ public class ControllerDialogDesconto implements Initializable {
 
     public void getValorTotal(Pedido pedido) {
         ControllerDialogDesconto.pedido = pedido;
-        valorPedido = pedido.getValorTotal();
+        valorPedido = pedido.getSubTotal();
     }
 
     @FXML

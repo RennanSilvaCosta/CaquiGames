@@ -190,7 +190,7 @@ public class ControllerFecharPedidoDinheiroScreen implements Initializable {
             dialog.setTitle("Valor recebido");
 
             ControllerDialogValorRecebido c = new ControllerDialogValorRecebido();
-            c.setValoRecebido(pedido.getValorTotal());
+            c.setValoRecebido(pedido.getSubTotal());
             dialog.showAndWait();
             new FadeIn(txtValorRecebido).play();
             new FadeIn(txtValorTroco).play();
@@ -201,7 +201,7 @@ public class ControllerFecharPedidoDinheiroScreen implements Initializable {
 
     public void setValorRecebido(double valor) {
         txtValorRecebidoStatic.setText(formataValor(valor));
-        txtValorTrocoStatic.setText(formataValor(valor - pedido.getValorTotal()));
+        txtValorTrocoStatic.setText(formataValor(valor - pedido.getSubTotal()));
     }
 
     public void setValorDesconto(double desconto) {
