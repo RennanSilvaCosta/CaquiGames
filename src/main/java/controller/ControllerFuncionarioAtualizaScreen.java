@@ -15,6 +15,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import model.Endereco;
 import model.Funcionario;
@@ -22,6 +27,9 @@ import service.FuncionarioService;
 import utils.Helper;
 import validate.Validate;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.*;
 import java.net.URL;
 import java.util.*;
 
@@ -41,6 +49,8 @@ public class ControllerFuncionarioAtualizaScreen implements Initializable {
     JFXButton btnSair;
     @FXML
     JFXButton btnSalvarFuncionario;
+    @FXML
+    JFXButton btnAddFotoPerfil;
 
     @FXML
     JFXComboBox<String> comboBoxPerfil;
@@ -85,10 +95,14 @@ public class ControllerFuncionarioAtualizaScreen implements Initializable {
     @FXML
     Label lblErrorNumero;
 
+    @FXML
+    Circle fotoPerfil;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         comboBoxPerfil.getItems().addAll("VENDEDOR", "ADM");
         comboBoxPerfil.getSelectionModel().selectFirst();
+        btnAddFotoPerfil.setGraphic(new ImageView(new Image("/icons/icon-add-foto.png")));
     }
 
     public void getInfoFuncionario(Funcionario func) {
@@ -106,6 +120,20 @@ public class ControllerFuncionarioAtualizaScreen implements Initializable {
         txtLogradouro.setText(func.getEndereco().getLogradouro());
         txtNumero.setText(func.getEndereco().getNumero().toString());
         txtComplemento.setText(func.getEndereco().getComplemento());
+
+        try {
+            if (funcionario.getImage() != null) {
+                InputStream input = new ByteArrayInputStream(funcionario.getImage());
+                BufferedImage imagem = ImageIO.read(input);
+                Image image = convertToFxImage(imagem);
+                fotoPerfil.setFill(new ImagePattern(image));
+            } else {
+                Image img = new Image("/icons/perfil/icon-perfil-padrao.png");
+                fotoPerfil.setFill(new ImagePattern(img));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void persistirFuncionario() {
@@ -236,6 +264,28 @@ public class ControllerFuncionarioAtualizaScreen implements Initializable {
             } catch (CepInvalidoException e) {
                 abrirDialog("Cep Invalido", e.getMessage(), Alert.AlertType.ERROR);
             }
+        }
+    }
+
+    @FXML
+    private void escolheFoto() {
+        FileChooser fl = new FileChooser();
+        fl.setTitle("Selecione uma foto");
+        fl.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("png Files", "*.png"), new FileChooser.ExtensionFilter("jpg Files", "*.jpg"));
+        File foto = fl.showOpenDialog(null);
+
+        if (foto != null) {
+            Image img = new Image(foto.toURI().toString());
+            fotoPerfil.setFill(new ImagePattern(img));
+            byte[] bFile = new byte[(int) foto.length()];
+            try {
+                FileInputStream fileInputStream = new FileInputStream(foto);
+                fileInputStream.read(bFile);
+                fileInputStream.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            funcionario.setImage(bFile);
         }
     }
 

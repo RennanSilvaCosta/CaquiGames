@@ -3,6 +3,7 @@
 <?import com.jfoenix.controls.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 <?import utils.*?>
 
@@ -86,7 +87,7 @@
                 <Font name="Ebrima" size="14.0" />
             </font>
         </JFXTextField>
-        <JFXButton fx:id="btnSalvarFuncionario" buttonType="RAISED" layoutX="313.0" layoutY="526.0" mnemonicParsing="false" onAction="#persistirFuncionario" prefHeight="50.0" prefWidth="300.0" style="-fx-background-color: #56CAA4; -fx-background-radius: 20 20 20 20;" text="SALVAR CADASTRO" textFill="WHITE">
+        <JFXButton fx:id="btnSalvarFuncionario" buttonType="RAISED" layoutX="291.0" layoutY="526.0" mnemonicParsing="false" onAction="#persistirFuncionario" prefHeight="50.0" prefWidth="300.0" style="-fx-background-color: #56CAA4; -fx-background-radius: 20 20 20 20;" text="SALVAR CADASTRO" textFill="WHITE">
             <font>
                 <Font name="Ebrima" size="14.0" />
             </font>
@@ -100,8 +101,10 @@
       <Label fx:id="lblErrorNumero" layoutX="490.0" layoutY="340.0" textFill="RED" />
       <Label fx:id="lblErrorCEP" layoutX="490.0" layoutY="116.0" textFill="RED" />
       <Label fx:id="lblErrorData" layoutX="53.0" layoutY="478.0" textFill="RED" />
+      <Circle fx:id="fotoPerfil" fill="DODGERBLUE" layoutX="663.0" layoutY="436.0" radius="65.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" />
+      <JFXButton fx:id="btnAddFotoPerfil" contentDisplay="GRAPHIC_ONLY" layoutX="680.0" layoutY="469.0" mnemonicParsing="false" onAction="#escolheFoto" prefHeight="35.0" prefWidth="35.0" style="-fx-background-radius: 50 50 50 50; -fx-background-color: #FF7C00;" />
     </Pane>
-    <JFXButton fx:id="btnSair" layoutX="886.0" mnemonicParsing="false" onAction="#fecharCadastroFuncionario" prefHeight="35.0" prefWidth="35.0" styleClass="btnSair" stylesheets="@../stylesheets/styleButton.css" text="x" textFill="WHITE">
+    <JFXButton fx:id="btnSair" layoutX="887.0" mnemonicParsing="false" onAction="#fecharCadastroFuncionario" prefHeight="35.0" prefWidth="35.0" styleClass="btnSair" stylesheets="@../stylesheets/styleButton.css" text="x" textFill="WHITE">
         <font>
             <Font name="Ebrima Bold" size="12.0" />
         </font>

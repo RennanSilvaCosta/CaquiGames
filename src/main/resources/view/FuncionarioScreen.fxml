@@ -19,10 +19,10 @@
       <font>
          <Font name="Ebrima" size="14.0" />
       </font></JFXTextField>
-   <JFXButton fx:id="btnCadastrarNovoFuncionario" layoutX="658.0" layoutY="122.0" onAction="#abrirCadastroFuncionario" maxWidth="300.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="300.0" ripplerFill="WHITE" style="-fx-background-color: #FF6800; -fx-background-radius: 20 20 20 20;" text="CADASTRAR NOVO FUNCIONARIO" textFill="WHITE">
+   <JFXButton fx:id="btnCadastrarNovoFuncionario" layoutX="658.0" layoutY="122.0" maxWidth="300.0" mnemonicParsing="false" onAction="#abrirCadastroFuncionario" prefHeight="75.0" prefWidth="300.0" ripplerFill="WHITE" style="-fx-background-color: #FF6800; -fx-background-radius: 20 20 20 20;" text="CADASTRAR NOVO FUNCIONARIO" textFill="WHITE">
       <font>
          <Font name="Ebrima" size="14.0" />
       </font></JFXButton>
-   <JFXListView fx:id="listaFuncionario" layoutX="43.0" layoutY="216.0" prefHeight="453.0" prefWidth="915.0" style="-fx-background-radius: 10 10 10 10;" />
+   <JFXListView fx:id="listaFuncionario" layoutX="43.0" layoutY="223.0" prefHeight="453.0" prefWidth="915.0" style="-fx-background-radius: 10 10 10 10;" />
 
 </Pane>

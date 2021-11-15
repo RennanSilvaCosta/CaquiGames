@@ -2,9 +2,6 @@ package adapter;
 
 import com.jfoenix.controls.JFXButton;
 import controller.ControllerFuncionarioScreen;
-import controller.ControllerProdutoScreen;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
@@ -14,15 +11,21 @@ import javafx.scene.control.ListCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 import model.Funcionario;
-import model.Produto;
 import service.FuncionarioService;
-import service.ProdutoService;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import static utils.Helper.convertToFxImage;
 
 public class AdapterListFuncionario extends ListCell<Funcionario> {
 
@@ -56,6 +59,9 @@ public class AdapterListFuncionario extends ListCell<Funcionario> {
     @FXML
     JFXButton btnExcluir;
 
+    @FXML
+    Circle fotoPerfil;
+
     @Override
     protected void updateItem(Funcionario funcionario, boolean empty) {
         super.updateItem(funcionario, empty);
@@ -84,6 +90,21 @@ public class AdapterListFuncionario extends ListCell<Funcionario> {
             txtCpf.setText(funcionario.getCpf());
             txtEmail.setText(funcionario.getEmail());
             txtTelefone.setText(funcionario.getTelefone());
+
+            try {
+                if (funcionario.getImage() != null) {
+                    InputStream input = new ByteArrayInputStream(funcionario.getImage());
+                    BufferedImage imagem = ImageIO.read(input);
+                    Image image = convertToFxImage(imagem);
+                    fotoPerfil.setFill(new ImagePattern(image));
+                } else {
+                    Image img = new Image("/icons/perfil/icon-perfil-padrao.png");
+                    fotoPerfil.setFill(new ImagePattern(img));
+                }
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
             btnEditar.setOnAction(actionEvent -> {
                 c.abrirEditarFuncionario(funcionario);

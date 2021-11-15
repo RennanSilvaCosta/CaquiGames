@@ -26,6 +26,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import model.Funcionario;
+import service.FuncionarioService;
 import service.MainService;
 import session.UserSession;
 import utils.Helper;
@@ -54,6 +55,7 @@ public class ControllerMainScreen implements Initializable {
     public static Pane paneProdutoEstoqueStatic;
 
     MainService mainService = new MainService();
+    FuncionarioService funcionarioService = new FuncionarioService();
 
     Funcionario func;
 

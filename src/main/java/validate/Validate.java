@@ -23,7 +23,6 @@ public class Validate {
         return exception.getErrors();
     }
 
-
     public Map<String, String> validaFormCadastroFuncionario(FuncionarioValidaDTO funcionarioValidaDTO) {
         exception.getErrors().clear();
         validateNome(funcionarioValidaDTO.getNome());
@@ -180,6 +179,4 @@ public class Validate {
             exception.addError("cep", "O CEP informado é inválido");
         }
     }
-
-
 }
