@@ -17,6 +17,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.LineTo;
 import javafx.scene.shape.MoveTo;
@@ -31,7 +32,11 @@ import service.MainService;
 import session.UserSession;
 import utils.Helper;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.HashMap;
@@ -40,6 +45,7 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 import static utils.Helper.abrirDialog;
+import static utils.Helper.convertToFxImage;
 
 public class ControllerMainScreen implements Initializable {
 
@@ -96,6 +102,22 @@ public class ControllerMainScreen implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         inicializaComponentesEstaticos();
         func = UserSession.getFuncionario();
+
+        try {
+            if (func.getImage() != null) {
+                InputStream input = new ByteArrayInputStream(func.getImage());
+                BufferedImage imagem = ImageIO.read(input);
+                Image image = convertToFxImage(imagem);
+                fotoPerfil.setFill(new ImagePattern(image));
+            } else {
+                Image img = new Image("/icons/perfil/icon-perfil-padrao.png");
+                fotoPerfil.setFill(new ImagePattern(img));
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         txtSaudacao.setText(txtSaudacao.getText() + func.getNome());
         txtNomeFuncionario.setText(func.getNome());
         txtEmailFuncionario.setText(func.getEmail());
