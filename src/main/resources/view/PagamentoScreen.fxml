@@ -26,7 +26,7 @@
          <Font name="Ebrima" size="24.0" />
       </font>
    </JFXButton>
-   <JFXButton fx:id="btnSair" layoutX="969.0" mnemonicParsing="false" onAction="#fecharJanela" prefHeight="35.0" prefWidth="35.0" styleClass="btnSair" stylesheets="@../stylesheets/styleButton.css" text="x">
+   <JFXButton fx:id="btnSair" layoutX="969.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="35.0" styleClass="btnSair" stylesheets="@../stylesheets/styleButton.css" text="x">
       <font>
          <Font name="Ebrima Bold" size="12.0" />
       </font></JFXButton>

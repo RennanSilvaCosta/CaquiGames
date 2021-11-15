@@ -4,7 +4,6 @@ import animatefx.animation.FadeIn;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import exceptions.NenhumClienteSelecionadoException;
-import javafx.animation.PathTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -12,11 +11,7 @@ import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
-import javafx.scene.shape.LineTo;
-import javafx.scene.shape.MoveTo;
-import javafx.scene.shape.Path;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 import model.Cliente;
 import model.Funcionario;
 import model.Pedido;
@@ -32,8 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import static utils.Helper.abrirDialog;
-import static utils.Helper.formataValor;
+import static utils.Helper.*;
 
 public class ControllerFecharPedidoCartaoScreen implements Initializable {
 
@@ -90,6 +84,7 @@ public class ControllerFecharPedidoCartaoScreen implements Initializable {
         txtValorSubTotalStatic = txtValorSubTotal;
         txtValorDescontoStatic = txtValorDesconto;
         txtQtdParcelasStatic = txtQtdParcelas;
+        inicializaEfeitoDeslizaPainel();
     }
 
     private void inicializaListaClientes() {
@@ -201,6 +196,15 @@ public class ControllerFecharPedidoCartaoScreen implements Initializable {
         }
     }
 
+    private void inicializaEfeitoDeslizaPainel() {
+        paneValorTotalPedido.setOnMouseEntered(mouseEvent -> deslizaPainelCima(paneValorTotalPedido));
+        paneValorTotalPedido.setOnMouseExited(mouseEvent -> deslizaPainelBaixo(paneValorTotalPedido));
+        paneDesconto.setOnMouseEntered(mouseEvent -> deslizaPainelCima(paneDesconto));
+        paneDesconto.setOnMouseExited(mouseEvent -> deslizaPainelBaixo(paneDesconto));
+        paneQtdParcelas.setOnMouseEntered(mouseEvent -> deslizaPainelCima(paneQtdParcelas));
+        paneQtdParcelas.setOnMouseExited(mouseEvent -> deslizaPainelBaixo(paneQtdParcelas));
+    }
+
     @FXML
     private void keyPressed(KeyEvent evt) {
         if (evt.getCode() == KeyCode.ENTER || evt.getCode() == KeyCode.F3) {
@@ -216,83 +220,5 @@ public class ControllerFecharPedidoCartaoScreen implements Initializable {
     private void fecharJanela() {
         Stage stage = (Stage) btnFinalizarPedido.getScene().getWindow();
         stage.close();
-    }
-
-    @FXML
-    private void deslizarPainelValorTotalCima() {
-        Path path = new Path();
-        path.getElements().add(new MoveTo(110, 75));
-        path.getElements().add(new LineTo(110, 65));
-
-        PathTransition transition = new PathTransition();
-        transition.setNode(paneValorTotalPedido);
-        transition.setDuration(Duration.millis(300));
-        transition.setPath(path);
-        transition.play();
-    }
-
-    @FXML
-    private void deslizarPainelValorTotalBaixo() {
-        Path path = new Path();
-        path.getElements().add(new MoveTo(110, 65));
-        path.getElements().add(new LineTo(110, 75));
-
-        PathTransition transition = new PathTransition();
-        transition.setNode(paneValorTotalPedido);
-        transition.setDuration(Duration.millis(300));
-        transition.setPath(path);
-        transition.play();
-    }
-
-    @FXML
-    private void deslizarPainelDescontoCima() {
-        Path path = new Path();
-        path.getElements().add(new MoveTo(110, 75));
-        path.getElements().add(new LineTo(110, 65));
-
-        PathTransition transition = new PathTransition();
-        transition.setNode(paneDesconto);
-        transition.setDuration(Duration.millis(300));
-        transition.setPath(path);
-        transition.play();
-    }
-
-    @FXML
-    private void deslizarPainelDescontoBaixo() {
-        Path path = new Path();
-        path.getElements().add(new MoveTo(110, 65));
-        path.getElements().add(new LineTo(110, 75));
-
-        PathTransition transition = new PathTransition();
-        transition.setNode(paneDesconto);
-        transition.setDuration(Duration.millis(300));
-        transition.setPath(path);
-        transition.play();
-    }
-
-    @FXML
-    private void deslizarPainelQtdParcelasCima() {
-        Path path = new Path();
-        path.getElements().add(new MoveTo(110, 75));
-        path.getElements().add(new LineTo(110, 65));
-
-        PathTransition transition = new PathTransition();
-        transition.setNode(paneQtdParcelas);
-        transition.setDuration(Duration.millis(300));
-        transition.setPath(path);
-        transition.play();
-    }
-
-    @FXML
-    private void deslizarPainelQtdParcelasBaixo() {
-        Path path = new Path();
-        path.getElements().add(new MoveTo(110, 65));
-        path.getElements().add(new LineTo(110, 75));
-
-        PathTransition transition = new PathTransition();
-        transition.setNode(paneQtdParcelas);
-        transition.setDuration(Duration.millis(300));
-        transition.setPath(path);
-        transition.play();
     }
 }

@@ -5,6 +5,8 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import dto.FuncionarioDTO;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -30,6 +32,7 @@ import java.util.ResourceBundle;
 import java.util.Set;
 
 import static utils.Helper.abrirDialog;
+import static utils.Helper.fecharJanela;
 
 public class ControllerLoginScreen implements Initializable {
 
@@ -62,9 +65,10 @@ public class ControllerLoginScreen implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        // TODO document why this method is empty
+        btnSair.setOnAction(actionEvent -> fecharJanela(btnSair));
     }
 
+    @FXML
     private void logar() {
         try {
             limparLabelsErro();
@@ -144,11 +148,6 @@ public class ControllerLoginScreen implements Initializable {
     private void limparLabelsErro() {
         lblErrorEmail.setText("");
         lblErrorSenha.setText("");
-    }
-
-    public void fecharJanela() {
-        Stage stage = (Stage) btnSair.getScene().getWindow();
-        stage.close();
     }
 
     @FXML

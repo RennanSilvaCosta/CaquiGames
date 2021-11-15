@@ -21,6 +21,8 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import static utils.Helper.fecharJanela;
+
 public class ControllerFuncionarioScreen implements Initializable {
 
     private double xOffset = 0;
@@ -122,7 +124,8 @@ public class ControllerFuncionarioScreen implements Initializable {
         listaFuncionario.setCellFactory(cliente -> new AdapterListFuncionario());
     }
 
-    public void fecharJanela() {
+    @FXML
+    private void fecharJanela() {
         listaFuncionarioStatic.getItems().clear();
         Stage stage = (Stage) btnSair.getScene().getWindow();
         stage.close();

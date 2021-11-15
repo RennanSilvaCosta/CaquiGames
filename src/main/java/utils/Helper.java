@@ -1,12 +1,18 @@
 package utils;
 
 import com.jfoenix.controls.JFXButton;
+import javafx.animation.PathTransition;
 import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
+import javafx.scene.layout.Pane;
+import javafx.scene.shape.LineTo;
+import javafx.scene.shape.MoveTo;
+import javafx.scene.shape.Path;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.awt.image.BufferedImage;
 import java.text.NumberFormat;
@@ -60,5 +66,29 @@ public class Helper {
             }
         }
         return new ImageView(wr).getImage();
+    }
+
+    public static void deslizaPainelCima(Pane painel) {
+        Path path = new Path();
+        path.getElements().add(new MoveTo(110, 75));
+        path.getElements().add(new LineTo(110, 65));
+
+        PathTransition transition = new PathTransition();
+        transition.setNode(painel);
+        transition.setDuration(Duration.millis(300));
+        transition.setPath(path);
+        transition.play();
+    }
+
+    public static void deslizaPainelBaixo(Pane painel) {
+        Path path = new Path();
+        path.getElements().add(new MoveTo(110, 65));
+        path.getElements().add(new LineTo(110, 75));
+
+        PathTransition transition = new PathTransition();
+        transition.setNode(painel);
+        transition.setDuration(Duration.millis(300));
+        transition.setPath(path);
+        transition.play();
     }
 }

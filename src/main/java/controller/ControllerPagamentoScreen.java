@@ -15,13 +15,14 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
-import javafx.stage.Stage;
 import javafx.util.Duration;
 import model.Pedido;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import static utils.Helper.fecharJanela;
 
 
 public class ControllerPagamentoScreen implements Initializable {
@@ -46,6 +47,8 @@ public class ControllerPagamentoScreen implements Initializable {
 
         btnCartaoCredito.setGraphic(new ImageView(new Image("/icons/cartao-credito.png")));
         btnCartaoCredito.setGraphicTextGap(20.0);
+
+        btnSair.setOnAction(actionEvent -> fecharJanela(btnSair));
     }
 
     @FXML
@@ -91,12 +94,6 @@ public class ControllerPagamentoScreen implements Initializable {
         timeline.setOnFinished(t -> parentContainer.getChildren().remove(container));
         controller.getPedido(pedido);
         timeline.play();
-    }
-
-    @FXML
-    private void fecharJanela() {
-        Stage stage = (Stage) btnSair.getScene().getWindow();
-        stage.close();
     }
 
     public void getPedido(Pedido pedido) {

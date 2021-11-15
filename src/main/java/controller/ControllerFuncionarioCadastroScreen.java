@@ -295,7 +295,8 @@ public class ControllerFuncionarioCadastroScreen implements Initializable {
         }
     }
 
-    public void fecharCadastroFuncionario() {
+    @FXML
+    private void fecharCadastroFuncionario() {
         Stage stage = (Stage) btnSair.getScene().getWindow();
         stage.close();
     }
