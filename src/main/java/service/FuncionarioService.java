@@ -66,7 +66,7 @@ public class FuncionarioService {
         UserSession.getInstace(funcionarioDAO.buscaFuncionarioEmaileSenha(dto));
     }
 
-    public String criptografaSenha(String md5) {
+    private String criptografaSenha(String md5) {
         try {
             java.security.MessageDigest md = java.security.MessageDigest.getInstance("MD5");
             byte[] array = md.digest(md5.getBytes());

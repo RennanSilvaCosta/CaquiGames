@@ -52,7 +52,7 @@ public class ControllerDialogPeriodo implements Initializable {
             ControllerRelatorioScreen c = new ControllerRelatorioScreen();
             String tipoRelatorio = c.tipoRelatorio;
 
-            if (tipoRelatorio.equals("analitico")) {
+            if ("analitico".equals(tipoRelatorio)) {
                 jr.gerarRelatorioAnalitico(dataI, dataF);
             } else {
                 jr.gerarRelatorioSintetico(dataI, dataF);

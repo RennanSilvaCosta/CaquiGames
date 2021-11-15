@@ -44,6 +44,7 @@ public class ControllerRelatorioScreen implements Initializable {
             Dialog<ButtonType> dialog = new Dialog<>();
             dialog.setDialogPane(dialogPane);
             dialog.setTitle("Periodo");
+            tipoRelatorio = "sintetico";
             dialog.showAndWait();
         } catch (IOException e) {
             abrirDialog("Algo deu errado!", e.getMessage(), Alert.AlertType.ERROR);

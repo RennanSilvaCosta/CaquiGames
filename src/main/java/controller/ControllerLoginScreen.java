@@ -65,7 +65,7 @@ public class ControllerLoginScreen implements Initializable {
         // TODO document why this method is empty
     }
 
-    public void logar() {
+    private void logar() {
         try {
             limparLabelsErro();
             FuncionarioDTO dto = new FuncionarioDTO();
@@ -84,6 +84,8 @@ public class ControllerLoginScreen implements Initializable {
                 setErrorMessages(errors);
             }
         } catch (NoResultException e) {
+            lblErrorEmail.setText("Email inválido");
+            lblErrorSenha.setText("Senha inválida");
             new Shake(txtEmail).play();
             new Shake(txtSenha).play();
             abrirDialog("Credenciais Inválidas", "Email ou senha inválidos!", Alert.AlertType.ERROR);

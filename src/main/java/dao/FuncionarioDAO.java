@@ -29,7 +29,7 @@ public class FuncionarioDAO {
 
     public List<Funcionario> buscaFuncionariosPorNome(String str) {
         Funcionario func = UserSession.getFuncionario();
-        String getFuncionariosPorNome = "SELECT f FROM Funcionario f WHERE f.nome LIKE :str OR f.cpf LIKE :str AND f.cpf != :cpfFunc";
+        String getFuncionariosPorNome = "SELECT f FROM Funcionario f WHERE (f.nome LIKE :str OR f.cpf LIKE :str) AND f.cpf != :cpfFunc";
         TypedQuery<Funcionario> typedQuery = entityManager
                 .createQuery(getFuncionariosPorNome, Funcionario.class)
                 .setParameter("str", "%" + str + "%")
