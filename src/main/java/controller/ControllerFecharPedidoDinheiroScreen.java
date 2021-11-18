@@ -39,7 +39,7 @@ public class ControllerFecharPedidoDinheiroScreen implements Initializable {
     PedidoService pedidoService = new PedidoService();
     List<Cliente> clientes = new ArrayList<>();
     ClienteService clienteService = new ClienteService();
-    Cliente cliente;
+    Cliente cliente = new Cliente();
 
     //TextFields
     @FXML
@@ -117,7 +117,7 @@ public class ControllerFecharPedidoDinheiroScreen implements Initializable {
             pedido.setFuncionario(func);
             pedido.setData(LocalDate.now());
 
-            if (cliente != null) {
+            if (cliente != null && cliente.getId() != null) {
                 pedido.setCliente(cliente);
                 pedidoService.salvarPedido(pedido);
                 fecharJanela();
@@ -133,14 +133,7 @@ public class ControllerFecharPedidoDinheiroScreen implements Initializable {
     @FXML
     private void adicionarCliente() {
         String nomeCliente = txtAdicionarCliente.getText();
-        if (!nomeCliente.equals("")) {
-            paneClienteSelecionado.setVisible(true);
-            lblClienteSelecionado.setVisible(true);
-
-            new FadeIn(paneClienteSelecionado).play();
-            new FadeIn(lblClienteSelecionado).play();
-
-            cliente = new Cliente();
+        if (!nomeCliente.isBlank()) {
             for (Cliente c : clientes) {
                 String cpfNome = c.getCpf() + " - " + c.getNome();
                 if (cpfNome.equals(nomeCliente)) {
@@ -148,9 +141,17 @@ public class ControllerFecharPedidoDinheiroScreen implements Initializable {
                     break;
                 }
             }
-            txtCpfCliente.setText(cliente.getCpf());
-            txtNomeCliente.setText(cliente.getNome());
-            txtEmailCliente.setText(cliente.getEmail());
+            if (cliente.getId() != null) {
+                paneClienteSelecionado.setVisible(true);
+                lblClienteSelecionado.setVisible(true);
+
+                new FadeIn(paneClienteSelecionado).play();
+                new FadeIn(lblClienteSelecionado).play();
+
+                txtCpfCliente.setText(cliente.getCpf());
+                txtNomeCliente.setText(cliente.getNome());
+                txtEmailCliente.setText(cliente.getEmail());
+            }
         }
     }
 
