@@ -84,7 +84,7 @@ public class AdapterListProduto extends ListCell<Produto> {
             txtMarca.setText(produto.getMarca());
             txtQtdEstoque.setText(String.valueOf(produto.getQtdEstoque()));
             txtValor.setText(formataValor(produto.getValor()));
-            txtCategoria.setText("Controles");
+            txtCategoria.setText(produto.getCategoria().getDescricao());
 
             btnEditarProduto.setOnAction(actionEvent -> {
                 c.abrirEditarProduto(produto);
