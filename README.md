@@ -1,8 +1,8 @@
 # CaquiGames
  CaquiGames software desenvolvido para o trabalho de PI (Projeto Integrador) do SENAC - Analise e Desenvolvimento de Sistemas.
  
-# :bulb: Desafio :bulb:
-Desenvolver um software que faça:
+## :bulb: Desafio :bulb:
+### Desenvolver um software que faça:
  * vendas;
  * cadastro, atualização, exclusão e busca de clientes;
  * cadastro, atualização, exclusão e busca de funcionarios;
