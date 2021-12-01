@@ -3,11 +3,11 @@
  
 ## :bulb: Desafio :bulb:
 ### Desenvolver um software que faça:
- * vendas;
- * cadastro, atualização, exclusão e busca de clientes;
- * cadastro, atualização, exclusão e busca de funcionarios;
- * cadastro, atualização, exclusão e busca de produtos;
- * relatorios analiticos e sinteticos.
+ * Vendas;
+ * Cadastro, atualização, exclusão e busca de clientes;
+ * Cadastro, atualização, exclusão e busca de funcionarios;
+ * Cadastro, atualização, exclusão e busca de produtos;
+ * Relatorios analiticos e sinteticos.
 
 ## :hammer_and_wrench: Tecnologias utilizadas :hammer_and_wrench:
 
@@ -15,7 +15,7 @@
 * intellij IDEA
 * Java
 * JavaFX
-* jasperreports
+* Jasper Reports
 * Maven
 * Mysql
 * [ViaCEP](https://viacep.com.br/)
@@ -27,4 +27,4 @@
 * Gson 2.8.8
 * Hibernate 5.4.28.Final
 * JFoenix 9.0.10
-* jasperreports 6.17.0
+* JasperReports 6.17.0
