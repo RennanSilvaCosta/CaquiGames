@@ -1,10 +1,30 @@
 # CaquiGames
+ CaquiGames software desenvolvido para o trabalho de PI (Projeto Integrador) do SENAC - Analise e Desenvolvimento de Sistemas.
+ 
+# :bulb: Desafio :bulb:
+Desenvolver um software que faça:
+ * vendas;
+ * cadastro, atualização, exclusão e busca de clientes;
+ * cadastro, atualização, exclusão e busca de funcionarios;
+ * cadastro, atualização, exclusão e busca de produtos;
+ * relatorios analiticos e sinteticos.
 
-  - CaquiGames é um sistema gerencial focado no mercado de video games e periféricos, mas é altamente adaptavel ao seu comércio, atendendo os mais variados tipos de varejo. 
-  - Sistema de vendas completo, trazendo mais comodidade ao seu cliente podendo parcelas suas compras em até 24x.
-  - Cadastre o seu cliente, para trazer mais comodidade ao mesmo.
-  - Cadastre os seus funcionários, trazendo mais privacidade, segurança e controle de suas vendas.
-  - Controle seus produtos, com uma gama de opções para cadastrar, alterar e gerenciar o seu estoque.
+## :hammer_and_wrench: Tecnologias utilizadas :hammer_and_wrench:
 
+* CSS
+* intellij IDEA
+* Java
+* JavaFX
+* jasperreports
+* Maven
+* Mysql
+* [ViaCEP](https://viacep.com.br/)
 
-# Venha para CaquiGames!
+## :books: Bibliotecas utilizadas :books:
+
+* AnimateFX 1.2.1
+* Caelum 2.1.2
+* Gson 2.8.8
+* Hibernate 5.4.28.Final
+* JFoenix 9.0.10
+* jasperreports 6.17.0
