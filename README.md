@@ -9,6 +9,9 @@
  * Cadastro, atualização, exclusão e busca de produtos;
  * Relatorios analiticos e sinteticos.
 
+## :page_with_curl: Prototipação :page_with_curl:
+* [Figma](https://www.figma.com/file/doN7ujEgpoFYABAtFg9wNq/CaquiGames?node-id=0%3A1)
+
 ## :hammer_and_wrench: Tecnologias utilizadas :hammer_and_wrench:
 
 * CSS
