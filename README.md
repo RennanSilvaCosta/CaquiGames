@@ -75,7 +75,7 @@ Tela responsável pela geração de ralatorios
 
 * CSS
 * intellij IDEA
-* Java
+* Java 11
 * JavaFX
 * Jasper Reports
 * Maven
