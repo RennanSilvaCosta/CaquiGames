@@ -1,17 +1,15 @@
 package dao;
 
 import model.Produto;
+import utils.JPAUtil;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
 public class ProdutoDAO {
 
-    private static EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("caqui");
-    private static EntityManager entityManager = entityManagerFactory.createEntityManager();
+    private static EntityManager entityManager = JPAUtil.getEntityManager();
 
     public void cadastraProduto(Produto produto) {
         entityManager.getTransaction().begin();

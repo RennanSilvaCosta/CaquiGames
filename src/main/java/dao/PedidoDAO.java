@@ -7,15 +7,17 @@ import model.Pedido;
 import org.hibernate.SQLQuery;
 import org.hibernate.transform.Transformers;
 import org.hibernate.type.*;
+import utils.JPAUtil;
 
-import javax.persistence.*;
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import java.time.LocalDate;
 import java.util.List;
 
 public class PedidoDAO {
 
-    private static EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("caqui");
-    private static EntityManager entityManager = entityManagerFactory.createEntityManager();
+    private static EntityManager entityManager = JPAUtil.getEntityManager();
 
     public void registrarVenda(Pedido pedido) {
         entityManager.getTransaction().begin();

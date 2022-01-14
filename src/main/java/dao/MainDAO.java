@@ -2,10 +2,9 @@ package dao;
 
 import model.Funcionario;
 import session.UserSession;
+import utils.JPAUtil;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.persistence.Query;
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -13,9 +12,7 @@ import java.time.LocalDate;
 
 public class MainDAO {
 
-    private static EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("caqui");
-    private static EntityManager entityManager = entityManagerFactory.createEntityManager();
-
+    private static EntityManager entityManager = JPAUtil.getEntityManager();
 
     public Double obterTotalVendido(LocalDate data) {
         Funcionario func = UserSession.getFuncionario();

@@ -3,14 +3,16 @@ package dao;
 import dto.FuncionarioDTO;
 import model.Funcionario;
 import session.UserSession;
+import utils.JPAUtil;
 
-import javax.persistence.*;
+import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.TypedQuery;
 import java.util.List;
 
 public class FuncionarioDAO {
 
-    private static EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("caqui");
-    private static EntityManager entityManager = entityManagerFactory.createEntityManager();
+    private static EntityManager entityManager = JPAUtil.getEntityManager();
 
     public void criaFuncionario(Funcionario funcionario) {
         entityManager.getTransaction().begin();

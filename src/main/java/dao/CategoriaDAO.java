@@ -1,17 +1,15 @@
 package dao;
 
 import model.Categoria;
+import utils.JPAUtil;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
 public class CategoriaDAO {
 
-    private static EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("caqui");
-    private static EntityManager entityManager = entityManagerFactory.createEntityManager();
+    private static EntityManager entityManager = JPAUtil.getEntityManager();
 
     public void criarCategoria(Categoria categoria) {
         entityManager.getTransaction().begin();

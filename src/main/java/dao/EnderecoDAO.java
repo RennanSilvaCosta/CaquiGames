@@ -1,15 +1,13 @@
 package dao;
 
 import model.Endereco;
+import utils.JPAUtil;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 
 public class EnderecoDAO {
 
-    private static EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("caqui");
-    private static EntityManager entityManager = entityManagerFactory.createEntityManager();
+    private static EntityManager entityManager = JPAUtil.getEntityManager();
 
     public Endereco criaEndereco(Endereco endereco) {
 
